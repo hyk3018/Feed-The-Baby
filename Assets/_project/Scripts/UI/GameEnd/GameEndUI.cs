@@ -7,13 +7,15 @@ using UnityEngine.UI;
 
 namespace FeedTheBaby.UI
 {
-    public class GameEndUI : MonoBehaviour
+    public class GameEndUI : DisableablePanel
     {
         [SerializeField] GameObject stars = null;
         [SerializeField] TextMeshProUGUI endGameMessage = null;
         [SerializeField] GameObject collectedStarPrefab = null;
         [SerializeField] GameObject uncollectedStarPrefab = null;
         [SerializeField] Goals goals = null;
+
+        [SerializeField] GameObject restartLevelButton = null;
         [SerializeField] GameObject nextLevelButton = null;
 
         static readonly int Show = Animator.StringToHash("Show");
@@ -21,8 +23,9 @@ namespace FeedTheBaby.UI
         Animator _animator;
         static readonly int Disabled = Animator.StringToHash("Disabled");
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _animator = GetComponent<Animator>();
             LevelManager.Instance.GameEnd += () => StartCoroutine(ShowPanel());
         }
@@ -37,9 +40,12 @@ namespace FeedTheBaby.UI
         IEnumerator UpdatePanelData()
         {
             var currentLevel = DataService.Instance.GetCurrentLevel();
+            
+            restartLevelButton.GetComponent<LevelSelector>().SetLevelToSelect(currentLevel);
+            
             if (DataService.Instance.GetLevelsUnlocked() > currentLevel + 1)
             {
-                nextLevelButton.GetComponent<NextLevelButton>().nextLevel = currentLevel + 1;
+                nextLevelButton.GetComponent<LevelSelector>().SetLevelToSelect(currentLevel + 1);
                 nextLevelButton.GetComponent<Button>().enabled = true;
             }
             else

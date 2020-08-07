@@ -31,15 +31,14 @@ namespace FeedTheBaby.UI
             for (var i = 0; i < levelDatas.Length; i++)
             {
                 var buttonGameObject = Instantiate(buttonPrefab, content.transform);
-                var buttonLevelSelect = buttonGameObject.GetComponent<LevelSelectButton>();
-                buttonLevelSelect.levelIndex = i;
+                var buttonLevelSelect = buttonGameObject.GetComponent<LevelSelector>();
+                buttonLevelSelect.SetLevelToSelect(i);
+                buttonLevelSelect.focusedLevelUI = focusedLevelUI.GetComponent<FocusedLevelUI>();
 
                 var text = buttonGameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
                 text.text = (i + 1).ToString();
 
                 var button = buttonGameObject.GetComponent<Button>();
-                button.onClick.AddListener(ShowFocusedLevel);
-
                 if (i >= DataService.Instance.GetLevelsUnlocked())
                 {
                     button.enabled = false;
@@ -69,17 +68,6 @@ namespace FeedTheBaby.UI
                         _levelButtons[i].enabled = false;
                         _levelButtons[i].GetComponent<Animator>().SetTrigger(ButtonDisabled);
                     }
-        }
-
-        public override void Disable()
-        {
-            base.Disable();
-        }
-
-        void ShowFocusedLevel()
-        {
-            StartCoroutine(focusedLevelUI.GetComponent<FocusedLevelUI>().FetchLevelData());
-            focusedLevelUI.GetComponent<Animator>().SetTrigger(Show);
         }
     }
 }

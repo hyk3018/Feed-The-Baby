@@ -16,6 +16,7 @@ namespace FeedTheBaby.UI
 
         int _levelToLoad;
         LevelData _levelData;
+        static readonly int Show = Animator.StringToHash("Show");
 
         // Instantiate empty item slots
         protected override void Awake()
@@ -84,6 +85,11 @@ namespace FeedTheBaby.UI
                 var itemSlotUI = itemSlotGameObject.GetComponent<ItemSlotUI>();
                 itemSlotUI.SetEmpty();
             }
+        }
+
+        public void ShowUI()
+        {
+            GetComponent<Animator>().SetTrigger(Show);
         }
     }
 }

@@ -30,10 +30,11 @@ namespace FeedTheBaby
 
         static GameManager s_instance;
 
-        [SerializeField] GameObject loading = null;
-        [SerializeField] GameObject music = null;
+        static GameObject loading = null;
+        static GameObject music = null;
 
         static List<AsyncOperation> _asyncOps;
+        AsyncOperation _loadSceneAsync;
 
         void Awake()
         {
@@ -43,9 +44,14 @@ namespace FeedTheBaby
             {
                 loading = Instantiate(Resources.Load<GameObject>("Loading"));
                 DontDestroyOnLoad(loading);
-                DontDestroyOnLoad(music);
             }
 
+            if (music == null)
+            {
+                music = Instantiate(Resources.Load<GameObject>("Music"));
+                DontDestroyOnLoad(music);
+            }
+            
             if (SceneManager.GetActiveScene().buildIndex == (int) SceneNumbers.PRELOAD)
                 SceneManager.LoadSceneAsync((int) SceneNumbers.MAIN_MENU, LoadSceneMode.Additive);
         }
@@ -54,22 +60,29 @@ namespace FeedTheBaby
         {
             // Put up loading screen
             loading.SetActive(true);
-
-            SceneManager.UnloadSceneAsync((int) currentScene);
+            
             // Load required and wait for it to finish loading
-            _asyncOps.Add(SceneManager.LoadSceneAsync((int) sceneToLoad, LoadSceneMode.Additive));
+            _loadSceneAsync = SceneManager.LoadSceneAsync((int) sceneToLoad);
+            _asyncOps.Add(_loadSceneAsync);
+            _loadSceneAsync.allowSceneActivation = false;
             StartCoroutine(WaitSceneLoad(currentScene));
             yield break;
         }
 
         IEnumerator WaitSceneLoad(SceneNumbers currentScene)
         {
-            for (var i = 0; i < _asyncOps.Count; i++)
-                while (!_asyncOps[i].isDone)
-                    yield return null;
+            while (!_loadSceneAsync.isDone)
+            {
+                if (_loadSceneAsync.progress >= 0.9f)
+                {
+                    // Once the required scene is loaded then unload current
+                    loading.SetActive(false);
+                    _loadSceneAsync.allowSceneActivation = true;
+                }
 
-            // Once the required scene is loaded then unload current
-            loading.SetActive(false);
+                yield return null;
+            }
+
         }
     }
 
