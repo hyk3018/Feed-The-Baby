@@ -1,0 +1,54 @@
+﻿using System;
+using UnityEngine;
+
+namespace FeedTheBaby
+{
+    public class Timer : MonoBehaviour
+    {
+        public float TimeToCount { get; private set; }
+        public float RemainingTime { get; private set; }
+        public bool Counting { get; private set; }
+
+        public Action<Timer> TimerStart;
+        public Action<Timer> TimerUpdate;
+        public Action<Timer> TimerEnd;
+
+        void Awake()
+        {
+            LevelManager.Instance.GameEnd += () => PauseTimer();
+        }
+
+        void Update()
+        {
+            if (Counting)
+            {
+                RemainingTime -= Time.deltaTime;
+                TimerUpdate(this);
+
+                if (RemainingTime <= 0)
+                {
+                    Counting = false;
+                    TimerEnd(this);
+                }
+            }
+        }
+
+        public void StartCount(float countTime)
+        {
+            TimeToCount = countTime;
+            RemainingTime = countTime;
+            Counting = true;
+            TimerStart(this);
+        }
+
+        void PauseTimer()
+        {
+            Counting = false;
+        }
+
+        public void RestartTimer()
+        {
+            Counting = true;
+        }
+    }
+}
