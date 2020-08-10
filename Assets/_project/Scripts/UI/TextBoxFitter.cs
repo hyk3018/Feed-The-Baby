@@ -1,8 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace FeedTheBaby
+namespace FeedTheBaby.UI
 {
+    [ExecuteInEditMode]
     public class TextBoxFitter : MonoBehaviour
     {
         RectTransform _rectTransform;
@@ -12,7 +13,8 @@ namespace FeedTheBaby
         {
             _rectTransform = GetComponent<RectTransform>();
             _text = GetComponent<TextMeshProUGUI>();
-            _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _text.preferredWidth / 3);
+            _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 
+                Mathf.Max(100, _text.preferredWidth / 3));
         }
 
         // Start is called before the first frame update
@@ -24,7 +26,10 @@ namespace FeedTheBaby
         // Update is called once per frame
         void Update()
         {
-        
+            _rectTransform = GetComponent<RectTransform>();
+            _text = GetComponent<TextMeshProUGUI>();
+            _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 
+                Mathf.Max(100, _text.preferredWidth / 3));
         }
     }
 }

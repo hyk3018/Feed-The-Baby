@@ -1,9 +1,6 @@
 ﻿using System;
 using FeedTheBaby.Tiles;
-using FeedTheBaby.Tiles.Terrain;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using TerrainTile = FeedTheBaby.Tiles.Terrain.TerrainTile;
 
 namespace FeedTheBaby.LevelEditor
@@ -26,11 +23,13 @@ namespace FeedTheBaby.LevelEditor
         public float playerStartTime;
     }
 
+    [Serializable]
     public struct HintData
     {
         public Vector2 position;
-        public string hint;
+        public string text;
         public float duration;
         public bool showOnce;
+        public Rect trigger;
     }
 }

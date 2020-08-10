@@ -9,6 +9,7 @@ TagManager:
   - Baby
   - Terrain
   - LevelObjects
+  - Hints
   layers:
   - Default
   - TransparentFX

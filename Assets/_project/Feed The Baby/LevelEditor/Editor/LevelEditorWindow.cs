@@ -27,6 +27,7 @@ namespace FeedTheBaby.LevelEditor
         int _fuelAmount;
         float _levelTime;
         float _playerStartTime;
+        GameObject[] _hints;
 
         #endregion
 
@@ -40,6 +41,7 @@ namespace FeedTheBaby.LevelEditor
         bool[] _showTiers;
         ItemAmount[] _pendingAddGoal;
         ItemAmount _pendingAddInventory;
+        GameObject _hintsContainer;
 
         #endregion
 
@@ -142,6 +144,9 @@ namespace FeedTheBaby.LevelEditor
             DrawGoalsUI();
             DrawLineUI();
 
+            DrawHintsUI();
+            DrawLineUI();
+
             GUILayout.EndScrollView();
         }
 
@@ -212,6 +217,9 @@ namespace FeedTheBaby.LevelEditor
                 _levelObjectsTileMap.ClearAllTiles();
                 var children = _levelObjectsTileMap.transform.Cast<Transform>().ToList();
                 foreach (var child in children)
+                    DestroyImmediate(child.gameObject);
+                
+                foreach (Transform child in _hintsContainer.transform)
                     DestroyImmediate(child.gameObject);
             }
         }
@@ -557,13 +565,64 @@ namespace FeedTheBaby.LevelEditor
             GUILayout.EndHorizontal();
         }
 
+        void DrawHintsUI()
+        {
+            GUILayout.Label("Hints : ", EditorStyles.boldLabel);
+            EditorGUILayout.BeginHorizontal();
+            _hintsContainer = GameObject.FindWithTag("Hints");
+            EditorGUILayout.EndHorizontal();
+
+            if (_hintsContainer && _hintsContainer.CompareTag("Hints"))
+            {
+                GUI.enabled = false;
+                EditorGUILayout.ObjectField(_hintsContainer, typeof(GameObject), true);
+                GUI.enabled = true;
+
+                for (int i = 0; i < _hintsContainer.transform.childCount; i++)
+                {
+                    GUILayout.BeginHorizontal();
+                    EditorGUI.BeginChangeCheck();
+                    GUILayout.Label($"Hint {i + 1} : ");
+                    GUI.enabled = false;
+                    EditorGUILayout.ObjectField(_hintsContainer.transform.GetChild(i), typeof(GameObject), true);
+                    GUI.enabled = true;
+
+                    if (GUILayout.Button(_minus))
+                    {
+                        DestroyImmediate(_hintsContainer.transform.GetChild(i).gameObject);
+                        i--;
+                    }
+
+                    GUILayout.EndHorizontal();
+                }
+                
+                GUILayout.BeginHorizontal();
+
+                EditorGUI.BeginChangeCheck();
+                GUILayout.Label("Add Another Hint : ");
+
+                if (GUILayout.Button(_plus))
+                {
+                    GameObject hintEditorPrefab = Resources.Load<GameObject>("Hint Editor");
+                    Instantiate(hintEditorPrefab, _hintsContainer.transform);
+                }
+                
+                GUILayout.EndHorizontal();
+            }
+            else
+            {
+                _hintsContainer = null;
+                GUILayout.Label("Missing hints container", _errorStyle);
+            }
+        }
 
         bool ValidFields()
         {
-            return _baby && _player && _terrainTileMap && _levelObjectsTileMap && _terrainMap && _levelObjectMap;
+            return _baby && _player && _terrainTileMap && _levelObjectsTileMap && _terrainMap && _levelObjectMap
+                && _hintsContainer;
         }
 
-        public static void DrawLineUI(Color? color = null, int thickness = 2, int padding = 10)
+        static void DrawLineUI(Color? color = null, int thickness = 2, int padding = 10)
         {
             var r = EditorGUILayout.GetControlRect(GUILayout.Height(padding + thickness));
             r.height = thickness;
