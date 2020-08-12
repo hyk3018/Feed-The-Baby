@@ -27,7 +27,6 @@ namespace FeedTheBaby.LevelEditor
         int _fuelAmount;
         float _levelTime;
         float _playerStartTime;
-        GameObject[] _hints;
 
         #endregion
 
@@ -263,6 +262,20 @@ namespace FeedTheBaby.LevelEditor
                 }
 
                 _fuelAmount = levelData.fuelAmount;
+
+                var  hints = _hintsContainer.transform.Cast<Transform>().ToList();
+                foreach (Transform hint in hints)
+                    DestroyImmediate(hint.gameObject);
+
+                if (levelData.hints != null)
+                {
+                    foreach (HintData hint in levelData.hints)
+                    {
+                        GameObject hintPrefab = Resources.Load<GameObject>("Hint Editor");
+                        GameObject hintObject = Instantiate(hintPrefab, _hintsContainer.transform);
+                        hintObject.GetComponent<Hint>().LoadHint(hint);
+                    }
+                }
             }
         }
 
@@ -287,9 +300,9 @@ namespace FeedTheBaby.LevelEditor
                 {
                     var levelAsset = AssetDatabase.LoadAssetAtPath<LevelData>(savePath);
                     SaveToLevelAsset(levelAsset);
-                    // EditorUtility.SetDirty(levelAsset);
-                    AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
+                    EditorUtility.SetDirty(levelAsset);
+                    AssetDatabase.SaveAssets();
                 }
             }
         }
@@ -333,6 +346,19 @@ namespace FeedTheBaby.LevelEditor
 
             SaveTerrain(levelAsset);
             SaveLevelObjects(levelAsset);
+            SaveHints(levelAsset);
+        }
+
+        void SaveHints(LevelData levelAsset)
+        {
+            var hintDatas = new List<HintData>();
+            foreach (Transform child in _hintsContainer.transform)
+            {
+                Hint hint = child.GetComponent<Hint>();
+                hintDatas.Add(hint.AsHintData());
+            }
+
+            levelAsset.hints = hintDatas.ToArray();
         }
 
         // Save tilemaps to arrays

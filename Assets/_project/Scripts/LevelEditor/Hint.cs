@@ -7,22 +7,31 @@ namespace FeedTheBaby.LevelEditor
 {
     public class Hint : MonoBehaviour
     {
-        Transform trigger;
         public TextMeshProUGUI hintText;
-        public RectTransform rectTransform;
-        
-        public HintData hintData;
+        public BoxCollider2D triggerRect;
+        public float duration;
+        public bool showOnce;
 
         void Awake()
         {
-            
+            triggerRect = GetComponent<BoxCollider2D>();
+            hintText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        public void SetData(HintData toSet)
+        public void LoadHint(HintData hint)
         {
-            hintData = toSet;
-            hintText.text = toSet.text;
-            
+            transform.position = hint.position;
+            hintText.text = hint.text;
+            triggerRect.offset = hint.triggerOffset;
+            triggerRect.size = hint.triggerSize;
+            duration = hint.duration;
+            showOnce = hint.showOnce;
+        }
+
+        public HintData AsHintData()
+        {
+            return new HintData(transform.position, hintText.text, duration, showOnce,
+                triggerRect.offset, triggerRect.size);
         }
     }
     
@@ -31,41 +40,82 @@ namespace FeedTheBaby.LevelEditor
     [CustomEditor(typeof(Hint))]
     public class HintEditor : UnityEditor.Editor
     {
+        GUIStyle _errorStyle;
         Hint hint => target as Hint;
 
         void Awake()
         {
-            hint.hintText.text = hint.hintData.text;
+            hint.triggerRect = hint.GetComponent<BoxCollider2D>();
+            hint.hintText = hint.GetComponentInChildren<TextMeshProUGUI>();
+            _errorStyle = new GUIStyle
+                {normal = {textColor = Color.red}, alignment = TextAnchor.MiddleCenter};
         }
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-            GUILayout.Label("Hint Editor");
-            
-            
-            
-            EditorGUI.BeginChangeCheck();
+            GUILayout.Label("Hint Editor", EditorStyles.boldLabel);
 
-            bool textAreaWordWrapOld = EditorStyles.textArea.wordWrap;
-            EditorStyles.textArea.wordWrap = true;
-            hint.hintData.text = EditorGUILayout.TextArea(hint.hintData.text, EditorStyles.textArea);
-            EditorStyles.textArea.wordWrap = textAreaWordWrapOld;
-            
-            if (EditorGUI.EndChangeCheck())
+            if (hint.hintText)
             {
-                hint.hintText.text = hint.hintData.text;
-                EditorUtility.SetDirty(hint.hintText);
-                EditorUtility.SetDirty(hint.hintText.transform.parent);
+                EditorGUI.BeginChangeCheck();
+                bool textAreaWordWrapOld = EditorStyles.textArea.wordWrap;
+                EditorStyles.textArea.wordWrap = true;
+                hint.hintText.text = EditorGUILayout.TextArea(hint.hintText.text, EditorStyles.textArea);
+                EditorStyles.textArea.wordWrap = textAreaWordWrapOld;
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    EditorUtility.SetDirty(hint.hintText);
+                    EditorUtility.SetDirty(hint.hintText.transform.parent);
+                }
+            }
+            else
+            {
+                GUILayout.Label("Hint does not have a TextMeshProUGUI child component!", _errorStyle);
             }
 
-            hint.hintData.position = EditorGUILayout.Vector2Field("Hint Position : ", hint.hintData.position);
-            hint.hintData.duration = EditorGUILayout.FloatField("Hint Show Duration : ", hint.hintData.duration);
-            hint.hintData.showOnce = EditorGUILayout.Toggle("Show Hint Once ? ", hint.hintData.showOnce);
+            hint.transform.position = EditorGUILayout.Vector2Field("Hint Position : ", hint.transform.position);
             
-            
+            hint.duration = EditorGUILayout.FloatField("Hint Show Duration : ", hint.duration);
+            hint.showOnce = EditorGUILayout.Toggle("Show Hint Once ? ", hint.showOnce);
+
+            if (hint.triggerRect)
+            {
+                EditorGUI.BeginChangeCheck();
+                hint.triggerRect.offset =
+                    EditorGUILayout.Vector2Field("Trigger Collider Offset : ", hint.triggerRect.offset);
+                hint.triggerRect.size =
+                    EditorGUILayout.Vector2Field("Trigger Collider Size : ", hint.triggerRect.size);
+            }
+            else
+            {
+                GUILayout.Label("Hint does not have a BoxCollider2D component!", _errorStyle);
+            }
         }
     }
     
     #endif
+    
+    
+    [Serializable]
+    public struct HintData
+    {
+        public Vector2 position;
+        public string text;
+        public float duration;
+        public bool showOnce;
+        public Vector2 triggerOffset;
+        public Vector2 triggerSize;
+
+        public HintData(Vector2 position, string text, float duration, bool showOnce,
+            Vector2 triggerOffset, Vector2 triggerSize)
+        {
+            this.position = position;
+            this.text = text;
+            this.duration = duration;
+            this.showOnce = showOnce;
+            this.triggerOffset = triggerOffset;
+            this.triggerSize = triggerSize;
+        }
+    }
 }

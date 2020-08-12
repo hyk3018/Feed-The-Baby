@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: level1
   m_EditorClassIdentifier: 
   goals:
-  - items:
-    - itemName: 0
-      amount: 1
+  - items: []
   - items: []
   - items: []
   terrainPositions:
@@ -1606,11 +1604,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
   levelObjectPositions: []
   levelObjectTiles: []
-  initialInventory:
-  - itemName: 0
-    amount: 1
-  playerStartPosition: {x: 1.5, y: -0.5}
-  babyStartPosition: {x: -1.5, y: 1.5}
+  initialInventory: []
+  hints:
+  - position: {x: -3.98, y: -2.3}
+    text: Press W,A,S,D to move about the map!
+    duration: 2
+    showOnce: 1
+    triggerOffset: {x: 0, y: 0}
+    triggerSize: {x: 30, y: 30}
+  - position: {x: -2.53, y: 2.51}
+    text: Feed the baby the berry in your inventory by walking up to it and pressing
+      space!
+    duration: 0
+    showOnce: 0
+    triggerOffset: {x: -0.03, y: -2.4}
+    triggerSize: {x: 6, y: 2}
+  playerStartPosition: {x: -7.31, y: -3.03}
+  babyStartPosition: {x: 2.38, y: 0.68}
   fuelAmount: 0
   levelName: level1
   levelTime: 10

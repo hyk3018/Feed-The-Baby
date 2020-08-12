@@ -14,7 +14,7 @@ namespace FeedTheBaby.UI
             _rectTransform = GetComponent<RectTransform>();
             _text = GetComponent<TextMeshProUGUI>();
             _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 
-                Mathf.Max(100, _text.preferredWidth / 3));
+                Mathf.Max(100, _text.preferredWidth / 2.8f));
         }
 
         // Start is called before the first frame update
@@ -29,7 +29,7 @@ namespace FeedTheBaby.UI
             _rectTransform = GetComponent<RectTransform>();
             _text = GetComponent<TextMeshProUGUI>();
             _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 
-                Mathf.Max(100, _text.preferredWidth / 3));
+                Mathf.Max(100, _text.preferredWidth / 2.8f));
         }
     }
 }

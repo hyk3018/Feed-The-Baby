@@ -22,14 +22,4 @@ namespace FeedTheBaby.LevelEditor
         public float levelTime;
         public float playerStartTime;
     }
-
-    [Serializable]
-    public struct HintData
-    {
-        public Vector2 position;
-        public string text;
-        public float duration;
-        public bool showOnce;
-        public Rect trigger;
-    }
 }
