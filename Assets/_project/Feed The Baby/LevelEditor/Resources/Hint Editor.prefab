@@ -318,6 +318,8 @@ GameObject:
   - component: {fileID: 1856636218541071126}
   - component: {fileID: 1856636218541071121}
   - component: {fileID: 8599648045613379996}
+  - component: {fileID: 8574895619125266506}
+  - component: {fileID: 885502907737441215}
   m_Layer: 0
   m_Name: Hint Editor
   m_TagString: Untagged
@@ -343,7 +345,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.9500122, y: 0.6500015}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1856636218541071121
 MonoBehaviour:
@@ -357,7 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a313c22560e554c83b9d0b3166c08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hintText: {fileID: 1856636218495571589}
+  hintAnimator: {fileID: 1856636218247943172}
+  hintText: {fileID: 0}
   triggerRect: {fileID: 8599648045613379996}
   duration: 0
   showOnce: 0
@@ -387,3 +390,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!222 &8574895619125266506
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856636218541071127}
+  m_CullTransparentMesh: 0
+--- !u!114 &885502907737441215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856636218541071127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68c232369bc4301ad354793c04555d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

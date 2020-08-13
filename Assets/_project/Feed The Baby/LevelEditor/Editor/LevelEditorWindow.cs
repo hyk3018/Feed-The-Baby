@@ -19,6 +19,7 @@ namespace FeedTheBaby.LevelEditor
 
         Tilemap _terrainTileMap = null;
         Tilemap _levelObjectsTileMap = null;
+        Tilemap _obstructionsTileMap = null;
         string _levelName;
         Vector2 _playerPosition;
         Vector2 _babyPosition;
@@ -31,7 +32,6 @@ namespace FeedTheBaby.LevelEditor
         #endregion
 
         #region Helper Variables
-
         TerrainMap _terrainMap = null;
         LevelObjectMap _levelObjectMap = null;
         GameObject _player = null;
@@ -48,18 +48,11 @@ namespace FeedTheBaby.LevelEditor
 
         Texture2D _plus;
         Texture2D _minus;
-
-        string previousFolder = "";
-
-        #endregion
-
-        #region Editor Serialization
-
-        SerializedObject _serializedObject;
-
-        #endregion
-
         GUIStyle _errorStyle;
+        string _previousFolder = "";
+
+        #endregion
+
 
         [MenuItem("Window/Feed The Baby/Level Editor")]
         public static void ShowWindow()
@@ -85,6 +78,8 @@ namespace FeedTheBaby.LevelEditor
             _showTiers = new bool[3] {true, true, true};
 
             _fuelAmount = 0;
+            
+            _previousFolder = "Assets/_project/Feed The Baby/Levels";
         }
 
         void OnInspectorUpdate()
@@ -116,12 +111,15 @@ namespace FeedTheBaby.LevelEditor
             DrawDataMapsUI();
             DrawLineUI();
 
-            DrawTerrainTilemapUI();
+            DrawTerrainTileMapUI();
             DrawLineUI();
 
-            DrawLevelObjectsTilemapUI();
+            DrawLevelObjectsTileMapUI();
             DrawLineUI();
 
+            DrawObstructionsTileMapUI();
+            DrawLineUI();
+            
             DrawTimeUI();
             DrawLineUI();
 
@@ -148,54 +146,8 @@ namespace FeedTheBaby.LevelEditor
 
             GUILayout.EndScrollView();
         }
-
-        void DrawTimeUI()
-        {
-            DrawFloatUI("Level Time : ", ref _levelTime);
-            DrawLineUI();
-            DrawFloatUI("Player Start Time : ", ref _playerStartTime);
-            DrawLineUI();
-        }
-
-        static void DrawFloatUI(string labelText, ref float floatVariable)
-        {
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(labelText, EditorStyles.boldLabel);
-            floatVariable = EditorGUILayout.FloatField(floatVariable);
-            GUILayout.EndHorizontal();
-        }
-
-        // static void DrawVariableUI<T>(string labelText, ref T variable)
-        // {
-        //     GUILayout.BeginHorizontal();
-        //     GUILayout.Label(labelText, EditorStyles.boldLabel);
-        //     
-        //     switch (variable)
-        //     {
-        //         case int i:
-        //         {
-        //             
-        //             variable = EditorGUILayout.IntField(i, EditorStyles.boldLabel);
-        //             break;
-        //         }
-        //     }
-        //     GUILayout.EndHorizontal();
-        // }
-
-        void DrawButtons()
-        {
-            if (!ValidFields()) GUI.enabled = false;
-
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Load Level")) LoadLevel();
-
-            if (GUILayout.Button("Save Level")) SaveLevel();
-
-            if (GUILayout.Button("New Level")) NewLevel();
-            EditorGUILayout.EndHorizontal();
-
-            GUI.enabled = true;
-        }
+        
+        #region Loading
 
         void NewLevel()
         {
@@ -204,90 +156,122 @@ namespace FeedTheBaby.LevelEditor
                 "before clearing.",
                 "Yes, clear", "No"))
             {
-                _levelName = "";
-                _player.transform.position = new Vector2(-1.5f, 0);
-                _baby.transform.position = new Vector3(1.5f, 0);
-                _inventoryOnLoad = new List<ItemAmount>();
-                _levelTime = 0;
-                _playerStartTime = 0;
-
-                for (var i = 0; i < _goalTiers.Length; i++) _goalTiers[i] = new ItemTier();
-
-                _levelObjectsTileMap.ClearAllTiles();
-                var children = _levelObjectsTileMap.transform.Cast<Transform>().ToList();
-                foreach (var child in children)
-                    DestroyImmediate(child.gameObject);
-                
-                foreach (Transform child in _hintsContainer.transform)
-                    DestroyImmediate(child.gameObject);
+                LevelData defaultLevel = Resources.Load<LevelData>("default");
+                if (defaultLevel)
+                    LoadLevel(defaultLevel);
+                else
+                {
+                    ClearLevel();
+                }
             }
         }
 
-        void LoadLevel()
+        void ClearLevel()
         {
-            var filePath = EditorUtility.OpenFilePanel("Open Level File", previousFolder, "asset");
+            _levelName = "";
+            _player.transform.position = new Vector2(-1.5f, 0);
+            _baby.transform.position = new Vector3(1.5f, 0);
+            _inventoryOnLoad = new List<ItemAmount>();
+            _levelTime = 0;
+            _playerStartTime = 0;
+
+            for (var i = 0; i < _goalTiers.Length; i++) _goalTiers[i] = new ItemTier();
+
+            _levelObjectsTileMap.ClearAllTiles();
+            var children = _levelObjectsTileMap.transform.Cast<Transform>().ToList();
+            foreach (var child in children)
+                DestroyImmediate(child.gameObject);
+
+            foreach (Transform child in _hintsContainer.transform)
+                DestroyImmediate(child.gameObject);
+        }
+
+        void LoadLevelFromPath()
+        {
+            var filePath = EditorUtility.OpenFilePanel("Open Level File", _previousFolder, "asset");
             if (filePath.Length != 0)
             {
                 var relativePath = FileUtil.GetProjectRelativePath(filePath);
                 var levelData = AssetDatabase.LoadAssetAtPath<LevelData>(relativePath);
 
-                _levelName = levelData.levelName;
-                _player.transform.position = levelData.playerStartPosition;
-                _baby.transform.position = levelData.babyStartPosition;
-                _inventoryOnLoad = levelData.initialInventory.ToList();
-                _levelTime = levelData.levelTime;
-                _playerStartTime = levelData.playerStartTime;
+                LoadLevel(levelData);
+            }
+        }
 
-                Array.Resize(ref _goalTiers, levelData.goals.Length);
-                for (var i = 0; i < levelData.goals.Length; i++) _goalTiers[i] = ItemTier.Copy(levelData.goals[i]);
+        void LoadLevel(LevelData levelData)
+        {
+            _levelName = levelData.levelName;
+            _player.transform.position = levelData.playerStartPosition;
+            _baby.transform.position = levelData.babyStartPosition;
+            _inventoryOnLoad = levelData.initialInventory.ToList();
+            _levelTime = levelData.levelTime;
+            _playerStartTime = levelData.playerStartTime;
+            _fuelAmount = levelData.fuelAmount;
+            
+            Array.Resize(ref _goalTiers, levelData.goals.Length);
+            for (var i = 0; i < levelData.goals.Length; i++) _goalTiers[i] = ItemTier.Copy(levelData.goals[i]);
 
-                _terrainTileMap.SetTiles(levelData.terrainPositions, levelData.terrainTiles);
+            // Load ground and obstructions
+            _terrainTileMap.ClearAllTiles();
+            _terrainTileMap.SetTiles(levelData.terrainPositions, levelData.terrainTiles);
+            _obstructionsTileMap.ClearAllTiles();
+            _obstructionsTileMap.SetTiles(levelData.obstructionPositions, levelData.obstructionTiles);
 
-                // Set level object tiles
-                // Then instantiate gameobjects after destroying all children
+            LoadLevelObjects(levelData);
 
-                _levelObjectsTileMap.ClearAllTiles();
-                _levelObjectsTileMap.SetTiles(levelData.levelObjectPositions, levelData.levelObjectTiles);
+            LoadHints(levelData);
+        }
 
-                var children = _levelObjectsTileMap.transform.Cast<Transform>().ToList();
-                foreach (var child in children)
-                    DestroyImmediate(child.gameObject);
+        void LoadLevelObjects(LevelData levelData)
+        {
+            // Set level object tiles
+            // Then instantiate game objects after destroying all children
 
-                for (var i = 0; i < levelData.levelObjectPositions.Length; i++)
+            _levelObjectsTileMap.ClearAllTiles();
+            _levelObjectsTileMap.SetTiles(levelData.levelObjectPositions, levelData.levelObjectTiles);
+
+            var children = _levelObjectsTileMap.transform.Cast<Transform>().ToList();
+            foreach (var child in children)
+                DestroyImmediate(child.gameObject);
+
+            for (var i = 0; i < levelData.levelObjectPositions.Length; i++)
+            {
+                InstantiateLevelObjectPrefabInCell(_levelObjectsTileMap.layoutGrid, _levelObjectsTileMap.gameObject,
+                    levelData.levelObjectPositions[i],
+                    _levelObjectMap.GetPrefab(levelData.levelObjectTiles[i].levelObjectType));
+            }
+        }
+
+        void LoadHints(LevelData levelData)
+        {
+            var hints = _hintsContainer.transform.Cast<Transform>().ToList();
+            foreach (Transform hint in hints)
+                DestroyImmediate(hint.gameObject);
+
+            if (levelData.hints != null)
+            {
+                foreach (HintData hint in levelData.hints)
                 {
-                    var pos = levelData.levelObjectPositions[i];
-                    InstantiateLevelObjectPrefabInCell(_levelObjectsTileMap.layoutGrid, _levelObjectsTileMap.gameObject,
-                        levelData.levelObjectPositions[i],
-                        _levelObjectMap.GetPrefab(levelData.levelObjectTiles[i].levelObjectType));
-                }
-
-                _fuelAmount = levelData.fuelAmount;
-
-                var  hints = _hintsContainer.transform.Cast<Transform>().ToList();
-                foreach (Transform hint in hints)
-                    DestroyImmediate(hint.gameObject);
-
-                if (levelData.hints != null)
-                {
-                    foreach (HintData hint in levelData.hints)
-                    {
-                        GameObject hintPrefab = Resources.Load<GameObject>("Hint Editor");
-                        GameObject hintObject = Instantiate(hintPrefab, _hintsContainer.transform);
-                        hintObject.GetComponent<Hint>().LoadHint(hint);
-                    }
+                    GameObject hintPrefab = Resources.Load<GameObject>("Hint Editor");
+                    GameObject hintObject = Instantiate(hintPrefab, _hintsContainer.transform);
+                    hintObject.GetComponent<Hint>().LoadHint(hint);
                 }
             }
         }
 
+        #endregion
+
+        #region Saving
+        
         void SaveLevel()
         {
-            var savePath = EditorUtility.SaveFolderPanel("Save Level Data", previousFolder, "");
+            var savePath = EditorUtility.SaveFolderPanel("Save Level Data", _previousFolder, "");
             if (savePath.Length != 0)
             {
                 if (_levelName.Length == 0)
                     _levelName = "level";
 
-                previousFolder = savePath;
+                _previousFolder = savePath;
 
                 if (GetNewFileNameFromFolderPath(ref savePath))
                 {
@@ -345,23 +329,64 @@ namespace FeedTheBaby.LevelEditor
             levelAsset.fuelAmount = _fuelAmount;
 
             SaveTerrain(levelAsset);
+            SaveObstructions(levelAsset);
             SaveLevelObjects(levelAsset);
             SaveHints(levelAsset);
+        }
+        
+        void SaveTerrain(LevelData levelAsset)
+        {
+            var terrainPositions = new List<Vector3Int>();
+            var terrainTypes = new List<TerrainTile>();
+            _terrainTileMap.CompressBounds();
+            var bounds = _terrainTileMap.cellBounds;
+
+            foreach (var pos in bounds.allPositionsWithin)
+            {
+                if (_terrainTileMap.GetTile(pos) is TerrainTile terrainTile)
+                {
+                    terrainPositions.Add(pos);
+                    terrainTypes.Add(terrainTile);
+                }
+            }
+
+            levelAsset.terrainPositions = terrainPositions.ToArray();
+            levelAsset.terrainTiles = terrainTypes.ToArray();
+        }
+        
+        void SaveObstructions(LevelData levelAsset)
+        {
+            var obstructionPositions = new List<Vector3Int>();
+            var obstructionTypes = new List<TerrainTile>();
+            _obstructionsTileMap.CompressBounds();
+            var bounds = _obstructionsTileMap.cellBounds;
+
+            foreach (var pos in bounds.allPositionsWithin)
+            {
+                if (_obstructionsTileMap.GetTile(pos) is TerrainTile obstructionTile)
+                {
+                    obstructionPositions.Add(pos);
+                    obstructionTypes.Add(obstructionTile);
+                }
+            }
+
+            levelAsset.obstructionPositions = obstructionPositions.ToArray();
+            levelAsset.obstructionTiles = obstructionTypes.ToArray();
         }
 
         void SaveHints(LevelData levelAsset)
         {
-            var hintDatas = new List<HintData>();
+            var hintData = new List<HintData>();
             foreach (Transform child in _hintsContainer.transform)
             {
                 Hint hint = child.GetComponent<Hint>();
-                hintDatas.Add(hint.AsHintData());
+                hintData.Add(hint.AsHintData());
             }
 
-            levelAsset.hints = hintDatas.ToArray();
+            levelAsset.hints = hintData.ToArray();
         }
 
-        // Save tilemaps to arrays
+        // Save tile maps to arrays
         void SaveLevelObjects(LevelData levelAsset)
         {
             var levelObjectPositions = new List<Vector3Int>();
@@ -379,26 +404,11 @@ namespace FeedTheBaby.LevelEditor
             levelAsset.levelObjectPositions = levelObjectPositions.ToArray();
             levelAsset.levelObjectTiles = levelObjectTypes.ToArray();
         }
-
-        void SaveTerrain(LevelData levelAsset)
-        {
-            var terrainPositions = new List<Vector3Int>();
-            var terrainTypes = new List<TerrainTile>();
-            _terrainTileMap.CompressBounds();
-            var bounds = _terrainTileMap.cellBounds;
-
-            foreach (var pos in bounds.allPositionsWithin)
-                if (_terrainTileMap.GetTile(pos) is TerrainTile terrainTile)
-                {
-                    terrainPositions.Add(pos);
-                    terrainTypes.Add(terrainTile);
-                }
-
-            levelAsset.terrainPositions = terrainPositions.ToArray();
-            levelAsset.terrainTiles = terrainTypes.ToArray();
-        }
-
-
+        
+        #endregion
+        
+        #region UI Functions
+        
         void DrawDataMapsUI()
         {
             _terrainMap = EditorGUILayout.ObjectField(_terrainMap, typeof(TerrainMap), true) as TerrainMap;
@@ -409,9 +419,9 @@ namespace FeedTheBaby.LevelEditor
                 GUILayout.Label("Missing terrain and level object data maps.", _errorStyle);
         }
 
-        void DrawTerrainTilemapUI()
+        void DrawTerrainTileMapUI()
         {
-            GUILayout.Label("Terrain Tilemap : ", EditorStyles.boldLabel);
+            GUILayout.Label("Terrain Tile Map : ", EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
             var terrainObject = GameObject.FindWithTag("Terrain");
 
@@ -430,9 +440,9 @@ namespace FeedTheBaby.LevelEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        void DrawLevelObjectsTilemapUI()
+        void DrawLevelObjectsTileMapUI()
         {
-            GUILayout.Label("Level Objects Tilemap : ", EditorStyles.boldLabel);
+            GUILayout.Label("Level Objects Tile Map : ", EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
             var levelObjectsObject = GameObject.FindWithTag("LevelObjects");
             if (levelObjectsObject)
@@ -447,6 +457,26 @@ namespace FeedTheBaby.LevelEditor
                 GUILayout.Label("No GameObject with tag \"LevelObjects\" found.", _errorStyle);
             }
 
+            EditorGUILayout.EndHorizontal();
+        }
+
+        void DrawObstructionsTileMapUI()
+        {
+            GUILayout.Label("Obstructions Tile Map : ", EditorStyles.boldLabel);
+            EditorGUILayout.BeginHorizontal();
+            var obstructionsObject = GameObject.FindWithTag("Obstructions");
+            if (obstructionsObject)
+            {
+                _obstructionsTileMap = obstructionsObject.GetComponent<Tilemap>();
+                GUI.enabled = false;
+                EditorGUILayout.ObjectField(_obstructionsTileMap, typeof(Tilemap), true);
+                GUI.enabled = true;
+            }
+            else
+            {
+                GUILayout.Label("No GameObnject with tag \"Obstructions\" found.", _errorStyle);
+            }
+            
             EditorGUILayout.EndHorizontal();
         }
 
@@ -641,7 +671,43 @@ namespace FeedTheBaby.LevelEditor
                 GUILayout.Label("Missing hints container", _errorStyle);
             }
         }
+        
 
+        void DrawTimeUI()
+        {
+            DrawFloatUI("Level Time : ", ref _levelTime);
+            DrawLineUI();
+            DrawFloatUI("Player Start Time : ", ref _playerStartTime);
+            DrawLineUI();
+        }
+
+        static void DrawFloatUI(string labelText, ref float floatVariable)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(labelText, EditorStyles.boldLabel);
+            floatVariable = EditorGUILayout.FloatField(floatVariable);
+            GUILayout.EndHorizontal();
+        }
+
+        void DrawButtons()
+        {
+            if (!ValidFields()) GUI.enabled = false;
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Load Level")) LoadLevelFromPath();
+
+            if (GUILayout.Button("Save Level")) SaveLevel();
+
+            if (GUILayout.Button("New Level")) NewLevel();
+            EditorGUILayout.EndHorizontal();
+
+            GUI.enabled = true;
+        }
+        
+        #endregion
+
+        #region Utility Functions
+        
         bool ValidFields()
         {
             return _baby && _player && _terrainTileMap && _levelObjectsTileMap && _terrainMap && _levelObjectMap
@@ -659,20 +725,7 @@ namespace FeedTheBaby.LevelEditor
             EditorGUI.DrawRect(r, color.Value);
         }
 
-        List<GameObject> GetObjectsInCell(GridLayout grid, Transform parent, Vector3Int position)
-        {
-            var results = new List<GameObject>();
-            var childCount = parent.childCount;
-            for (var i = 0; i < childCount; i++)
-            {
-                var child = parent.GetChild(i);
-                if (position == grid.WorldToCell(child.position)) results.Add(child.gameObject);
-            }
-
-            return results;
-        }
-
-        public static void InstantiateLevelObjectPrefabInCell(GridLayout grid, GameObject brushTarget,
+        static void InstantiateLevelObjectPrefabInCell(GridLayout grid, GameObject brushTarget,
             Vector3Int position, GameObject prefab)
         {
             var instance = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
@@ -685,5 +738,7 @@ namespace FeedTheBaby.LevelEditor
                     grid.LocalToWorld(grid.CellToLocalInterpolated(position + new Vector3(0.5f, 0.5f, 0.5f)));
             }
         }
+        
+        #endregion
     }
 }

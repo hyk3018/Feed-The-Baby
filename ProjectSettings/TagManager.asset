@@ -10,6 +10,7 @@ TagManager:
   - Terrain
   - LevelObjects
   - Hints
+  - Obstructions
   layers:
   - Default
   - TransparentFX

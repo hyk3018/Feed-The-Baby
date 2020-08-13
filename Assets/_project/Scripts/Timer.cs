@@ -23,12 +23,12 @@ namespace FeedTheBaby
             if (Counting)
             {
                 RemainingTime -= Time.deltaTime;
-                TimerUpdate(this);
+                TimerUpdate?.Invoke(this);
 
                 if (RemainingTime <= 0)
                 {
                     Counting = false;
-                    TimerEnd(this);
+                    TimerEnd?.Invoke(this);
                 }
             }
         }
@@ -38,7 +38,8 @@ namespace FeedTheBaby
             TimeToCount = countTime;
             RemainingTime = countTime;
             Counting = true;
-            TimerStart(this);
+            
+            TimerStart?.Invoke(this);
         }
 
         void PauseTimer()

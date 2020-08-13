@@ -7,15 +7,38 @@ namespace FeedTheBaby.LevelEditor
 {
     public class Hint : MonoBehaviour
     {
+        public Animator hintAnimator = null;
         public TextMeshProUGUI hintText;
         public BoxCollider2D triggerRect;
         public float duration;
         public bool showOnce;
+        static readonly int Show = Animator.StringToHash("Show");
+        static readonly int Hide = Animator.StringToHash("Hide");
 
         void Awake()
         {
             triggerRect = GetComponent<BoxCollider2D>();
+            hintAnimator = GetComponentInChildren<Animator>();
             hintText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (!showOnce)
+                {
+                    Timer timer = GetComponent<Timer>();
+                    timer.TimerEnd += timer1 =>
+                    {
+                        hintAnimator.SetTrigger(Hide);
+                    };
+                    
+                    timer.StartCount(duration);
+                }
+                
+                hintAnimator.SetTrigger(Show);
+            }
         }
 
         public void LoadHint(HintData hint)
@@ -47,6 +70,7 @@ namespace FeedTheBaby.LevelEditor
         {
             hint.triggerRect = hint.GetComponent<BoxCollider2D>();
             hint.hintText = hint.GetComponentInChildren<TextMeshProUGUI>();
+            hint.hintAnimator = hint.GetComponentInChildren<Animator>();
             _errorStyle = new GUIStyle
                 {normal = {textColor = Color.red}, alignment = TextAnchor.MiddleCenter};
         }
@@ -54,6 +78,11 @@ namespace FeedTheBaby.LevelEditor
         public override void OnInspectorGUI()
         {
             GUILayout.Label("Hint Editor", EditorStyles.boldLabel);
+
+            if (!hint.hintAnimator)
+            {
+                GUILayout.Label("Hint does not have an Animator child component!", _errorStyle);
+            }
 
             if (hint.hintText)
             {

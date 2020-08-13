@@ -5,7 +5,8 @@ namespace FeedTheBaby.Tiles.Terrain
     public enum TerrainType
     {
         Grassland,
-        Desert
+        Desert,
+        PineTree
     }
 
     [UnityEngine.CreateAssetMenu(fileName = "Terrain Tile", menuName = "Tiles/Terrain Tile", order = 0)]

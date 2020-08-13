@@ -17,6 +17,7 @@ namespace FeedTheBaby
         [SerializeField] GameObject baby = null;
         [SerializeField] Tilemap terrainTilemap = null;
         [SerializeField] Tilemap levelObjectsTilemap = null;
+        [SerializeField] GameObject hints = null;
 
         public int currentLevel;
         public LevelData currentLevelData;
@@ -90,6 +91,20 @@ namespace FeedTheBaby
                     currentLevelData.levelObjectPositions[i],
                     DataService.Instance.GetLevelObjectMap()
                         .GetPrefab(currentLevelData.levelObjectTiles[i].levelObjectType));
+            }
+
+            children = hints.transform.Cast<Transform>().ToList();
+            foreach (var child in children)
+                DestroyImmediate(child.gameObject);
+
+            if (currentLevelData.hints != null)
+            {
+                foreach (var hint in currentLevelData.hints)
+                {
+                    GameObject hintPrefab = Resources.Load<GameObject>("Hint Editor");
+                    GameObject hintObject = Instantiate(hintPrefab, hints.transform);
+                    hintObject.GetComponent<Hint>().LoadHint(hint);
+                }
             }
 
             // _fuelAmount = levelData.fuelAmount;

@@ -1,6 +1,7 @@
 ﻿using System;
 using FeedTheBaby.Tiles;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using TerrainTile = FeedTheBaby.Tiles.Terrain.TerrainTile;
 
 namespace FeedTheBaby.LevelEditor
@@ -11,6 +12,8 @@ namespace FeedTheBaby.LevelEditor
         public ItemTier[] goals = null;
         public Vector3Int[] terrainPositions = null;
         public TerrainTile[] terrainTiles = null;
+        public Vector3Int[] obstructionPositions = null;
+        public TerrainTile[] obstructionTiles = null;
         public Vector3Int[] levelObjectPositions = null;
         public LevelObjectTile[] levelObjectTiles = null;
         public ItemAmount[] initialInventory = null;
