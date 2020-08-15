@@ -32,7 +32,7 @@ namespace FeedTheBaby.UI
 
         public void SetItemAmount(ItemAmount itemAmount)
         {
-            SetItemType(itemAmount.itemName);
+            SetItemType(itemAmount.type);
             SetAmount(itemAmount.amount);
         }
     }

@@ -7,6 +7,8 @@ namespace FeedTheBaby.Player
     [RequireComponent(typeof(BehaviourController))]
     public class Harvester : MonoBehaviour
     {
+        [SerializeField] AudioClip harvestSound = null;
+        
         BehaviourController _behaviour;
         Inventory _inventory;
         Movement _movement;
@@ -47,6 +49,7 @@ namespace FeedTheBaby.Player
                     _behaviour.canMove = true;
                 }
 
+                AudioSource.PlayClipAtPoint(harvestSound, transform.position);
                 _inventory.AddItem(itemAmount);
             }
         }

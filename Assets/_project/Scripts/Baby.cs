@@ -19,6 +19,8 @@ namespace FeedTheBaby
     public class Baby : MonoBehaviour, IFeedable
     {
         [SerializeField] Animator emotionAnimator = null;
+        [SerializeField] AudioClip happySound = null;
+        [SerializeField] public AudioClip cryingSound = null;
 
         public Action<List<ItemAmount>> HungerChanged;
 
@@ -34,7 +36,11 @@ namespace FeedTheBaby
         void Awake()
         {
             LevelManager.Instance.LevelStart += Setup;
-            LevelManager.Instance.EndWithStarsUncollected += () => emotionAnimator.SetTrigger(IsSad);
+            LevelManager.Instance.EndWithStarsUncollected += () =>
+            {
+                AudioSource.PlayClipAtPoint(cryingSound, transform.position);
+                emotionAnimator.SetTrigger(IsSad);
+            };
         }
 
         // For each item we are eating, subtract the amount 
@@ -72,7 +78,11 @@ namespace FeedTheBaby
         {
             SetHunger(goals);
 
-            goals.TierFilled += (int i) => { emotionAnimator.SetTrigger(IsHappy); };
+            goals.TierFilled += i =>
+            {
+                AudioSource.PlayClipAtPoint(happySound, transform.position);
+                emotionAnimator.SetTrigger(IsHappy);
+            };
         }
     }
 }

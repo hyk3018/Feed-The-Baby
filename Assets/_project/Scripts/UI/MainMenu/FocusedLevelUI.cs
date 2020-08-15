@@ -54,7 +54,7 @@ namespace FeedTheBaby.UI
             ClearGrid(inventoryGrid);
 
             var potatoUI = inventoryGrid.GetChild(0).GetComponent<ItemSlotUI>();
-            potatoUI.SetItemAmount(new ItemAmount(ItemType.Potato, _levelData.fuelAmount));
+            potatoUI.SetItemAmount(new ItemAmount(ItemType.Fuel, _levelData.fuelAmount));
 
             FillGrid(_levelData.initialInventory, inventoryGrid, 1);
         }

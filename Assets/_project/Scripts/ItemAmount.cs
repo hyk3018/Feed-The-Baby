@@ -31,7 +31,7 @@ namespace FeedTheBaby
         {
             var copy = new ItemTier();
             foreach (var itemAmount in goalTier.items)
-                copy.items.Add(new ItemAmount(itemAmount.itemName, itemAmount.amount));
+                copy.items.Add(new ItemAmount(itemAmount.type, itemAmount.amount));
 
             return copy;
         }
@@ -40,7 +40,7 @@ namespace FeedTheBaby
         public static ItemTier CopyZero(ItemTier goalTier)
         {
             var copy = new ItemTier();
-            foreach (var itemAmount in goalTier.items) copy.items.Add(new ItemAmount(itemAmount.itemName, 0));
+            foreach (var itemAmount in goalTier.items) copy.items.Add(new ItemAmount(itemAmount.type, 0));
 
             return copy;
         }
@@ -51,9 +51,9 @@ namespace FeedTheBaby
             for (var i = 0; i < items.Count; i++)
             {
                 var item = items[i];
-                if (item.itemName == itemToAdd.itemName)
+                if (item.type == itemToAdd.type)
                 {
-                    items[i] = new ItemAmount(item.itemName, item.amount + itemToAdd.amount);
+                    items[i] = new ItemAmount(item.type, item.amount + itemToAdd.amount);
                     added = true;
                 }
             }
@@ -86,24 +86,24 @@ namespace FeedTheBaby
     [Serializable]
     public struct ItemAmount
     {
-        public ItemType itemName;
+        public ItemType type;
         public int amount;
 
         public ItemAmount(int amount)
         {
-            itemName = default;
+            type = default;
             this.amount = amount;
         }
 
         public ItemAmount(ItemType name, int amount)
         {
-            itemName = name;
+            type = name;
             this.amount = amount;
         }
 
         public static void ZeroAmounts(List<ItemAmount> items)
         {
-            for (var i = 0; i < items.Count; i++) items[i] = new ItemAmount(items[i].itemName, 0);
+            for (var i = 0; i < items.Count; i++) items[i] = new ItemAmount(items[i].type, 0);
         }
 
         public static List<ItemAmount> AddList(List<ItemAmount> items1, List<ItemAmount> items2)
@@ -119,7 +119,7 @@ namespace FeedTheBaby
             for (var i = 0; i < items.Count; i++)
             {
                 var itemInList = items[i];
-                if (item.itemName == itemInList.itemName)
+                if (item.type == itemInList.type)
                 {
                     itemInList.amount = itemInList.amount + item.amount;
                     items[i] = itemInList;
@@ -139,7 +139,7 @@ namespace FeedTheBaby
             for (var j = 0; j < items1.Count; j++)
             {
                 var alreadyAte = items1[j];
-                if (items2[i].itemName == alreadyAte.itemName)
+                if (items2[i].type == alreadyAte.type)
                 {
                     alreadyAte.amount = alreadyAte.amount - items2[i].amount;
                     items1[j] = alreadyAte;
@@ -155,6 +155,6 @@ namespace FeedTheBaby
         Berry,
         Apple,
         Wood,
-        Potato
+        Fuel
     }
 }

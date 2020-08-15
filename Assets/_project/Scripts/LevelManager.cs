@@ -53,6 +53,7 @@ namespace FeedTheBaby
 
         void CheckGameEnd(Timer timer)
         {
+            AudioSource.PlayClipAtPoint(baby.GetComponent<Baby>().cryingSound, player.transform.position);
             EndWithStarsUncollected();
             OnGameEnd();
             GameEnd();

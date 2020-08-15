@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goals:
   - items:
-    - itemName: 0
+    - type: 0
       amount: 1
   - items: []
   - items: []
@@ -4568,16 +4568,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c97d36f731f7d4488f6039e6b56a6c3, type: 2}
   initialInventory: []
   hints:
-  - position: {x: -4, y: -2.1}
+  - position: {x: -2.24, y: 1.41}
     text: You have no berries in your inventory! Walk to the bush to harvest some
       berries!
     duration: 3
     showOnce: 1
-    triggerOffset: {x: 1.87, y: 2.46}
+    triggerOffset: {x: 0.33, y: -2.41}
     triggerSize: {x: 3, y: 1.77}
-  playerStartPosition: {x: -4.5, y: 1.5}
+  playerStartPosition: {x: -4.5, y: -1.5}
   babyStartPosition: {x: 2.5, y: 0.44}
-  fuelAmount: 0
+  fuelAmount: 1
   levelName: level2
   levelTime: 10
   playerStartTime: 10

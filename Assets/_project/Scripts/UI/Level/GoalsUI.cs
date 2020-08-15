@@ -35,7 +35,7 @@ namespace FeedTheBaby.UI
 
                     var images = goalSlot.GetComponentsInChildren<Image>();
                     images[1].fillAmount = 0;
-                    images[2].sprite = itemUiData.itemSpriteDictionary.dictionary[tier[j].itemName];
+                    images[2].sprite = itemUiData.itemSpriteDictionary.dictionary[tier[j].type];
 
                     var text = goalSlot.GetComponentInChildren<TextMeshProUGUI>();
                     text.text = "0/" + tier[j].amount;

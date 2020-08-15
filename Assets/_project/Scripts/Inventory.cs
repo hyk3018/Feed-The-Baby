@@ -13,17 +13,21 @@ namespace FeedTheBaby
     public class Inventory : MonoBehaviour
     {
         [SerializeField] List<ItemAmount> itemList = null;
+        ItemAmount _fuel;
 
         public Action<List<ItemAmount>> InventoryChange;
+        public Action<ItemAmount> FuelChange;
 
         void Awake()
         {
+            _fuel = new ItemAmount(ItemType.Fuel, LevelManager.Instance.currentLevelData.fuelAmount);
             itemList = LevelManager.Instance.currentLevelData.initialInventory.ToList();
         }
 
         void Start()
         {
             InventoryChange(itemList);
+            FuelChange(_fuel);
         }
 
         public void AddItem(ItemAmount itemAmount)
@@ -31,10 +35,10 @@ namespace FeedTheBaby
             var added = false;
 
             for (var i = 0; i < itemList.Count; i++)
-                if (itemList[i].itemName == itemAmount.itemName)
+                if (itemList[i].type == itemAmount.type)
                 {
                     added = true;
-                    itemList[i] = new ItemAmount(itemAmount.itemName,
+                    itemList[i] = new ItemAmount(itemAmount.type,
                         itemList[i].amount + itemAmount.amount);
                     break;
                 }
@@ -58,15 +62,15 @@ namespace FeedTheBaby
                 var took = false;
                 foreach (var itemAmountWanted in itemsToTake)
                     // If the names match
-                    if (itemAmountInventory.itemName == itemAmountWanted.itemName)
+                    if (itemAmountInventory.type == itemAmountWanted.type)
                     {
                         // If there is more than needed, leave the remaining
                         if (itemAmountInventory.amount > itemAmountWanted.amount)
-                            toRemain.Add(new ItemAmount(itemAmountInventory.itemName,
+                            toRemain.Add(new ItemAmount(itemAmountInventory.type,
                                 itemAmountInventory.amount - itemAmountWanted.amount));
 
                         // Take what we need
-                        toTake.Add(new ItemAmount(itemAmountWanted.itemName,
+                        toTake.Add(new ItemAmount(itemAmountWanted.type,
                             Mathf.Min(itemAmountWanted.amount, itemAmountInventory.amount)));
                         took = true;
                         break;

@@ -547,7 +547,7 @@ namespace FeedTheBaby.LevelEditor
 
                     EditorGUI.BeginChangeCheck();
                     GUILayout.Label("Item Amount : ");
-                    item.itemName = (ItemType) EditorGUILayout.EnumPopup(item.itemName);
+                    item.type = (ItemType) EditorGUILayout.EnumPopup(item.type);
                     item.amount = EditorGUILayout.IntField(item.amount);
 
                     if (GUILayout.Button(_minus))
@@ -569,7 +569,7 @@ namespace FeedTheBaby.LevelEditor
                 EditorGUI.BeginChangeCheck();
                 GUILayout.Label("Add Item Amount : ");
                 var pending = _pendingAddGoal[i];
-                pending.itemName = (ItemType) EditorGUILayout.EnumPopup(pending.itemName);
+                pending.type = (ItemType) EditorGUILayout.EnumPopup(pending.type);
                 pending.amount = EditorGUILayout.IntField(pending.amount);
 
                 if (EditorGUI.EndChangeCheck()) _pendingAddGoal[i] = pending;
@@ -590,7 +590,7 @@ namespace FeedTheBaby.LevelEditor
 
                 EditorGUI.BeginChangeCheck();
                 GUILayout.Label("Item Amount : ");
-                item.itemName = (ItemType) EditorGUILayout.EnumPopup(item.itemName);
+                item.type = (ItemType) EditorGUILayout.EnumPopup(item.type);
                 item.amount = EditorGUILayout.IntField(item.amount);
 
                 if (GUILayout.Button(_minus))
@@ -612,7 +612,7 @@ namespace FeedTheBaby.LevelEditor
             EditorGUI.BeginChangeCheck();
             GUILayout.Label("Add Item Amount : ");
             var pending = _pendingAddInventory;
-            pending.itemName = (ItemType) EditorGUILayout.EnumPopup(pending.itemName);
+            pending.type = (ItemType) EditorGUILayout.EnumPopup(pending.type);
             pending.amount = EditorGUILayout.IntField(pending.amount);
 
             if (EditorGUI.EndChangeCheck()) _pendingAddInventory = pending;

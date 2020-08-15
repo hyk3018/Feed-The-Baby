@@ -1,5 +1,6 @@
 ﻿using System;
 using FeedTheBaby.Player;
+using TreeEditor;
 using UnityEngine;
 
 namespace FeedTheBaby
@@ -19,7 +20,6 @@ namespace FeedTheBaby
         [SerializeField] bool destroyOnHarvest = true;
 
         [SerializeField] bool needsFight;
-        // [SerializeField] Fightable fightable;
 
         Timer _timer;
         Harvester _currentHarvester;

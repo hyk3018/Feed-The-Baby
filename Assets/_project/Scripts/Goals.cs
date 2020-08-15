@@ -100,13 +100,13 @@ namespace FeedTheBaby
             for (var k = 0; k < filled.Count; k++)
             {
                 var filledAmount = filled[k];
-                if (goalTierItems[j].itemName == filledAmount.itemName)
+                if (goalTierItems[j].type == filledAmount.type)
                 {
                     // If what we need is greater, this item is not filled
                     if (goalTierItems[j].amount > filledAmount.amount) filledItem = false;
 
                     // Set the fill to be min of the two amounts
-                    currentFilled[i].items[j] = new ItemAmount(filledAmount.itemName,
+                    currentFilled[i].items[j] = new ItemAmount(filledAmount.type,
                         Mathf.Min(goalTierItems[j].amount, filledAmount.amount));
 
                     // Subtract needed from filled
