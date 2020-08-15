@@ -72,8 +72,6 @@ namespace FeedTheBaby
             player.transform.position = currentLevelData.playerStartPosition;
             baby.transform.position = currentLevelData.babyStartPosition;
 
-            // _inventoryOnLoad = levelData.initialInventory.ToList();
-
             terrainTilemap.SetTiles(currentLevelData.terrainPositions, currentLevelData.terrainTiles);
 
             // Set level object tiles
@@ -107,8 +105,6 @@ namespace FeedTheBaby
                     hintObject.GetComponent<Hint>().LoadHint(hint);
                 }
             }
-
-            // _fuelAmount = levelData.fuelAmount;
         }
 
         static void InstantiateLevelObjectPrefabInCell(GridLayout grid, GameObject brushTarget, Vector3Int position,
