@@ -15,8 +15,12 @@ namespace FeedTheBaby.Player
 
         void DisableComponents()
         {
+            canMove = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            GetComponent<TileMapMovement>().enabled = false;
+
+            TileMapMovement tileMapMovement = GetComponent<TileMapMovement>();
+            tileMapMovement.lockMovement = true;
+            tileMapMovement.enabled = false;
             GetComponent<Feeder>().enabled = false;
             GetComponent<Harvester>().enabled = false;
             GetComponent<Animator>().enabled = false;

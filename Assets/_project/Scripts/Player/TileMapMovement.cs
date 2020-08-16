@@ -13,6 +13,7 @@ namespace FeedTheBaby.Player
         [SerializeField] float moveSpeed = 0f;
 
         public Vector2 CurrentMovement;
+        public bool lockMovement;
 
         Rigidbody2D _rb2d;
         BehaviourController _behaviour;
@@ -52,7 +53,7 @@ namespace FeedTheBaby.Player
         IEnumerator FollowPath()
         {
             Vector3 currentWaypoint = _currentPath[0] + new Vector3(0.5f,0.5f);
-            while (true)
+            while (!lockMovement)
             {
                 if (Vector3.Distance(transform.position, currentWaypoint) < 0.2f)
                 {
