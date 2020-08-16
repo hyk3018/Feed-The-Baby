@@ -11,21 +11,21 @@ namespace FeedTheBaby.Player
         
         BehaviourController _behaviour;
         Inventory _inventory;
-        Movement _movement;
+        TileMapMovement _tileMapMovement;
 
         bool _harvesting;
 
         void Awake()
         {
             _behaviour = GetComponent<BehaviourController>();
-            _movement = GetComponent<Movement>();
+            _tileMapMovement = GetComponent<TileMapMovement>();
             _inventory = GetComponent<Inventory>();
         }
 
         void OnTriggerStay2D(Collider2D other)
         {
             // If moved into a harvestable, harvest it
-            if (_movement.MovedInto(other.transform))
+            if (_tileMapMovement.MovedInto(other.transform))
             {
                 var harvestable = other.GetComponent<IHarvestable>();
                 if (harvestable != null && !_harvesting)
