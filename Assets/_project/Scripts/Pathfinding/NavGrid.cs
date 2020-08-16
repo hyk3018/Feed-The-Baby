@@ -13,6 +13,8 @@ namespace FeedTheBaby.Pathfinding
 
         public Tilemap terrainTileMap;
 
+        public int MaxSize => gridBounds.size.x * gridBounds.size.y;
+
         public NavGrid(Tilemap terrainTileMap, Tilemap obstructionsTileMap, Tilemap levelObjectsTileMap)
         {
             this.terrainTileMap = terrainTileMap;

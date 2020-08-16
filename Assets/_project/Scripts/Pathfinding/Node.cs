@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FeedTheBaby.Pathfinding
 {
     [Serializable]
-    public class Node
+    public class Node : IHeapItem<Node>
     {
         public bool traversable;
         public Vector2 worldPosition;
@@ -14,6 +14,8 @@ namespace FeedTheBaby.Pathfinding
         public int hCost;
         public Node parent;
 
+        int heapIndex;
+
         public Node(bool traversable, Vector2 worldPosition, Vector2Int gridPosition)
         {
             this.traversable = traversable;
@@ -22,6 +24,23 @@ namespace FeedTheBaby.Pathfinding
         }
 
         public int FCost => gCost + hCost;
+
+        public int CompareTo(Node other)
+        {
+            int compare = FCost.CompareTo(other.FCost);
+            if (compare == 0)
+            {
+                compare = hCost.CompareTo(other.hCost);
+            }
+
+            return -compare;
+        }
+
+        public int HeapIndex
+        {
+            get { return heapIndex; }
+            set { heapIndex = value; }
+        }
     }
 }
 

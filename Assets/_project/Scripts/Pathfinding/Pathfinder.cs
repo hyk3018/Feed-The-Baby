@@ -43,7 +43,7 @@ namespace FeedTheBaby.Pathfinding
 
             foreach (Node pathNode in _path)
             {
-                GameObject pathObject = Instantiate(pathNodePrefab, transform);
+                GameObject pathObject = Instantiate(pathNodePrefab);
                 pathObject.transform.position = pathNode.worldPosition + Vector2.up * 0.5f + Vector2.right * 0.5f;
                 _pathObjects.Add(pathObject);
             }
@@ -54,23 +54,13 @@ namespace FeedTheBaby.Pathfinding
             Node startNode = navGrid.NodeFromWorldPoint(startPos);
             Node targetNode = navGrid.NodeFromWorldPoint(targetPos);
             
-            List<Node> openSet = new List<Node>();
+            Heap<Node> openSet = new Heap<Node>(navGrid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>();
             openSet.Add(startNode);
 
             while (openSet.Count > 0)
             {
-                Node currentNode = openSet[0];
-                for (int i = 1; i < openSet.Count; i++)
-                {
-                    if (openSet[i].FCost < currentNode.FCost ||
-                        openSet[i].FCost == currentNode.FCost && openSet[i].hCost < currentNode.hCost)
-                    {
-                        currentNode = openSet[i];
-                    }
-                }
-
-                openSet.Remove(currentNode);
+                Node currentNode = openSet.RemoveFirst();
                 closedSet.Add(currentNode);
 
                 if (currentNode == targetNode)
