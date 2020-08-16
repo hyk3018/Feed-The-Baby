@@ -19422,8 +19422,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8398071496377634767}
   baby: {fileID: 758138390}
-  terrainTilemap: {fileID: 247252750}
-  levelObjectsTilemap: {fileID: 648144683}
+  terrainTileMap: {fileID: 247252750}
+  levelObjectsTileMap: {fileID: 648144683}
+  obstructionsTileMap: {fileID: 1612521401}
   hints: {fileID: 1545827661}
   currentLevel: 0
   currentLevelData: {fileID: 0}
@@ -48729,6 +48730,7 @@ GameObject:
   - component: {fileID: 8398071496377634772}
   - component: {fileID: 8398071496377634774}
   - component: {fileID: 8398071496377634775}
+  - component: {fileID: 8398071496377634776}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -48849,6 +48851,29 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8398071496377634767}
   m_Enabled: 1
+--- !u!114 &8398071496377634776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398071496377634767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f0ee5716404bfeaa937d502404c1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navGrid:
+    grid: []
+    gridBounds:
+      m_Position: {x: 0, y: 0, z: 0}
+      m_Size: {x: 0, y: 0, z: 0}
+    terrainTileMap: {fileID: 0}
+  seeker: {fileID: 8398071496377634761}
+  target: {fileID: 758138393}
+  terrainTileMap: {fileID: 247252750}
+  pathNodePrefab: {fileID: 6512543185229405595, guid: 13f40579a27ca9f41b9dbfae09845bab,
+    type: 3}
 --- !u!114 &8576590722555926595
 MonoBehaviour:
   m_ObjectHideFlags: 0

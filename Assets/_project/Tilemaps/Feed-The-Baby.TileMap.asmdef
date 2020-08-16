@@ -1,0 +1,16 @@
+{
+    "name": "Feed-The-Baby.TileMap",
+    "references": [
+        "Unity.2D.Tilemap.Editor",
+        "Feed-The-Baby.Dictionary"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

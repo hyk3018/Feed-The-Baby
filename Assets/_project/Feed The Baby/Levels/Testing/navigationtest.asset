@@ -1,0 +1,435 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af5f17ad1cd4c679d0c1680c0259e16, type: 3}
+  m_Name: navigationtest
+  m_EditorClassIdentifier: 
+  goals:
+  - items:
+    - type: 0
+      amount: 1
+  - items: []
+  - items: []
+  terrainPositions:
+  - {x: -3, y: -4, z: 0}
+  - {x: -2, y: -4, z: 0}
+  - {x: -1, y: -4, z: 0}
+  - {x: 0, y: -4, z: 0}
+  - {x: 1, y: -4, z: 0}
+  - {x: 2, y: -4, z: 0}
+  - {x: 3, y: -4, z: 0}
+  - {x: -3, y: -3, z: 0}
+  - {x: -2, y: -3, z: 0}
+  - {x: -1, y: -3, z: 0}
+  - {x: 0, y: -3, z: 0}
+  - {x: 1, y: -3, z: 0}
+  - {x: 2, y: -3, z: 0}
+  - {x: 3, y: -3, z: 0}
+  - {x: -3, y: -2, z: 0}
+  - {x: -2, y: -2, z: 0}
+  - {x: -1, y: -2, z: 0}
+  - {x: 0, y: -2, z: 0}
+  - {x: 1, y: -2, z: 0}
+  - {x: 2, y: -2, z: 0}
+  - {x: 3, y: -2, z: 0}
+  - {x: -3, y: -1, z: 0}
+  - {x: -2, y: -1, z: 0}
+  - {x: -1, y: -1, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: 1, y: -1, z: 0}
+  - {x: 2, y: -1, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: -2, y: 1, z: 0}
+  - {x: -1, y: 1, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 2, y: 1, z: 0}
+  - {x: 3, y: 1, z: 0}
+  - {x: -3, y: 2, z: 0}
+  - {x: -2, y: 2, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 1, y: 2, z: 0}
+  - {x: 2, y: 2, z: 0}
+  - {x: 3, y: 2, z: 0}
+  terrainTiles:
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  - {fileID: 11400000, guid: d3f57be11cf5f644dabe9601d4d9c130, type: 2}
+  obstructionPositions:
+  - {x: -3, y: -4, z: 0}
+  - {x: -2, y: -4, z: 0}
+  - {x: -1, y: -4, z: 0}
+  - {x: 0, y: -4, z: 0}
+  - {x: 1, y: -4, z: 0}
+  - {x: 2, y: -4, z: 0}
+  - {x: 3, y: -4, z: 0}
+  - {x: -3, y: -3, z: 0}
+  - {x: 3, y: -3, z: 0}
+  - {x: -3, y: -2, z: 0}
+  - {x: 3, y: -2, z: 0}
+  - {x: -3, y: -1, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: -3, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: -3, y: 1, z: 0}
+  - {x: 3, y: 1, z: 0}
+  - {x: -3, y: 2, z: 0}
+  - {x: -2, y: 2, z: 0}
+  - {x: -1, y: 2, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: 1, y: 2, z: 0}
+  - {x: 2, y: 2, z: 0}
+  - {x: 3, y: 2, z: 0}
+  obstructionTiles:
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  - {fileID: 11400000, guid: 13c27aa8c83d9a649a5df8e735b79d17, type: 2}
+  levelObjectPositions:
+  - {x: -1, y: -2, z: 0}
+  - {x: 2, y: 1, z: 0}
+  levelObjectTiles:
+  - {fileID: 11400000, guid: 0c97d36f731f7d4488f6039e6b56a6c3, type: 2}
+  - {fileID: 11400000, guid: 0c97d36f731f7d4488f6039e6b56a6c3, type: 2}
+  navigationGrid:
+    grid:
+    - traversable: 0
+      worldPosition: {x: -3, y: -4}
+      gridPosition: {x: 0, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -2, y: -4}
+      gridPosition: {x: 1, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -1, y: -4}
+      gridPosition: {x: 2, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 0, y: -4}
+      gridPosition: {x: 3, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 1, y: -4}
+      gridPosition: {x: 4, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 2, y: -4}
+      gridPosition: {x: 5, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: -4}
+      gridPosition: {x: 6, y: 0}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -3, y: -3}
+      gridPosition: {x: 0, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -2, y: -3}
+      gridPosition: {x: 1, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -1, y: -3}
+      gridPosition: {x: 2, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 0, y: -3}
+      gridPosition: {x: 3, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 1, y: -3}
+      gridPosition: {x: 4, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 2, y: -3}
+      gridPosition: {x: 5, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: -3}
+      gridPosition: {x: 6, y: 1}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -3, y: -2}
+      gridPosition: {x: 0, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -2, y: -2}
+      gridPosition: {x: 1, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -1, y: -2}
+      gridPosition: {x: 2, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 0, y: -2}
+      gridPosition: {x: 3, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 1, y: -2}
+      gridPosition: {x: 4, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 2, y: -2}
+      gridPosition: {x: 5, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: -2}
+      gridPosition: {x: 6, y: 2}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -3, y: -1}
+      gridPosition: {x: 0, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -2, y: -1}
+      gridPosition: {x: 1, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -1, y: -1}
+      gridPosition: {x: 2, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 0, y: -1}
+      gridPosition: {x: 3, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 1, y: -1}
+      gridPosition: {x: 4, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 2, y: -1}
+      gridPosition: {x: 5, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: -1}
+      gridPosition: {x: 6, y: 3}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -3, y: 0}
+      gridPosition: {x: 0, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -2, y: 0}
+      gridPosition: {x: 1, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -1, y: 0}
+      gridPosition: {x: 2, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 0, y: 0}
+      gridPosition: {x: 3, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 1, y: 0}
+      gridPosition: {x: 4, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 2, y: 0}
+      gridPosition: {x: 5, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: 0}
+      gridPosition: {x: 6, y: 4}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -3, y: 1}
+      gridPosition: {x: 0, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -2, y: 1}
+      gridPosition: {x: 1, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: -1, y: 1}
+      gridPosition: {x: 2, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 0, y: 1}
+      gridPosition: {x: 3, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 1
+      worldPosition: {x: 1, y: 1}
+      gridPosition: {x: 4, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 2, y: 1}
+      gridPosition: {x: 5, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: 1}
+      gridPosition: {x: 6, y: 5}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -3, y: 2}
+      gridPosition: {x: 0, y: 6}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -2, y: 2}
+      gridPosition: {x: 1, y: 6}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: -1, y: 2}
+      gridPosition: {x: 2, y: 6}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 0, y: 2}
+      gridPosition: {x: 3, y: 6}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 1, y: 2}
+      gridPosition: {x: 4, y: 6}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 2, y: 2}
+      gridPosition: {x: 5, y: 6}
+      gCost: 0
+      hCost: 0
+    - traversable: 0
+      worldPosition: {x: 3, y: 2}
+      gridPosition: {x: 6, y: 6}
+      gCost: 0
+      hCost: 0
+    gridBounds:
+      m_Position: {x: -3, y: -4, z: 0}
+      m_Size: {x: 7, y: 7, z: 1}
+    terrainTileMap: {fileID: 0}
+  initialInventory: []
+  hints: []
+  playerStartPosition: {x: -1.5, y: -2.5}
+  babyStartPosition: {x: 2.5, y: 0.5}
+  fuelAmount: 0
+  levelName: navigationtest
+  levelTime: 30
+  playerStartTime: 30

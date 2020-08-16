@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FeedTheBaby.Brushes;
-using FeedTheBaby.Editor.Brushes;
-using FeedTheBaby.Tiles;
+using FeedTheBaby.Pathfinding;
+using FeedTheBaby.Tilemaps.Brushes;
+using FeedTheBaby.Tilemaps.Tiles;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
-using TerrainTile = FeedTheBaby.Tiles.Terrain.TerrainTile;
+using TerrainMap = FeedTheBaby.Tilemaps.Brushes.TerrainMap;
+using TerrainTile = FeedTheBaby.Tilemaps.Tiles.TerrainTile;
 
 namespace FeedTheBaby.LevelEditor
 {
@@ -332,8 +333,15 @@ namespace FeedTheBaby.LevelEditor
             SaveObstructions(levelAsset);
             SaveLevelObjects(levelAsset);
             SaveHints(levelAsset);
+            SaveNavGrid(levelAsset);
         }
-        
+
+        void SaveNavGrid(LevelData levelAsset)
+        {
+            NavGrid navGrid = new NavGrid(_terrainTileMap, _obstructionsTileMap, _levelObjectsTileMap);
+            levelAsset.navigationGrid = navGrid;
+        }
+
         void SaveTerrain(LevelData levelAsset)
         {
             var terrainPositions = new List<Vector3Int>();

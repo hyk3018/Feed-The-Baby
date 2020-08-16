@@ -1,7 +1,6 @@
-﻿using FeedTheBaby.Brushes;
-using FeedTheBaby.Editor.Brushes;
-using FeedTheBaby.LevelEditor;
+﻿using FeedTheBaby.LevelEditor;
 using FeedTheBaby.SkillTree;
+using FeedTheBaby.Tilemaps.Brushes;
 using FeedTheBaby.UI;
 
 namespace FeedTheBaby.GameData
