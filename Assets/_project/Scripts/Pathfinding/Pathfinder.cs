@@ -133,7 +133,9 @@ namespace FeedTheBaby.Pathfinding
                 directionOld = directionNew;
             }
             
-            waypoints.Add(path[path.Count - 1].worldPosition);
+            if (path.Count > 0)
+                waypoints.Add(path[path.Count - 1].worldPosition);
+            
             return waypoints.ToArray();
         }
 
