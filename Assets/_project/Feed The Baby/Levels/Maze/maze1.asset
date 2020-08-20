@@ -16,7 +16,9 @@ MonoBehaviour:
   - items:
     - type: 0
       amount: 1
-  - items: []
+  - items:
+    - type: 2
+      amount: 1
   - items: []
   terrainPositions:
   - {x: -14, y: -6, z: 0}
@@ -1245,33 +1247,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: -5}
       gridPosition: {x: 1, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5250
+      hCost: 110
     - traversable: 1
       worldPosition: {x: -12, y: -5}
       gridPosition: {x: 2, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5240
+      hCost: 100
     - traversable: 1
       worldPosition: {x: -11, y: -5}
       gridPosition: {x: 3, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5490
+      hCost: 194
     - traversable: 1
       worldPosition: {x: -10, y: -5}
       gridPosition: {x: 4, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5480
+      hCost: 184
     - traversable: 1
       worldPosition: {x: -9, y: -5}
       gridPosition: {x: 5, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5470
+      hCost: 174
     - traversable: 1
       worldPosition: {x: -8, y: -5}
       gridPosition: {x: 6, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5460
+      hCost: 164
     - traversable: 0
       worldPosition: {x: -7, y: -5}
       gridPosition: {x: 7, y: 1}
@@ -1280,38 +1282,38 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: -5}
       gridPosition: {x: 8, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5400
+      hCost: 144
     - traversable: 1
       worldPosition: {x: -5, y: -5}
       gridPosition: {x: 9, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5390
+      hCost: 134
     - traversable: 1
       worldPosition: {x: -4, y: -5}
       gridPosition: {x: 10, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5380
+      hCost: 124
     - traversable: 1
       worldPosition: {x: -3, y: -5}
       gridPosition: {x: 11, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5370
+      hCost: 114
     - traversable: 1
       worldPosition: {x: -2, y: -5}
       gridPosition: {x: 12, y: 1}
-      gCost: 0
+      gCost: 5360
       hCost: 0
     - traversable: 1
       worldPosition: {x: -1, y: -5}
       gridPosition: {x: 13, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5370
+      hCost: 94
     - traversable: 1
       worldPosition: {x: 0, y: -5}
       gridPosition: {x: 14, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5380
+      hCost: 84
     - traversable: 0
       worldPosition: {x: 1, y: -5}
       gridPosition: {x: 15, y: 1}
@@ -1320,18 +1322,18 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 2, y: -5}
       gridPosition: {x: 16, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5440
+      hCost: 64
     - traversable: 1
       worldPosition: {x: 3, y: -5}
       gridPosition: {x: 17, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5450
+      hCost: 54
     - traversable: 1
       worldPosition: {x: 4, y: -5}
       gridPosition: {x: 18, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5460
+      hCost: 44
     - traversable: 0
       worldPosition: {x: 5, y: -5}
       gridPosition: {x: 19, y: 1}
@@ -1350,23 +1352,23 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: -5}
       gridPosition: {x: 22, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5680
+      hCost: 24
     - traversable: 1
       worldPosition: {x: 9, y: -5}
       gridPosition: {x: 23, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 5690
+      hCost: 14
     - traversable: 1
       worldPosition: {x: 10, y: -5}
       gridPosition: {x: 24, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 6120
+      hCost: 80
     - traversable: 1
       worldPosition: {x: 11, y: -5}
       gridPosition: {x: 25, y: 1}
-      gCost: 0
-      hCost: 0
+      gCost: 6110
+      hCost: 90
     - traversable: 0
       worldPosition: {x: 12, y: -5}
       gridPosition: {x: 26, y: 1}
@@ -1380,8 +1382,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: -4}
       gridPosition: {x: 1, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5200
+      hCost: 106
     - traversable: 0
       worldPosition: {x: -12, y: -4}
       gridPosition: {x: 2, y: 2}
@@ -1405,8 +1407,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -8, y: -4}
       gridPosition: {x: 6, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5450
+      hCost: 160
     - traversable: 0
       worldPosition: {x: -7, y: -4}
       gridPosition: {x: 7, y: 2}
@@ -1430,8 +1432,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -3, y: -4}
       gridPosition: {x: 11, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5380
+      hCost: 110
     - traversable: 0
       worldPosition: {x: -2, y: -4}
       gridPosition: {x: 12, y: 2}
@@ -1445,8 +1447,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 0, y: -4}
       gridPosition: {x: 14, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5390
+      hCost: 80
     - traversable: 0
       worldPosition: {x: 1, y: -4}
       gridPosition: {x: 15, y: 2}
@@ -1455,8 +1457,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 2, y: -4}
       gridPosition: {x: 16, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5430
+      hCost: 60
     - traversable: 0
       worldPosition: {x: 3, y: -4}
       gridPosition: {x: 17, y: 2}
@@ -1465,18 +1467,18 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 4, y: -4}
       gridPosition: {x: 18, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5470
+      hCost: 40
     - traversable: 1
       worldPosition: {x: 5, y: -4}
       gridPosition: {x: 19, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5480
+      hCost: 30
     - traversable: 1
       worldPosition: {x: 6, y: -4}
       gridPosition: {x: 20, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5490
+      hCost: 20
     - traversable: 0
       worldPosition: {x: 7, y: -4}
       gridPosition: {x: 21, y: 2}
@@ -1485,23 +1487,23 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: -4}
       gridPosition: {x: 22, y: 2}
-      gCost: 0
+      gCost: 5670
       hCost: 0
     - traversable: 1
       worldPosition: {x: 9, y: -4}
       gridPosition: {x: 23, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5680
+      hCost: 10
     - traversable: 1
       worldPosition: {x: 10, y: -4}
       gridPosition: {x: 24, y: 2}
-      gCost: 0
+      gCost: 5690
       hCost: 0
     - traversable: 1
       worldPosition: {x: 11, y: -4}
       gridPosition: {x: 25, y: 2}
-      gCost: 0
-      hCost: 0
+      gCost: 5640
+      hCost: 30
     - traversable: 0
       worldPosition: {x: 12, y: -4}
       gridPosition: {x: 26, y: 2}
@@ -1515,23 +1517,23 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: -3}
       gridPosition: {x: 1, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5190
+      hCost: 102
     - traversable: 1
       worldPosition: {x: -12, y: -3}
       gridPosition: {x: 2, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5180
+      hCost: 92
     - traversable: 1
       worldPosition: {x: -11, y: -3}
       gridPosition: {x: 3, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5170
+      hCost: 82
     - traversable: 1
       worldPosition: {x: -10, y: -3}
       gridPosition: {x: 4, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5180
+      hCost: 72
     - traversable: 0
       worldPosition: {x: -9, y: -3}
       gridPosition: {x: 5, y: 3}
@@ -1540,33 +1542,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -8, y: -3}
       gridPosition: {x: 6, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5440
+      hCost: 164
     - traversable: 1
       worldPosition: {x: -7, y: -3}
       gridPosition: {x: 7, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5430
+      hCost: 154
     - traversable: 1
       worldPosition: {x: -6, y: -3}
       gridPosition: {x: 8, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5420
+      hCost: 144
     - traversable: 1
       worldPosition: {x: -5, y: -3}
       gridPosition: {x: 9, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5410
+      hCost: 134
     - traversable: 1
       worldPosition: {x: -4, y: -3}
       gridPosition: {x: 10, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5400
+      hCost: 124
     - traversable: 1
       worldPosition: {x: -3, y: -3}
       gridPosition: {x: 11, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5390
+      hCost: 114
     - traversable: 0
       worldPosition: {x: -2, y: -3}
       gridPosition: {x: 12, y: 3}
@@ -1580,18 +1582,18 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 0, y: -3}
       gridPosition: {x: 14, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5400
+      hCost: 84
     - traversable: 1
       worldPosition: {x: 1, y: -3}
       gridPosition: {x: 15, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5410
+      hCost: 74
     - traversable: 1
       worldPosition: {x: 2, y: -3}
       gridPosition: {x: 16, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5420
+      hCost: 64
     - traversable: 0
       worldPosition: {x: 3, y: -3}
       gridPosition: {x: 17, y: 3}
@@ -1610,8 +1612,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: -3}
       gridPosition: {x: 20, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5500
+      hCost: 24
     - traversable: 0
       worldPosition: {x: 7, y: -3}
       gridPosition: {x: 21, y: 3}
@@ -1620,8 +1622,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: -3}
       gridPosition: {x: 22, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5680
+      hCost: 24
     - traversable: 0
       worldPosition: {x: 9, y: -3}
       gridPosition: {x: 23, y: 3}
@@ -1635,8 +1637,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 11, y: -3}
       gridPosition: {x: 25, y: 3}
-      gCost: 0
-      hCost: 0
+      gCost: 5630
+      hCost: 34
     - traversable: 0
       worldPosition: {x: 12, y: -3}
       gridPosition: {x: 26, y: 3}
@@ -1650,8 +1652,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: -2}
       gridPosition: {x: 1, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5200
+      hCost: 98
     - traversable: 0
       worldPosition: {x: -12, y: -2}
       gridPosition: {x: 2, y: 4}
@@ -1660,13 +1662,13 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -11, y: -2}
       gridPosition: {x: 3, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5160
+      hCost: 78
     - traversable: 1
       worldPosition: {x: -10, y: -2}
       gridPosition: {x: 4, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5170
+      hCost: 68
     - traversable: 0
       worldPosition: {x: -9, y: -2}
       gridPosition: {x: 5, y: 4}
@@ -1675,8 +1677,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -8, y: -2}
       gridPosition: {x: 6, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5450
+      hCost: 168
     - traversable: 0
       worldPosition: {x: -7, y: -2}
       gridPosition: {x: 7, y: 4}
@@ -1735,8 +1737,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 4, y: -2}
       gridPosition: {x: 18, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5710
+      hCost: 68
     - traversable: 0
       worldPosition: {x: 5, y: -2}
       gridPosition: {x: 19, y: 4}
@@ -1745,8 +1747,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: -2}
       gridPosition: {x: 20, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5510
+      hCost: 28
     - traversable: 0
       worldPosition: {x: 7, y: -2}
       gridPosition: {x: 21, y: 4}
@@ -1755,23 +1757,23 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: -2}
       gridPosition: {x: 22, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5650
+      hCost: 20
     - traversable: 1
       worldPosition: {x: 9, y: -2}
       gridPosition: {x: 23, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5640
+      hCost: 24
     - traversable: 1
       worldPosition: {x: 10, y: -2}
       gridPosition: {x: 24, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5630
+      hCost: 28
     - traversable: 1
       worldPosition: {x: 11, y: -2}
       gridPosition: {x: 25, y: 4}
-      gCost: 0
-      hCost: 0
+      gCost: 5620
+      hCost: 38
     - traversable: 0
       worldPosition: {x: 12, y: -2}
       gridPosition: {x: 26, y: 4}
@@ -1785,8 +1787,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: -1}
       gridPosition: {x: 1, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5210
+      hCost: 94
     - traversable: 0
       worldPosition: {x: -12, y: -1}
       gridPosition: {x: 2, y: 5}
@@ -1795,13 +1797,13 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -11, y: -1}
       gridPosition: {x: 3, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5150
+      hCost: 74
     - traversable: 1
       worldPosition: {x: -10, y: -1}
       gridPosition: {x: 4, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5160
+      hCost: 64
     - traversable: 0
       worldPosition: {x: -9, y: -1}
       gridPosition: {x: 5, y: 5}
@@ -1810,18 +1812,18 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -8, y: -1}
       gridPosition: {x: 6, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5460
+      hCost: 172
     - traversable: 1
       worldPosition: {x: -7, y: -1}
       gridPosition: {x: 7, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5470
+      hCost: 162
     - traversable: 1
       worldPosition: {x: -6, y: -1}
       gridPosition: {x: 8, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5480
+      hCost: 152
     - traversable: 0
       worldPosition: {x: -5, y: -1}
       gridPosition: {x: 9, y: 5}
@@ -1830,38 +1832,38 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -4, y: -1}
       gridPosition: {x: 10, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5620
+      hCost: 24
     - traversable: 1
       worldPosition: {x: -3, y: -1}
       gridPosition: {x: 11, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5630
+      hCost: 14
     - traversable: 1
       worldPosition: {x: -2, y: -1}
       gridPosition: {x: 12, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5640
+      hCost: 10
     - traversable: 1
       worldPosition: {x: -1, y: -1}
       gridPosition: {x: 13, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5650
+      hCost: 14
     - traversable: 1
       worldPosition: {x: 0, y: -1}
       gridPosition: {x: 14, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 6340
+      hCost: 44
     - traversable: 1
       worldPosition: {x: 1, y: -1}
       gridPosition: {x: 15, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 6350
+      hCost: 34
     - traversable: 1
       worldPosition: {x: 2, y: -1}
       gridPosition: {x: 16, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 6360
+      hCost: 24
     - traversable: 0
       worldPosition: {x: 3, y: -1}
       gridPosition: {x: 17, y: 5}
@@ -1870,8 +1872,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 4, y: -1}
       gridPosition: {x: 18, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5700
+      hCost: 72
     - traversable: 0
       worldPosition: {x: 5, y: -1}
       gridPosition: {x: 19, y: 5}
@@ -1880,8 +1882,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: -1}
       gridPosition: {x: 20, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5520
+      hCost: 38
     - traversable: 0
       worldPosition: {x: 7, y: -1}
       gridPosition: {x: 21, y: 5}
@@ -1890,13 +1892,13 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: -1}
       gridPosition: {x: 22, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5660
+      hCost: 30
     - traversable: 1
       worldPosition: {x: 9, y: -1}
       gridPosition: {x: 23, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5650
+      hCost: 34
     - traversable: 0
       worldPosition: {x: 10, y: -1}
       gridPosition: {x: 24, y: 5}
@@ -1905,8 +1907,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 11, y: -1}
       gridPosition: {x: 25, y: 5}
-      gCost: 0
-      hCost: 0
+      gCost: 5610
+      hCost: 42
     - traversable: 0
       worldPosition: {x: 12, y: -1}
       gridPosition: {x: 26, y: 5}
@@ -1920,8 +1922,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: 0}
       gridPosition: {x: 1, y: 6}
-      gCost: 0
-      hCost: 0
+      gCost: 5220
+      hCost: 90
     - traversable: 0
       worldPosition: {x: -12, y: 0}
       gridPosition: {x: 2, y: 6}
@@ -1930,8 +1932,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -11, y: 0}
       gridPosition: {x: 3, y: 6}
-      gCost: 0
-      hCost: 0
+      gCost: 5140
+      hCost: 70
     - traversable: 0
       worldPosition: {x: -10, y: 0}
       gridPosition: {x: 4, y: 6}
@@ -1955,8 +1957,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: 0}
       gridPosition: {x: 8, y: 6}
-      gCost: 0
-      hCost: 0
+      gCost: 5490
+      hCost: 156
     - traversable: 0
       worldPosition: {x: -5, y: 0}
       gridPosition: {x: 9, y: 6}
@@ -1965,7 +1967,7 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -4, y: 0}
       gridPosition: {x: 10, y: 6}
-      gCost: 0
+      gCost: 5610
       hCost: 0
     - traversable: 0
       worldPosition: {x: -3, y: 0}
@@ -1975,7 +1977,7 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -2, y: 0}
       gridPosition: {x: 12, y: 6}
-      gCost: 0
+      gCost: 5650
       hCost: 0
     - traversable: 0
       worldPosition: {x: -1, y: 0}
@@ -2005,7 +2007,7 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 4, y: 0}
       gridPosition: {x: 18, y: 6}
-      gCost: 0
+      gCost: 6410
       hCost: 0
     - traversable: 0
       worldPosition: {x: 5, y: 0}
@@ -2015,8 +2017,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: 0}
       gridPosition: {x: 20, y: 6}
-      gCost: 0
-      hCost: 0
+      gCost: 5530
+      hCost: 48
     - traversable: 0
       worldPosition: {x: 7, y: 0}
       gridPosition: {x: 21, y: 6}
@@ -2040,8 +2042,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 11, y: 0}
       gridPosition: {x: 25, y: 6}
-      gCost: 0
-      hCost: 0
+      gCost: 5600
+      hCost: 52
     - traversable: 0
       worldPosition: {x: 12, y: 0}
       gridPosition: {x: 26, y: 6}
@@ -2055,8 +2057,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: 1}
       gridPosition: {x: 1, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5230
+      hCost: 94
     - traversable: 0
       worldPosition: {x: -12, y: 1}
       gridPosition: {x: 2, y: 7}
@@ -2065,23 +2067,23 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -11, y: 1}
       gridPosition: {x: 3, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5130
+      hCost: 74
     - traversable: 1
       worldPosition: {x: -10, y: 1}
       gridPosition: {x: 4, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5120
+      hCost: 64
     - traversable: 1
       worldPosition: {x: -9, y: 1}
       gridPosition: {x: 5, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5110
+      hCost: 54
     - traversable: 1
       worldPosition: {x: -8, y: 1}
       gridPosition: {x: 6, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5120
+      hCost: 44
     - traversable: 0
       worldPosition: {x: -7, y: 1}
       gridPosition: {x: 7, y: 7}
@@ -2090,8 +2092,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: 1}
       gridPosition: {x: 8, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5500
+      hCost: 160
     - traversable: 0
       worldPosition: {x: -5, y: 1}
       gridPosition: {x: 9, y: 7}
@@ -2100,8 +2102,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -4, y: 1}
       gridPosition: {x: 10, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5600
+      hCost: 10
     - traversable: 0
       worldPosition: {x: -3, y: 1}
       gridPosition: {x: 11, y: 7}
@@ -2110,38 +2112,38 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -2, y: 1}
       gridPosition: {x: 12, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6340
+      hCost: 64
     - traversable: 1
       worldPosition: {x: -1, y: 1}
       gridPosition: {x: 13, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6350
+      hCost: 54
     - traversable: 1
       worldPosition: {x: 0, y: 1}
       gridPosition: {x: 14, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6360
+      hCost: 44
     - traversable: 1
       worldPosition: {x: 1, y: 1}
       gridPosition: {x: 15, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6370
+      hCost: 34
     - traversable: 1
       worldPosition: {x: 2, y: 1}
       gridPosition: {x: 16, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6380
+      hCost: 24
     - traversable: 1
       worldPosition: {x: 3, y: 1}
       gridPosition: {x: 17, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6390
+      hCost: 14
     - traversable: 1
       worldPosition: {x: 4, y: 1}
       gridPosition: {x: 18, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 6400
+      hCost: 10
     - traversable: 0
       worldPosition: {x: 5, y: 1}
       gridPosition: {x: 19, y: 7}
@@ -2150,33 +2152,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: 1}
       gridPosition: {x: 20, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5540
+      hCost: 58
     - traversable: 1
       worldPosition: {x: 7, y: 1}
       gridPosition: {x: 21, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5550
+      hCost: 54
     - traversable: 1
       worldPosition: {x: 8, y: 1}
       gridPosition: {x: 22, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5560
+      hCost: 50
     - traversable: 1
       worldPosition: {x: 9, y: 1}
       gridPosition: {x: 23, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5570
+      hCost: 54
     - traversable: 1
       worldPosition: {x: 10, y: 1}
       gridPosition: {x: 24, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5580
+      hCost: 58
     - traversable: 1
       worldPosition: {x: 11, y: 1}
       gridPosition: {x: 25, y: 7}
-      gCost: 0
-      hCost: 0
+      gCost: 5590
+      hCost: 62
     - traversable: 0
       worldPosition: {x: 12, y: 1}
       gridPosition: {x: 26, y: 7}
@@ -2210,13 +2212,13 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -9, y: 2}
       gridPosition: {x: 5, y: 8}
-      gCost: 0
-      hCost: 0
+      gCost: 5100
+      hCost: 58
     - traversable: 1
       worldPosition: {x: -8, y: 2}
       gridPosition: {x: 6, y: 8}
-      gCost: 0
-      hCost: 0
+      gCost: 5110
+      hCost: 48
     - traversable: 0
       worldPosition: {x: -7, y: 2}
       gridPosition: {x: 7, y: 8}
@@ -2225,8 +2227,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: 2}
       gridPosition: {x: 8, y: 8}
-      gCost: 0
-      hCost: 0
+      gCost: 5510
+      hCost: 164
     - traversable: 0
       worldPosition: {x: -5, y: 2}
       gridPosition: {x: 9, y: 8}
@@ -2235,8 +2237,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -4, y: 2}
       gridPosition: {x: 10, y: 8}
-      gCost: 0
-      hCost: 0
+      gCost: 5590
+      hCost: 20
     - traversable: 0
       worldPosition: {x: -3, y: 2}
       gridPosition: {x: 11, y: 8}
@@ -2295,8 +2297,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: 2}
       gridPosition: {x: 22, y: 8}
-      gCost: 0
-      hCost: 0
+      gCost: 5570
+      hCost: 60
     - traversable: 0
       worldPosition: {x: 9, y: 2}
       gridPosition: {x: 23, y: 8}
@@ -2325,33 +2327,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: 3}
       gridPosition: {x: 1, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5070
+      hCost: 102
     - traversable: 1
       worldPosition: {x: -12, y: 3}
       gridPosition: {x: 2, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5060
+      hCost: 92
     - traversable: 1
       worldPosition: {x: -11, y: 3}
       gridPosition: {x: 3, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5070
+      hCost: 82
     - traversable: 1
       worldPosition: {x: -10, y: 3}
       gridPosition: {x: 4, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5080
+      hCost: 72
     - traversable: 1
       worldPosition: {x: -9, y: 3}
       gridPosition: {x: 5, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5090
+      hCost: 62
     - traversable: 1
       worldPosition: {x: -8, y: 3}
       gridPosition: {x: 6, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5100
+      hCost: 52
     - traversable: 0
       worldPosition: {x: -7, y: 3}
       gridPosition: {x: 7, y: 9}
@@ -2360,8 +2362,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: 3}
       gridPosition: {x: 8, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5360
+      hCost: 38
     - traversable: 0
       worldPosition: {x: -5, y: 3}
       gridPosition: {x: 9, y: 9}
@@ -2370,58 +2372,58 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -4, y: 3}
       gridPosition: {x: 10, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5580
+      hCost: 30
     - traversable: 1
       worldPosition: {x: -3, y: 3}
       gridPosition: {x: 11, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5570
+      hCost: 34
     - traversable: 1
       worldPosition: {x: -2, y: 3}
       gridPosition: {x: 12, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5560
+      hCost: 38
     - traversable: 1
       worldPosition: {x: -1, y: 3}
       gridPosition: {x: 13, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5550
+      hCost: 42
     - traversable: 1
       worldPosition: {x: 0, y: 3}
       gridPosition: {x: 14, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5540
+      hCost: 52
     - traversable: 1
       worldPosition: {x: 1, y: 3}
       gridPosition: {x: 15, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5530
+      hCost: 62
     - traversable: 1
       worldPosition: {x: 2, y: 3}
       gridPosition: {x: 16, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5520
+      hCost: 72
     - traversable: 1
       worldPosition: {x: 3, y: 3}
       gridPosition: {x: 17, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5510
+      hCost: 82
     - traversable: 1
       worldPosition: {x: 4, y: 3}
       gridPosition: {x: 18, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5500
+      hCost: 92
     - traversable: 1
       worldPosition: {x: 5, y: 3}
       gridPosition: {x: 19, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5510
+      hCost: 102
     - traversable: 1
       worldPosition: {x: 6, y: 3}
       gridPosition: {x: 20, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5520
+      hCost: 92
     - traversable: 0
       worldPosition: {x: 7, y: 3}
       gridPosition: {x: 21, y: 9}
@@ -2430,23 +2432,23 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 8, y: 3}
       gridPosition: {x: 22, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5580
+      hCost: 70
     - traversable: 1
       worldPosition: {x: 9, y: 3}
       gridPosition: {x: 23, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5590
+      hCost: 74
     - traversable: 1
       worldPosition: {x: 10, y: 3}
       gridPosition: {x: 24, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 5600
+      hCost: 78
     - traversable: 1
       worldPosition: {x: 11, y: 3}
       gridPosition: {x: 25, y: 9}
-      gCost: 0
-      hCost: 0
+      gCost: 6070
+      hCost: 24
     - traversable: 0
       worldPosition: {x: 12, y: 3}
       gridPosition: {x: 26, y: 9}
@@ -2460,33 +2462,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: 4}
       gridPosition: {x: 1, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5060
+      hCost: 106
     - traversable: 1
       worldPosition: {x: -12, y: 4}
       gridPosition: {x: 2, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5050
+      hCost: 64
     - traversable: 1
       worldPosition: {x: -11, y: 4}
       gridPosition: {x: 3, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5060
+      hCost: 86
     - traversable: 1
       worldPosition: {x: -10, y: 4}
       gridPosition: {x: 4, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5070
+      hCost: 76
     - traversable: 1
       worldPosition: {x: -9, y: 4}
       gridPosition: {x: 5, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5080
+      hCost: 66
     - traversable: 1
       worldPosition: {x: -8, y: 4}
       gridPosition: {x: 6, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5090
+      hCost: 56
     - traversable: 0
       worldPosition: {x: -7, y: 4}
       gridPosition: {x: 7, y: 10}
@@ -2495,8 +2497,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: 4}
       gridPosition: {x: 8, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5370
+      hCost: 48
     - traversable: 0
       worldPosition: {x: -5, y: 4}
       gridPosition: {x: 9, y: 10}
@@ -2545,8 +2547,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 4, y: 4}
       gridPosition: {x: 18, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5490
+      hCost: 96
     - traversable: 0
       worldPosition: {x: 5, y: 4}
       gridPosition: {x: 19, y: 10}
@@ -2555,8 +2557,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: 4}
       gridPosition: {x: 20, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 5530
+      hCost: 96
     - traversable: 0
       worldPosition: {x: 7, y: 4}
       gridPosition: {x: 21, y: 10}
@@ -2580,8 +2582,8 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 11, y: 4}
       gridPosition: {x: 25, y: 10}
-      gCost: 0
-      hCost: 0
+      gCost: 6080
+      hCost: 34
     - traversable: 0
       worldPosition: {x: 12, y: 4}
       gridPosition: {x: 26, y: 10}
@@ -2595,33 +2597,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -13, y: 5}
       gridPosition: {x: 1, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5070
+      hCost: 110
     - traversable: 1
       worldPosition: {x: -12, y: 5}
       gridPosition: {x: 2, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5060
+      hCost: 100
     - traversable: 1
       worldPosition: {x: -11, y: 5}
       gridPosition: {x: 3, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5070
+      hCost: 90
     - traversable: 1
       worldPosition: {x: -10, y: 5}
       gridPosition: {x: 4, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5080
+      hCost: 80
     - traversable: 1
       worldPosition: {x: -9, y: 5}
       gridPosition: {x: 5, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5090
+      hCost: 70
     - traversable: 1
       worldPosition: {x: -8, y: 5}
       gridPosition: {x: 6, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5100
+      hCost: 66
     - traversable: 0
       worldPosition: {x: -7, y: 5}
       gridPosition: {x: 7, y: 11}
@@ -2630,58 +2632,58 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: -6, y: 5}
       gridPosition: {x: 8, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5380
+      hCost: 58
     - traversable: 1
       worldPosition: {x: -5, y: 5}
       gridPosition: {x: 9, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5390
+      hCost: 54
     - traversable: 1
       worldPosition: {x: -4, y: 5}
       gridPosition: {x: 10, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5400
+      hCost: 50
     - traversable: 1
       worldPosition: {x: -3, y: 5}
       gridPosition: {x: 11, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5410
+      hCost: 54
     - traversable: 1
       worldPosition: {x: -2, y: 5}
       gridPosition: {x: 12, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5420
+      hCost: 58
     - traversable: 1
       worldPosition: {x: -1, y: 5}
       gridPosition: {x: 13, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5430
+      hCost: 62
     - traversable: 1
       worldPosition: {x: 0, y: 5}
       gridPosition: {x: 14, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5440
+      hCost: 66
     - traversable: 1
       worldPosition: {x: 1, y: 5}
       gridPosition: {x: 15, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5450
+      hCost: 70
     - traversable: 1
       worldPosition: {x: 2, y: 5}
       gridPosition: {x: 16, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5460
+      hCost: 80
     - traversable: 1
       worldPosition: {x: 3, y: 5}
       gridPosition: {x: 17, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5470
+      hCost: 90
     - traversable: 1
       worldPosition: {x: 4, y: 5}
       gridPosition: {x: 18, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5480
+      hCost: 100
     - traversable: 0
       worldPosition: {x: 5, y: 5}
       gridPosition: {x: 19, y: 11}
@@ -2690,33 +2692,33 @@ MonoBehaviour:
     - traversable: 1
       worldPosition: {x: 6, y: 5}
       gridPosition: {x: 20, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5540
+      hCost: 100
     - traversable: 1
       worldPosition: {x: 7, y: 5}
       gridPosition: {x: 21, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 5550
+      hCost: 110
     - traversable: 1
       worldPosition: {x: 8, y: 5}
       gridPosition: {x: 22, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 6120
+      hCost: 66
     - traversable: 1
       worldPosition: {x: 9, y: 5}
       gridPosition: {x: 23, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 6110
+      hCost: 70
     - traversable: 1
       worldPosition: {x: 10, y: 5}
       gridPosition: {x: 24, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 6100
+      hCost: 80
     - traversable: 1
       worldPosition: {x: 11, y: 5}
       gridPosition: {x: 25, y: 11}
-      gCost: 0
-      hCost: 0
+      gCost: 6090
+      hCost: 90
     - traversable: 0
       worldPosition: {x: 12, y: 5}
       gridPosition: {x: 26, y: 11}
@@ -2861,7 +2863,11 @@ MonoBehaviour:
       m_Position: {x: -14, y: -6, z: 0}
       m_Size: {x: 27, y: 13, z: 1}
     terrainTileMap: {fileID: 0}
-  initialInventory: []
+  initialInventory:
+  - type: 2
+    amount: 1
+  - type: 0
+    amount: 1
   hints: []
   playerStartPosition: {x: -11.5, y: 4.5}
   babyStartPosition: {x: 10.5, y: -3.5}

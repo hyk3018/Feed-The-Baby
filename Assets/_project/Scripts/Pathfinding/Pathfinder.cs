@@ -84,6 +84,8 @@ namespace FeedTheBaby.Pathfinding
 
                             if (!openSet.Contains(neighbour))
                                 openSet.Add(neighbour);
+                            else
+                                openSet.UpdateItem(neighbour);
                         }
                     }
                 }

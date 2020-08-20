@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using FeedTheBaby.Commands;
 using FeedTheBaby.Pathfinding;
 using UnityEditor;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.Tilemaps;
 namespace FeedTheBaby.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class TileMapMovement : MonoBehaviour
+    public class TileMapMovement : MonoBehaviour, IMoveCommandExecutor
     {
         [SerializeField] float moveSpeed = 0f;
 
@@ -23,19 +24,17 @@ namespace FeedTheBaby.Player
         int _targetIndex;
         Coroutine _pathFollow;
 
+        Action _onCommandFinish;
+
         void Awake()
         {
             _behaviour = GetComponent<BehaviourController>();
             _rb2d = GetComponent<Rigidbody2D>();
         }
 
-        void Update()
+        void MoveToTarget()
         {
-            if (Input.GetMouseButtonDown(1))
-            {
-                _currentTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                PathRequestManager.RequestPath(transform.position, _currentTarget, OnPathFound);
-            }
+            PathRequestManager.RequestPath(transform.position, _currentTarget, OnPathFound);
         }
 
         void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -48,6 +47,8 @@ namespace FeedTheBaby.Player
                     StopCoroutine(_pathFollow);
                 _pathFollow = StartCoroutine(FollowPath());
             }
+            else
+                _onCommandFinish();
         }
 
         IEnumerator FollowPath()
@@ -70,6 +71,7 @@ namespace FeedTheBaby.Player
             }
             
             Move(Vector2.zero);
+            _onCommandFinish();
         }
 
         // Determines whether we are moving towards another object
@@ -91,6 +93,18 @@ namespace FeedTheBaby.Player
                 _rb2d.velocity = normalizedDirection * moveSpeed;
             else
                 _rb2d.velocity = Vector2.zero;
+        }
+
+        public void ExecuteMove(MoveCommand command, Action onCommandFinish)
+        {
+            _currentTarget = command.target;
+            MoveToTarget();
+            _onCommandFinish = onCommandFinish;
+        }
+
+        public void Interrupt()
+        {
+            _onCommandFinish?.Invoke();
         }
     }
 }

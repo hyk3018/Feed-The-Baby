@@ -18,8 +18,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce19dcf7905aca14d955bba414fb2d0e, type: 2}
   - {fileID: 11400000, guid: 454e548719d8106498b372f86acafa90, type: 2}
   - {fileID: 11400000, guid: 3f2023076f8ac1e4e9e29d1d0e3bf704, type: 2}
+  - {fileID: 11400000, guid: c1ff480ca03676c45b3a30bf010c827d, type: 2}
   skillTreeData: {fileID: 11400000, guid: 5f563687374f6e641bd0c7d017db4e11, type: 2}
   itemUIData: {fileID: 11400000, guid: 89e3d32d0f321b44cbd303f21db8715e, type: 2}
   levelObjectMap: {fileID: 11400000, guid: 06d1065fa2afca24f96729c5ff938bd0, type: 2}
-  currentLevel: 0
-  levelsUnlocked: 2
+  currentLevel: 5
+  levelsUnlocked: 6

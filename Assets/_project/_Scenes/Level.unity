@@ -14018,6 +14018,71 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &952173640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952173643}
+  - component: {fileID: 952173642}
+  - component: {fileID: 952173641}
+  m_Layer: 0
+  m_Name: Pathfinding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &952173641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952173640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f0ee5716404bfeaa937d502404c1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navGrid:
+    grid: []
+    gridBounds:
+      m_Position: {x: 0, y: 0, z: 0}
+      m_Size: {x: 0, y: 0, z: 0}
+    terrainTileMap: {fileID: 0}
+  terrainTileMap: {fileID: 247252750}
+  pathNodePrefab: {fileID: 6512543185229405595, guid: 13f40579a27ca9f41b9dbfae09845bab,
+    type: 3}
+--- !u!114 &952173642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952173640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7f87c4c2864df29ae731151680f844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &952173643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952173640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.0704699, y: -1.2974209, z: 156.57333}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &975214566
 GameObject:
   m_ObjectHideFlags: 0
@@ -48830,6 +48895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   CurrentMovement: {x: 0, y: 0}
+  lockMovement: 0
 --- !u!114 &8398071496377634774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48869,8 +48935,6 @@ MonoBehaviour:
       m_Position: {x: 0, y: 0, z: 0}
       m_Size: {x: 0, y: 0, z: 0}
     terrainTileMap: {fileID: 0}
-  seeker: {fileID: 8398071496377634761}
-  target: {fileID: 758138393}
   terrainTileMap: {fileID: 247252750}
   pathNodePrefab: {fileID: 6512543185229405595, guid: 13f40579a27ca9f41b9dbfae09845bab,
     type: 3}
