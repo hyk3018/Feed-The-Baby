@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FeedTheBaby.Game;
 using UnityEngine;
 
 namespace FeedTheBaby.Player
@@ -11,7 +12,6 @@ namespace FeedTheBaby.Player
         Inventory _inventory;
 
         bool _feeding;
-        IFeedable _feedable;
 
         void Awake()
         {
@@ -19,30 +19,17 @@ namespace FeedTheBaby.Player
             _inventory = GetComponent<Inventory>();
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        public void FeedFromInventory(IFeedable feedable)
         {
-            var feedable = other.GetComponent<IFeedable>();
-            if (feedable != null) _feedable = feedable;
-        }
-
-        void OnTriggerExit2D(Collider2D other)
-        {
-            var feedable = other.GetComponent<IFeedable>();
-            if (feedable == _feedable) _feedable = null;
-        }
-
-        void Update()
-        {
-            // If in contact with feedable and space pressed then feed it
-            if (Input.GetKeyDown(KeyCode.Space) && _feedable != null)
+            if (feedable != null)
             {
                 // First we need to find out how much food left do we need to feed baby
-                var hunger = _feedable.GetHunger();
-                _feedable.Feed(TakeFoodFromInventory(hunger));
+                var hunger = feedable.GetHunger();
+                feedable.Feed(TakeFoodFromInventory(hunger));
             }
         }
 
-        public List<ItemAmount> TakeFoodFromInventory(List<ItemAmount> hunger)
+        List<ItemAmount> TakeFoodFromInventory(List<ItemAmount> hunger)
         {
             if (hunger == null || hunger.Count == 0)
                 return null;

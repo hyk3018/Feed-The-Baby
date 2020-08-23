@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FeedTheBaby.Tilemaps.Tiles;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -33,15 +34,23 @@ namespace FeedTheBaby.Pathfinding
             {
                 Vector3 worldPosition = terrainTileMap.CellToWorld(cellPosition);
 
-                bool traversable = terrainTileMap.HasTile(cellPosition)
-                                   && !(obstructionsTileMap.HasTile(cellPosition)
-                                        || levelObjectsTileMap.HasTile(cellPosition));
+                bool traversable = terrainTileMap.HasTile(cellPosition) && !obstructionsTileMap.HasTile(cellPosition);
+                bool passable = traversable;
+                if (traversable)
+                {
+                    bool hasLevelObjectTile = levelObjectsTileMap.HasTile(cellPosition);
+                    if (hasLevelObjectTile)
+                        if (levelObjectsTileMap.GetTile(cellPosition) is LevelObjectTile levelObjectTile)
+                            passable = levelObjectTile.passable;
+                }
+
+                traversable = !obstructionsTileMap.HasTile(cellPosition) && traversable;
 
                 // All positions have to be relative to the min (bottom left) rather than center 
                 int yRelativeToBottomLeft = cellPosition.y - gridBounds.yMin;
                 int xRelativeToBottomLeft = cellPosition.x - gridBounds.xMin;
                 
-                Node node = new Node(traversable, worldPosition, new Vector2Int(xRelativeToBottomLeft,
+                Node node = new Node(traversable, passable, worldPosition, new Vector2Int(xRelativeToBottomLeft,
                     yRelativeToBottomLeft));
                 
                 grid[GridCoordToIndex(yRelativeToBottomLeft, xRelativeToBottomLeft)] = node;
@@ -88,9 +97,9 @@ namespace FeedTheBaby.Pathfinding
             return grid[yRelativeToBottomLeft * gridBounds.size.x + xRelativeToBottomleft];
         }
 
-        public bool NodeTraversable(Node neighbour)
+        public bool NodePassable(Node neighbour)
         {
-            return neighbour.traversable;
+            return neighbour.passable;
         }
     }
 }

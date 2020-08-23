@@ -12,6 +12,7 @@ namespace FeedTheBaby.Pathfinding
         [SerializeField] NavGrid navGrid = null;
         [SerializeField] Tilemap terrainTileMap = null;
         [SerializeField] GameObject pathNodePrefab = null;
+        [SerializeField] bool drawPath = false;
 
         PathRequestManager _pathRequestManager;
         
@@ -24,18 +25,7 @@ namespace FeedTheBaby.Pathfinding
             _pathObjects = new List<GameObject>();
             navGrid = LevelManager.Instance.currentLevelData.navigationGrid;
             navGrid.terrainTileMap = terrainTileMap;
-            // StartCoroutine(PeriodicPathFind());
         }
-
-        // IEnumerator PeriodicPathFind()
-        // {
-        //     while (true)
-        //     {
-        //         FindPath(seeker.position, target.position);
-        //         DrawPath();
-        //         yield return new WaitForSeconds(.1f);
-        //     }
-        // }
         
         public void StartFindPath(Vector3 startPos, Vector3 targetPos)
         {
@@ -44,7 +34,6 @@ namespace FeedTheBaby.Pathfinding
 
         IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
         {
-            Vector3[] waypoints = new Vector3[0];
             bool pathSuccess = false;
             
             Node startNode = navGrid.NodeFromWorldPoint(startPos);
@@ -71,7 +60,8 @@ namespace FeedTheBaby.Pathfinding
                     List<Node> neighbours = navGrid.GetNeighbours(currentNode);
                     foreach (Node neighbour in neighbours)
                     {
-                        if (!navGrid.NodeTraversable(neighbour) || closedSet.Contains(neighbour))
+                        if (!navGrid.NodePassable(neighbour) && neighbour != targetNode
+                            || closedSet.Contains(neighbour))
                             continue;
 
                         int newMoveCostToNeighbour = currentNode.gCost +
@@ -92,16 +82,27 @@ namespace FeedTheBaby.Pathfinding
             }
 
             yield return null;
-            
+
+            List<Vector3> waypoints = null;
             
             if (pathSuccess)
-                waypoints = RetracePath(startNode, targetNode);
-            
-            StartCoroutine(DrawPath(waypoints));
+            {
+                waypoints = RetracePath(startNode, targetNode.parent);
+
+                if (targetNode.passable)
+                    waypoints.Add(targetNode.worldPosition);
+                else
+                    waypoints.Add(Vector2.Lerp(targetNode.parent.worldPosition, targetNode.worldPosition,
+                        0.05f));
+                
+                if (drawPath)
+                    StartCoroutine(DrawPath(waypoints));
+            }
+
             _pathRequestManager.FinishProcessingPath(waypoints, pathSuccess);
         }
 
-        Vector3[] RetracePath(Node start, Node target)
+        List<Vector3> RetracePath(Node start, Node target)
         {
             List<Node> path = new List<Node>();
             Node currentNode = target;
@@ -111,12 +112,12 @@ namespace FeedTheBaby.Pathfinding
                 currentNode = currentNode.parent;
             }
 
-            Vector3[] waypoints = SimplifyPath(path);
-            Array.Reverse(waypoints);
+            List<Vector3> waypoints = SimplifyPath(path);
+            waypoints.Reverse();
             return waypoints;
         }
 
-        Vector3[] SimplifyPath(List<Node> path)
+        List<Vector3> SimplifyPath(List<Node> path)
         {
             List<Vector3> waypoints = new List<Vector3>();
             Vector2 directionOld = Vector2.zero;
@@ -136,10 +137,10 @@ namespace FeedTheBaby.Pathfinding
             if (path.Count > 0)
                 waypoints.Add(path[path.Count - 1].worldPosition);
             
-            return waypoints.ToArray();
+            return waypoints;
         }
 
-        IEnumerator DrawPath(Vector3[] waypoints)
+        IEnumerator DrawPath(List<Vector3> waypoints)
         {
             foreach (GameObject pathObject in _pathObjects)
                 Destroy(pathObject);

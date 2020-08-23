@@ -1,13 +1,14 @@
 ﻿using System;
+using FeedTheBaby.Commands;
 using FeedTheBaby.Player;
 using TreeEditor;
 using UnityEngine;
 
 namespace FeedTheBaby
 {
-    public interface IHarvestable
+    public interface IHarvestable : IInteractable
     {
-        void StartHarvest(Action<ItemAmount> onFinishHarvest);
+        void Harvest(Action<ItemAmount> onFinishHarvest);
         bool StayToHarvest();
     }
 
@@ -37,7 +38,7 @@ namespace FeedTheBaby
             return stayToHarvest;
         }
 
-        public void StartHarvest(Action<ItemAmount> onFinishHarvest)
+        public void Harvest(Action<ItemAmount> onFinishHarvest)
         {
             OnFinishHarvest += onFinishHarvest;
             _timer.StartCount(harvestTime);
@@ -48,6 +49,15 @@ namespace FeedTheBaby
         {
             OnFinishHarvest(itemAmount);
             if (destroyOnHarvest) Destroy(gameObject);
+        }
+
+        public void Interact(GameObject interacter, Action onInteractFinish)
+        {
+            Harvester harvester = interacter.GetComponent<Harvester>();
+            if (harvester)
+            {
+                harvester.StartHarvest(this);
+            }
         }
     }
 }

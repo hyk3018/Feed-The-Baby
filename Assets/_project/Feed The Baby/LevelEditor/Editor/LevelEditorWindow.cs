@@ -81,6 +81,9 @@ namespace FeedTheBaby.LevelEditor
             _fuelAmount = 0;
             
             _previousFolder = "Assets/_project/Feed The Baby/Levels";
+            
+            _levelObjectMap = Resources.Load("Level Object Data") as LevelObjectMap;
+            _terrainMap = Resources.Load("Terrain Data") as TerrainMap;
         }
 
         void OnInspectorUpdate()
@@ -202,8 +205,10 @@ namespace FeedTheBaby.LevelEditor
         void LoadLevel(LevelData levelData)
         {
             _levelName = levelData.levelName;
-            _player.transform.position = levelData.playerStartPosition;
-            _baby.transform.position = levelData.babyStartPosition;
+            _playerPosition = levelData.playerStartPosition;
+            _player.transform.position = _playerPosition;
+            _babyPosition = levelData.babyStartPosition;
+            _baby.transform.position = _babyPosition;
             _inventoryOnLoad = levelData.initialInventory.ToList();
             _levelTime = levelData.levelTime;
             _playerStartTime = levelData.playerStartTime;
@@ -263,6 +268,33 @@ namespace FeedTheBaby.LevelEditor
         #endregion
 
         #region Saving
+
+        void SaveAllLevels()
+        {
+            LevelData[] levelDatas = GetAllInstances<LevelData>();
+            foreach (LevelData levelData in levelDatas)
+            {
+                LoadLevel(levelData);
+                SaveToLevelAsset(levelData);
+                AssetDatabase.Refresh();
+                EditorUtility.SetDirty(levelData);
+                AssetDatabase.SaveAssets();
+            }
+        }
+        
+        static T[] GetAllInstances<T>() where T : ScriptableObject
+        {
+            string[] guids = AssetDatabase.FindAssets("t:"+ typeof(T).Name);  //FindAssets uses tags check documentation for more info
+            T[] a = new T[guids.Length];
+            for(int i =0;i<guids.Length;i++)         //probably could get optimized 
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                a[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+            }
+ 
+            return a;
+ 
+        }
         
         void SaveLevel()
         {
@@ -707,6 +739,10 @@ namespace FeedTheBaby.LevelEditor
             if (GUILayout.Button("Save Level")) SaveLevel();
 
             if (GUILayout.Button("New Level")) NewLevel();
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Save All Levels")) SaveAllLevels();
             EditorGUILayout.EndHorizontal();
 
             GUI.enabled = true;

@@ -14,5 +14,6 @@ namespace FeedTheBaby.Tilemaps.Tiles
     public class LevelObjectTile : Tile
     {
         public LevelObjectType levelObjectType;
+        public bool passable;
     }
 }

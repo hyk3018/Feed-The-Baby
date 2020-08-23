@@ -7,6 +7,7 @@ namespace FeedTheBaby.Pathfinding
     public class Node : IHeapItem<Node>
     {
         public bool traversable;
+        public bool passable;
         public Vector2 worldPosition;
         public Vector2Int gridPosition;
 
@@ -14,9 +15,10 @@ namespace FeedTheBaby.Pathfinding
         public int hCost;
         public Node parent;
 
-        public Node(bool traversable, Vector2 worldPosition, Vector2Int gridPosition)
+        public Node(bool traversable, bool passable, Vector2 worldPosition, Vector2Int gridPosition)
         {
             this.traversable = traversable;
+            this.passable = passable;
             this.worldPosition = worldPosition;
             this.gridPosition = gridPosition;
         }

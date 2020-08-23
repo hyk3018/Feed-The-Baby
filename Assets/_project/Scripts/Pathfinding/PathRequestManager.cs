@@ -21,7 +21,7 @@ namespace FeedTheBaby.Pathfinding
             _instance = this;
         }
 
-        public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
+        public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<List<Vector3>, bool> callback)
         {
             PathRequest request = new PathRequest(pathStart, pathEnd, callback);
             _instance.pathRequestQueue.Enqueue(request);
@@ -39,7 +39,7 @@ namespace FeedTheBaby.Pathfinding
             }
         }
 
-        public void FinishProcessingPath(Vector3[] path, bool success)
+        public void FinishProcessingPath(List<Vector3> path, bool success)
         {
             currentPathRequest.callback(path, success);
             isProcessingPath = false;
@@ -51,9 +51,9 @@ namespace FeedTheBaby.Pathfinding
     {
         public Vector3 pathStart;
         public Vector3 pathEnd;
-        public Action<Vector3[], bool> callback;
+        public Action<List<Vector3>, bool> callback;
 
-        public PathRequest(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
+        public PathRequest(Vector3 pathStart, Vector3 pathEnd, Action<List<Vector3>, bool> callback)
         {
             this.pathStart = pathStart;
             this.pathEnd = pathEnd;

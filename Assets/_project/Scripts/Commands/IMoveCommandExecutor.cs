@@ -4,7 +4,8 @@ namespace FeedTheBaby.Commands
 {
     public interface IMoveCommandExecutor : IInterruptable
     {
-        void ExecuteMove(MoveCommand command, Action onCommandFinish);
+        void ExecuteMoveTransform(MoveTransformCommand moveCommand, Action onCommandFinish);
+        void ExecuteMovePosition(MovePositionCommand moveCommand, Action onCommandFinish);
     }
 
     public interface IInterruptable

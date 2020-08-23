@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FeedTheBaby.Commands;
 using FeedTheBaby.Player;
 using UnityEngine;
 
-namespace FeedTheBaby
+namespace FeedTheBaby.Game
 {
     // Player interacts with this to feed baby and
     // beat the level
 
-    public interface IFeedable
+    public interface IFeedable : IInteractable
     {
         void Feed(List<ItemAmount> foods);
         List<ItemAmount> GetHunger();
@@ -37,7 +38,7 @@ namespace FeedTheBaby
             LevelManager.Instance.LevelStart += Setup;
             LevelManager.Instance.EndWithStarsUncollected += () =>
             {
-                AudioSource.PlayClipAtPoint(cryingSound, transform.position);
+                AudioSource.PlayClipAtPoint(cryingSound, Camera.main.transform.position, 0.1f);
                 emotionAnimator.SetTrigger(IsSad);
             };
         }
@@ -79,9 +80,18 @@ namespace FeedTheBaby
 
             goals.TierFilled += i =>
             {
-                AudioSource.PlayClipAtPoint(happySound, transform.position);
+                AudioSource.PlayClipAtPoint(happySound, Camera.main.transform.position, 0.1f);
                 emotionAnimator.SetTrigger(IsHappy);
             };
+        }
+
+        public void Interact(GameObject interacter, Action onCommandFinish)
+        {
+            Feeder feeder = interacter.GetComponent<Feeder>();
+            if (feeder)
+            {
+                feeder.FeedFromInventory(this);
+            }
         }
     }
 }
