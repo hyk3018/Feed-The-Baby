@@ -12,49 +12,57 @@ namespace FeedTheBaby.Pathfinding
         [SerializeField] Node[] grid;
         [SerializeField] BoundsInt gridBounds;
 
-        public Tilemap terrainTileMap;
+        Tilemap terrainTileMap;
+        Tilemap levelObjectsTileMap;
+        Tilemap obstructionsTileMap;
 
         public int MaxSize => gridBounds.size.x * gridBounds.size.y;
 
-        public NavGrid(Tilemap terrainTileMap, Tilemap obstructionsTileMap, Tilemap levelObjectsTileMap)
+        public NavGrid(Tilemap terrainTileMap, Tilemap levelObjectsTileMap, Tilemap obstructionsTileMap)
         {
             this.terrainTileMap = terrainTileMap;
+            this.levelObjectsTileMap = levelObjectsTileMap;
+            this.obstructionsTileMap = obstructionsTileMap;
             terrainTileMap.CompressBounds();
             gridBounds = terrainTileMap.cellBounds;
             grid = new Node[gridBounds.size.y * gridBounds.size.x];
-            FillGrid(terrainTileMap, obstructionsTileMap, levelObjectsTileMap);
         }
         
         // For each position in the grid we decide whether it is traversable or not by performing
         // tile map lookups
         
-        void FillGrid(Tilemap terrainTileMap, Tilemap obstructionsTileMap, Tilemap levelObjectsTileMap)
+        public void CalculateGridNavigation()
         {
             foreach (Vector3Int cellPosition in gridBounds.allPositionsWithin)
             {
-                Vector3 worldPosition = terrainTileMap.CellToWorld(cellPosition);
-
-                bool traversable = terrainTileMap.HasTile(cellPosition) && !obstructionsTileMap.HasTile(cellPosition);
-                bool passable = traversable;
-                if (traversable)
-                {
-                    bool hasLevelObjectTile = levelObjectsTileMap.HasTile(cellPosition);
-                    if (hasLevelObjectTile)
-                        if (levelObjectsTileMap.GetTile(cellPosition) is LevelObjectTile levelObjectTile)
-                            passable = levelObjectTile.passable;
-                }
-
-                traversable = !obstructionsTileMap.HasTile(cellPosition) && traversable;
-
-                // All positions have to be relative to the min (bottom left) rather than center 
-                int yRelativeToBottomLeft = cellPosition.y - gridBounds.yMin;
-                int xRelativeToBottomLeft = cellPosition.x - gridBounds.xMin;
-                
-                Node node = new Node(traversable, passable, worldPosition, new Vector2Int(xRelativeToBottomLeft,
-                    yRelativeToBottomLeft));
-                
-                grid[GridCoordToIndex(yRelativeToBottomLeft, xRelativeToBottomLeft)] = node;
+                CalculateCellNavigation(cellPosition);
             }
+        }
+
+        public void CalculateCellNavigation(Vector3Int cellPosition)
+        {
+            Vector3 worldPosition = terrainTileMap.CellToWorld(cellPosition);
+
+            bool traversable = terrainTileMap.HasTile(cellPosition) && !obstructionsTileMap.HasTile(cellPosition);
+            bool passable = traversable;
+            if (traversable)
+            {
+                bool hasLevelObjectTile = levelObjectsTileMap.HasTile(cellPosition);
+                if (hasLevelObjectTile)
+                    if (levelObjectsTileMap.GetTile(cellPosition) is LevelObjectTile levelObjectTile)
+                        passable = levelObjectTile.passable;
+            }
+
+            traversable = !obstructionsTileMap.HasTile(cellPosition) && traversable;
+
+            // All positions have to be relative to the min (bottom left) rather than center 
+            int yRelativeToBottomLeft = cellPosition.y - gridBounds.yMin;
+            int xRelativeToBottomLeft = cellPosition.x - gridBounds.xMin;
+
+            Node node = new Node(traversable, passable, worldPosition, new Vector2Int(xRelativeToBottomLeft,
+                yRelativeToBottomLeft));
+
+            grid[GridCoordToIndex(yRelativeToBottomLeft, xRelativeToBottomLeft)] = node;
         }
 
         int GridCoordToIndex(int y, int x)

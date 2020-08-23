@@ -23,8 +23,7 @@ namespace FeedTheBaby.Pathfinding
         {
             _pathRequestManager = GetComponent<PathRequestManager>();
             _pathObjects = new List<GameObject>();
-            navGrid = LevelManager.Instance.currentLevelData.navigationGrid;
-            navGrid.terrainTileMap = terrainTileMap;
+            navGrid = LevelManager.Instance.navigationGrid;
         }
         
         public void StartFindPath(Vector3 startPos, Vector3 targetPos)

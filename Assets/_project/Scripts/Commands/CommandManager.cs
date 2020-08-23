@@ -63,6 +63,7 @@ namespace FeedTheBaby.Commands
                     _moveCommandExecutor.ExecuteMoveTransform(new MoveTransformCommand(moveAndInteractCommand.target),
                         () =>
                         {
+                            Debug.Log("interacting bro");
                             moveAndInteractCommand.interactable.Interact(gameObject, OnCommandFinish);
                             OnCommandFinish();
                         });

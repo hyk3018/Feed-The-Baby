@@ -3,6 +3,8 @@ using System.Linq;
 using FeedTheBaby.Game;
 using FeedTheBaby.GameData;
 using FeedTheBaby.LevelEditor;
+using FeedTheBaby.LevelObjects;
+using FeedTheBaby.Pathfinding;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -23,6 +25,7 @@ namespace FeedTheBaby
 
         public int currentLevel;
         public LevelData currentLevelData;
+        public NavGrid navigationGrid;
 
         Goals _goals;
         Timer _timer;
@@ -39,6 +42,7 @@ namespace FeedTheBaby
                 _instance = this;
                 _timer = GetComponent<Timer>();
                 _goals = GetComponent<Goals>();
+                navigationGrid = new NavGrid(terrainTileMap, levelObjectsTileMap, obstructionsTileMap);
                 LoadLevel();
             }
         }
@@ -83,18 +87,27 @@ namespace FeedTheBaby
             // Then instantiate gameobjects after destroying all children
 
             levelObjectsTileMap.SetTiles(currentLevelData.levelObjectPositions, currentLevelData.levelObjectTiles);
-
+            
+            navigationGrid.CalculateGridNavigation();
+            
             var children = levelObjectsTileMap.transform.Cast<Transform>().ToList();
             foreach (var child in children)
                 DestroyImmediate(child.gameObject);
 
             for (var i = 0; i < currentLevelData.levelObjectPositions.Length; i++)
             {
-                var pos = currentLevelData.levelObjectPositions[i];
+                Vector3Int levelObjectPosition = currentLevelData.levelObjectPositions[i];
+                var pos = levelObjectPosition;
                 InstantiateLevelObjectPrefabInCell(levelObjectsTileMap.layoutGrid, levelObjectsTileMap.gameObject,
-                    currentLevelData.levelObjectPositions[i],
+                    levelObjectPosition,
                     DataService.Instance.GetLevelObjectMap()
-                        .GetPrefab(currentLevelData.levelObjectTiles[i].levelObjectType));
+                        .GetPrefab(currentLevelData.levelObjectTiles[i].levelObjectType),
+                    () =>
+                    {
+                        Debug.Log(levelObjectPosition);
+                        levelObjectsTileMap.SetTile(levelObjectPosition, null);
+                        navigationGrid.CalculateCellNavigation(levelObjectPosition);
+                    });
             }
 
             children = hints.transform.Cast<Transform>().ToList();
@@ -113,11 +126,19 @@ namespace FeedTheBaby
         }
 
         static void InstantiateLevelObjectPrefabInCell(GridLayout grid, GameObject brushTarget, Vector3Int position,
-            GameObject prefab)
+            GameObject prefab, Action clearTile)
         {
             var instance = Instantiate(prefab);
             if (instance != null)
             {
+                LevelObject levelObject = instance.GetComponent<LevelObject>();
+                if (levelObject == null)
+                {
+                    levelObject = instance.AddComponent<LevelObject>();
+                }
+                
+                levelObject.destroyTile = clearTile;
+                
                 instance.transform.SetParent(brushTarget.transform);
                 instance.transform.position =
                     grid.LocalToWorld(grid.CellToLocalInterpolated(position + new Vector3(0.5f, 0.5f, 0.5f)));

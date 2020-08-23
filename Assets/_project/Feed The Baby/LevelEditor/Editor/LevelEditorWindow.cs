@@ -365,15 +365,8 @@ namespace FeedTheBaby.LevelEditor
             SaveObstructions(levelAsset);
             SaveLevelObjects(levelAsset);
             SaveHints(levelAsset);
-            SaveNavGrid(levelAsset);
         }
-
-        void SaveNavGrid(LevelData levelAsset)
-        {
-            NavGrid navGrid = new NavGrid(_terrainTileMap, _obstructionsTileMap, _levelObjectsTileMap);
-            levelAsset.navigationGrid = navGrid;
-        }
-
+        
         void SaveTerrain(LevelData levelAsset)
         {
             var terrainPositions = new List<Vector3Int>();

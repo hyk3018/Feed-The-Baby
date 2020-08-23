@@ -1,10 +1,9 @@
 ﻿using System;
 using FeedTheBaby.Commands;
 using FeedTheBaby.Player;
-using TreeEditor;
 using UnityEngine;
 
-namespace FeedTheBaby
+namespace FeedTheBaby.LevelObjects
 {
     public interface IHarvestable : IInteractable
     {
@@ -13,7 +12,7 @@ namespace FeedTheBaby
     }
 
     [RequireComponent(typeof(Timer))]
-    public class Harvestable : MonoBehaviour, IHarvestable
+    public class Harvestable : LevelObject, IHarvestable
     {
         [SerializeField] ItemAmount itemAmount = default;
         [SerializeField] float harvestTime = 2f;
@@ -48,7 +47,11 @@ namespace FeedTheBaby
         void FinishHarvest(Timer t)
         {
             OnFinishHarvest(itemAmount);
-            if (destroyOnHarvest) Destroy(gameObject);
+            if (destroyOnHarvest)
+            {
+                destroyTile();
+                Destroy(gameObject);
+            }
         }
 
         public void Interact(GameObject interacter, Action onInteractFinish)

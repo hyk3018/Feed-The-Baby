@@ -16,7 +16,6 @@ namespace FeedTheBaby.LevelEditor
         public TerrainTile[] obstructionTiles = null;
         public Vector3Int[] levelObjectPositions = null;
         public LevelObjectTile[] levelObjectTiles = null;
-        public NavGrid navigationGrid = null;
         
         public ItemAmount[] initialInventory = null;
         public HintData[] hints = null;
