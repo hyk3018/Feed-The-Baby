@@ -12,17 +12,17 @@ namespace FeedTheBaby.Pathfinding
         [SerializeField] Node[] grid;
         [SerializeField] BoundsInt gridBounds;
 
-        Tilemap terrainTileMap;
-        Tilemap levelObjectsTileMap;
-        Tilemap obstructionsTileMap;
+        Tilemap _terrainTileMap;
+        Tilemap _levelObjectsTileMap;
+        Tilemap _obstructionsTileMap;
 
         public int MaxSize => gridBounds.size.x * gridBounds.size.y;
 
         public NavGrid(Tilemap terrainTileMap, Tilemap levelObjectsTileMap, Tilemap obstructionsTileMap)
         {
-            this.terrainTileMap = terrainTileMap;
-            this.levelObjectsTileMap = levelObjectsTileMap;
-            this.obstructionsTileMap = obstructionsTileMap;
+            _terrainTileMap = terrainTileMap;
+            _levelObjectsTileMap = levelObjectsTileMap;
+            _obstructionsTileMap = obstructionsTileMap;
             terrainTileMap.CompressBounds();
             gridBounds = terrainTileMap.cellBounds;
             grid = new Node[gridBounds.size.y * gridBounds.size.x];
@@ -41,19 +41,19 @@ namespace FeedTheBaby.Pathfinding
 
         public void CalculateCellNavigation(Vector3Int cellPosition)
         {
-            Vector3 worldPosition = terrainTileMap.CellToWorld(cellPosition);
+            Vector3 worldPosition = _terrainTileMap.CellToWorld(cellPosition);
 
-            bool traversable = terrainTileMap.HasTile(cellPosition) && !obstructionsTileMap.HasTile(cellPosition);
+            bool traversable = _terrainTileMap.HasTile(cellPosition) && !_obstructionsTileMap.HasTile(cellPosition);
             bool passable = traversable;
             if (traversable)
             {
-                bool hasLevelObjectTile = levelObjectsTileMap.HasTile(cellPosition);
+                bool hasLevelObjectTile = _levelObjectsTileMap.HasTile(cellPosition);
                 if (hasLevelObjectTile)
-                    if (levelObjectsTileMap.GetTile(cellPosition) is LevelObjectTile levelObjectTile)
+                    if (_levelObjectsTileMap.GetTile(cellPosition) is LevelObjectTile levelObjectTile)
                         passable = levelObjectTile.passable;
             }
 
-            traversable = !obstructionsTileMap.HasTile(cellPosition) && traversable;
+            traversable = !_obstructionsTileMap.HasTile(cellPosition) && traversable;
 
             // All positions have to be relative to the min (bottom left) rather than center 
             int yRelativeToBottomLeft = cellPosition.y - gridBounds.yMin;
@@ -99,7 +99,7 @@ namespace FeedTheBaby.Pathfinding
 
         public Node NodeFromWorldPoint(Vector3 worldPosition)
         {
-            Vector3Int cellPosition = terrainTileMap.WorldToCell(worldPosition);
+            Vector3Int cellPosition = _terrainTileMap.WorldToCell(worldPosition);
             int xRelativeToBottomleft = cellPosition.x - gridBounds.xMin;
             int yRelativeToBottomLeft = cellPosition.y - gridBounds.yMin;
             return grid[yRelativeToBottomLeft * gridBounds.size.x + xRelativeToBottomleft];
@@ -108,6 +108,14 @@ namespace FeedTheBaby.Pathfinding
         public bool NodePassable(Node neighbour)
         {
             return neighbour.passable;
+        }
+
+        public bool WithinGrid(Vector3 worldPosition)
+        {
+            Vector3Int cellPosition = _terrainTileMap.WorldToCell(worldPosition);
+            int xRelativeToBottomleft = cellPosition.x - gridBounds.xMin;
+            int yRelativeToBottomLeft = cellPosition.y - gridBounds.yMin;
+            return yRelativeToBottomLeft * gridBounds.size.x + xRelativeToBottomleft < grid.Length;
         }
     }
 }

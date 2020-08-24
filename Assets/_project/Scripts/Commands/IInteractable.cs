@@ -5,6 +5,6 @@ namespace FeedTheBaby.Commands
 {
     public interface IInteractable
     {
-        void Interact(GameObject interacter, Action onInteractFinish);
+        void Interact(GameObject interacter, Action<bool> onInteractFinish);
     }
 }

@@ -10,7 +10,6 @@ namespace FeedTheBaby.Pathfinding
     public class Pathfinder : MonoBehaviour
     {
         [SerializeField] NavGrid navGrid = null;
-        [SerializeField] Tilemap terrainTileMap = null;
         [SerializeField] GameObject pathNodePrefab = null;
         [SerializeField] bool drawPath = false;
 
@@ -34,9 +33,21 @@ namespace FeedTheBaby.Pathfinding
         IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
         {
             bool pathSuccess = false;
-            
+
+            if (!navGrid.WithinGrid(startPos) || !navGrid.WithinGrid(targetPos))
+            {
+                _pathRequestManager.FinishProcessingPath(new List<Vector3>(), false);
+                yield break;
+            }
+
             Node startNode = navGrid.NodeFromWorldPoint(startPos);
             Node targetNode = navGrid.NodeFromWorldPoint(targetPos);
+
+            if (startNode == targetNode)
+            {
+                _pathRequestManager.FinishProcessingPath(new List<Vector3>(), true);
+                yield break;
+            }
 
             if (startNode.traversable && targetNode.traversable)
             {
@@ -79,9 +90,7 @@ namespace FeedTheBaby.Pathfinding
                     }
                 }
             }
-
-            yield return null;
-
+            
             List<Vector3> waypoints = null;
             
             if (pathSuccess)
@@ -99,6 +108,7 @@ namespace FeedTheBaby.Pathfinding
             }
 
             _pathRequestManager.FinishProcessingPath(waypoints, pathSuccess);
+            yield return null;
         }
 
         List<Vector3> RetracePath(Node start, Node target)

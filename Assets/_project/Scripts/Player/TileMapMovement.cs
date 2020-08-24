@@ -22,9 +22,12 @@ namespace FeedTheBaby.Player
         List<Vector3> _currentPath;
         int _targetIndex;
         bool _reachedTarget;
+        bool _alreadyFailed;
+        
         Coroutine _pathFollow;
+        Coroutine _moveToTransform;
 
-        Action _onCommandFinish;
+        Action<bool> _onCommandFinish;
 
         void Awake()
         {
@@ -42,7 +45,9 @@ namespace FeedTheBaby.Player
                     transform.position = currentWaypoint;
                     _targetIndex++;
                     if (_targetIndex >= _currentPath.Count)
+                    {
                         break;
+                    }
                     currentWaypoint = _currentPath[_targetIndex] + new Vector3(0.5f, 0.5f);
                 }
 
@@ -51,16 +56,22 @@ namespace FeedTheBaby.Player
                 yield return null;
             }
 
+            FinishMove();
+        }
+
+        void FinishMove()
+        {
             Move(Vector2.zero);
             _reachedTarget = true;
-            _onCommandFinish();
+            _onCommandFinish(true);
         }
-        
-        public void ExecuteMoveTransform(MoveTransformCommand moveCommand, Action onCommandFinish)
+
+        public void ExecuteMoveTransform(MoveTransformCommand moveCommand, Action<bool> onCommandFinish)
         {
             _onCommandFinish = onCommandFinish;
             _reachedTarget = false;
-            StartCoroutine(MoveToTransform(moveCommand.target));
+            _alreadyFailed = false;
+            _moveToTransform = StartCoroutine(MoveToTransform(moveCommand.target));
         }
 
         IEnumerator MoveToTransform(Transform target)
@@ -73,9 +84,10 @@ namespace FeedTheBaby.Player
             }
         }
 
-        public void ExecuteMovePosition(MovePositionCommand moveCommand, Action onCommandFinish)
+        public void ExecuteMovePosition(MovePositionCommand moveCommand, Action<bool> onCommandFinish)
         {
             _currentTarget = moveCommand.target;
+            _alreadyFailed = false;
             _onCommandFinish = onCommandFinish;
             MoveToPosition();
         }
@@ -87,25 +99,41 @@ namespace FeedTheBaby.Player
 
         void OnPathFound(List<Vector3> newPath, bool pathSuccessful)
         {
-            if (pathSuccessful && newPath.Count > 0)
+            if (_alreadyFailed)
+                return;
+
+            if (_pathFollow != null)
+                StopCoroutine(_pathFollow);
+
+            if (pathSuccessful)
             {
                 _currentPath = newPath;
                 _targetIndex = 0;
-                if (_pathFollow != null)
-                    StopCoroutine(_pathFollow);
-                _pathFollow = StartCoroutine(FollowPath());
+                
+                if (newPath.Count > 0)
+                {
+                    _pathFollow = StartCoroutine(FollowPath());
+                }
+                else
+                {
+                    FinishMove();
+                }
             }
             else
             {
-                if (_pathFollow != null)
-                    StopCoroutine(_pathFollow);
-                _onCommandFinish();
+                if (_moveToTransform != null)
+                {
+                    StopCoroutine(_moveToTransform);
+                }
+                
+                _alreadyFailed = true;
+                _onCommandFinish(false);
             }
         }
 
         public void Interrupt()
         {
-            _onCommandFinish?.Invoke();
+            _onCommandFinish?.Invoke(false);
         }
         
         // Determines whether we are moving towards another object

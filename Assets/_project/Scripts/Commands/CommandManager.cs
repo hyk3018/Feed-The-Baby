@@ -32,9 +32,11 @@ namespace FeedTheBaby.Commands
 
         public void AddCommand(Command command)
         {
-            // _moveCommandExecutor.Interrupt();
-            _processingCommand = false;
-            _commands.Add(command);
+            if (_commands.Count < 2)
+            {
+                Debug.Log("Added another");
+                _commands.Add(command);
+            }
         }
 
         Command GetNextCommand()
@@ -42,7 +44,6 @@ namespace FeedTheBaby.Commands
             if (_commands.Count > 0)
             {
                 Command next = _commands[0];
-                _commands.RemoveAt(0);
                 return next;
             }
 
@@ -61,18 +62,21 @@ namespace FeedTheBaby.Commands
                     break;
                 case MoveAndInteractCommand moveAndInteractCommand:
                     _moveCommandExecutor.ExecuteMoveTransform(new MoveTransformCommand(moveAndInteractCommand.target),
-                        () =>
+                        (moveSuccess) =>
                         {
-                            Debug.Log("interacting bro");
-                            moveAndInteractCommand.interactable.Interact(gameObject, OnCommandFinish);
-                            OnCommandFinish();
+                            if (moveSuccess && moveAndInteractCommand.target != null)
+                                moveAndInteractCommand.interactable.Interact(gameObject, OnCommandFinish);
+                            else
+                                OnCommandFinish(false);
                         });
                     break;
             }
         }
 
-        void OnCommandFinish()
+        void OnCommandFinish(bool success)
         {
+            if (_commands.Count > 0)
+                _commands.RemoveAt(0);
             _processingCommand = false;
         }
     }

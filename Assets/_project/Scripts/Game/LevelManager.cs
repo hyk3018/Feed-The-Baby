@@ -42,7 +42,6 @@ namespace FeedTheBaby
                 _instance = this;
                 _timer = GetComponent<Timer>();
                 _goals = GetComponent<Goals>();
-                navigationGrid = new NavGrid(terrainTileMap, levelObjectsTileMap, obstructionsTileMap);
                 LoadLevel();
             }
         }
@@ -88,6 +87,7 @@ namespace FeedTheBaby
 
             levelObjectsTileMap.SetTiles(currentLevelData.levelObjectPositions, currentLevelData.levelObjectTiles);
             
+            navigationGrid = new NavGrid(terrainTileMap, levelObjectsTileMap, obstructionsTileMap);
             navigationGrid.CalculateGridNavigation();
             
             var children = levelObjectsTileMap.transform.Cast<Transform>().ToList();
@@ -104,7 +104,6 @@ namespace FeedTheBaby
                         .GetPrefab(currentLevelData.levelObjectTiles[i].levelObjectType),
                     () =>
                     {
-                        Debug.Log(levelObjectPosition);
                         levelObjectsTileMap.SetTile(levelObjectPosition, null);
                         navigationGrid.CalculateCellNavigation(levelObjectPosition);
                     });

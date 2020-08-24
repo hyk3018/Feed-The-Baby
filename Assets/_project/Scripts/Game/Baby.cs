@@ -85,12 +85,13 @@ namespace FeedTheBaby.Game
             };
         }
 
-        public void Interact(GameObject interacter, Action onCommandFinish)
+        public void Interact(GameObject interacter, Action<bool> onCommandFinish)
         {
             Feeder feeder = interacter.GetComponent<Feeder>();
             if (feeder)
             {
                 feeder.FeedFromInventory(this);
+                onCommandFinish(true);
             }
         }
     }
