@@ -140,7 +140,7 @@ namespace FeedTheBaby
                 
                 instance.transform.SetParent(brushTarget.transform);
                 instance.transform.position =
-                    grid.LocalToWorld(grid.CellToLocalInterpolated(position + new Vector3(0.5f, 0.5f, 0.5f)));
+                    grid.LocalToWorld(grid.CellToLocalInterpolated(position + new Vector3(0.5f, 0.55f, 0.5f)));
             }
         }
     }

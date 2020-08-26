@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FeedTheBaby.Commands;
 using FeedTheBaby.Game;
 using UnityEngine;
 
 namespace FeedTheBaby.Player
 {
-    public class Feeder : MonoBehaviour
+    public class Feeder : MonoBehaviour, IInteracter
     {
         BehaviourController _behaviour;
         Inventory _inventory;
@@ -19,7 +20,7 @@ namespace FeedTheBaby.Player
             _inventory = GetComponent<Inventory>();
         }
 
-        public void FeedFromInventory(IFeedable feedable)
+        void FeedFromInventory(IFeedable feedable)
         {
             if (feedable != null)
             {
@@ -37,6 +38,17 @@ namespace FeedTheBaby.Player
             // Take items will return at max the hunger required
             // If not fulfilled, still takes from the inventory
             return _inventory.TakeItems(hunger);
+        }
+
+        public void Interact(IInteractable interactable, Action<bool> interactionEnd)
+        {
+            if (interactable == null || !(interactable is IFeedable feedable))
+                interactionEnd(false);
+            else
+            {
+                FeedFromInventory(feedable);
+                interactionEnd(true);
+            }
         }
     }
 }

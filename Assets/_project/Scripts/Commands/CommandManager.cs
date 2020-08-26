@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace FeedTheBaby.Commands
@@ -34,7 +33,7 @@ namespace FeedTheBaby.Commands
         {
             if (_commands.Count < 2)
             {
-                Debug.Log("Added another");
+                _moveCommandExecutor.Interrupt();
                 _commands.Add(command);
             }
         }
@@ -65,7 +64,7 @@ namespace FeedTheBaby.Commands
                         (moveSuccess) =>
                         {
                             if (moveSuccess && moveAndInteractCommand.target != null)
-                                moveAndInteractCommand.interactable.Interact(gameObject, OnCommandFinish);
+                                _interactersManager.Interact(moveAndInteractCommand.interactable, OnCommandFinish);
                             else
                                 OnCommandFinish(false);
                         });
@@ -79,35 +78,5 @@ namespace FeedTheBaby.Commands
                 _commands.RemoveAt(0);
             _processingCommand = false;
         }
-    }
-
-    class InteractersManager : MonoBehaviour, IInteracter
-    {
-        [SerializeField] List<IInteracter> _interacters = null;
-
-        void Awake()
-        {
-            var interacters = GetComponentsInChildren<IInteracter>();
-            foreach (IInteracter interacter in interacters)
-            {
-                if (!_interacters.Contains(interacter))
-                {
-                    _interacters.Add(interacter);
-                }
-            }
-        }
-
-        public void Interact(GameObject interactable, Func<bool> interactionEnd)
-        {
-            foreach (IInteracter interacter in _interacters)
-            {
-                interacter.Interact(interactable, interactionEnd);
-            }
-        }
-    }
-
-    public interface IInteracter
-    {
-        void Interact(GameObject interactable, Func<bool> interactionEnd);
     }
 }

@@ -53,15 +53,5 @@ namespace FeedTheBaby.LevelObjects
                 Destroy(gameObject);
             }
         }
-
-        public void Interact(GameObject interacter, Action<bool> onInteractFinish)
-        {
-            Harvester harvester = interacter.GetComponent<Harvester>();
-            if (harvester)
-            {
-                harvester.StartHarvest(this);
-                OnFinishHarvest += item => onInteractFinish(true);
-            }
-        }
     }
 }

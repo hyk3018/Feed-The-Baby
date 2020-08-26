@@ -1,4 +1,5 @@
 ﻿using System;
+using FeedTheBaby.Commands;
 using FeedTheBaby.LevelObjects;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace FeedTheBaby.Player
 {
     [RequireComponent(typeof(Inventory))]
     [RequireComponent(typeof(BehaviourController))]
-    public class Harvester : MonoBehaviour
+    public class Harvester : MonoBehaviour, IInteracter
     {
         [SerializeField] AudioClip harvestSound = null;
         
@@ -15,13 +16,15 @@ namespace FeedTheBaby.Player
 
         bool _harvesting;
 
+        Action<bool> _onHarvestEnd;
+
         void Awake()
         {
             _behaviour = GetComponent<BehaviourController>();
             _inventory = GetComponent<Inventory>();
         }
 
-        public void StartHarvest(IHarvestable harvestable)
+        void StartHarvest(IHarvestable harvestable)
         {
             if (!_harvesting && harvestable != null)
             {
@@ -45,6 +48,21 @@ namespace FeedTheBaby.Player
 
                 AudioSource.PlayClipAtPoint(harvestSound, transform.position);
                 _inventory.AddItem(itemAmount);
+                _onHarvestEnd(true);
+            }
+
+            _onHarvestEnd(false);
+        }
+
+        public void Interact(IInteractable interactable, Action<bool> interactionEnd)
+        {
+            if (interactable == null)
+                return;
+
+            if (interactable is IHarvestable harvestable)
+            {
+                _onHarvestEnd += interactionEnd;
+                StartHarvest(harvestable);
             }
         }
     }

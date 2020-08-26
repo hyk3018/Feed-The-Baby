@@ -32,7 +32,6 @@ namespace FeedTheBaby.Game
         List<ItemAmount> _currentHungerFilled;
         List<ItemAmount> _remainingHunger;
 
-
         void Awake()
         {
             LevelManager.Instance.LevelStart += Setup;
@@ -83,16 +82,6 @@ namespace FeedTheBaby.Game
                 AudioSource.PlayClipAtPoint(happySound, Camera.main.transform.position, 0.1f);
                 emotionAnimator.SetTrigger(IsHappy);
             };
-        }
-
-        public void Interact(GameObject interacter, Action<bool> onCommandFinish)
-        {
-            Feeder feeder = interacter.GetComponent<Feeder>();
-            if (feeder)
-            {
-                feeder.FeedFromInventory(this);
-                onCommandFinish(true);
-            }
         }
     }
 }

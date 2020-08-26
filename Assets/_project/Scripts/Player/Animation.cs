@@ -33,7 +33,7 @@ namespace FeedTheBaby.Player
         {
             // Only need to update last directions if not moving or interacting since
             // the animator won't need to use it
-            if (_tileMapMovement.CurrentMovement.x == 0 && _tileMapMovement.CurrentMovement.y == 0
+            if (_tileMapMovement.currentDirection.x == 0 && _tileMapMovement.currentDirection.y == 0
                 || !_behaviour.canMove)
             {
                 _animator.SetBool(Movement, false);
@@ -43,11 +43,11 @@ namespace FeedTheBaby.Player
             else
             {
                 _animator.SetBool(Movement, true);
-                _lastMovement = _tileMapMovement.CurrentMovement.normalized;
+                _lastMovement = _tileMapMovement.currentDirection.normalized;
             }
 
-            _animator.SetFloat(DirX, _tileMapMovement.CurrentMovement.normalized.x);
-            _animator.SetFloat(DirY, _tileMapMovement.CurrentMovement.normalized.y);
+            _animator.SetFloat(DirX, _tileMapMovement.currentDirection.normalized.x);
+            _animator.SetFloat(DirY, _tileMapMovement.currentDirection.normalized.y);
         }
     }
 }

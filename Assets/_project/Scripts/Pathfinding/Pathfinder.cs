@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,7 +17,6 @@ namespace FeedTheBaby.Pathfinding
         PathRequestManager _pathRequestManager;
         
         List<GameObject> _pathObjects;
-        List<Node> _path = new List<Node>();
 
         void Awake()
         {
@@ -101,8 +101,8 @@ namespace FeedTheBaby.Pathfinding
                     waypoints.Add(targetNode.worldPosition);
                 else
                     waypoints.Add(Vector2.Lerp(targetNode.parent.worldPosition, targetNode.worldPosition,
-                        0.05f));
-                
+                        0.3f));
+
                 if (drawPath)
                     StartCoroutine(DrawPath(waypoints));
             }
@@ -121,6 +121,7 @@ namespace FeedTheBaby.Pathfinding
                 currentNode = currentNode.parent;
             }
 
+            path.Add(start);
             List<Vector3> waypoints = SimplifyPath(path);
             waypoints.Reverse();
             return waypoints;
