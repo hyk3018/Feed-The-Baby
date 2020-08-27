@@ -40,9 +40,9 @@ namespace FeedTheBaby.Player
             return _inventory.TakeItems(hunger);
         }
 
-        public void Interact(IInteractable interactable, Action<bool> interactionEnd)
+        public void Interact(Transform target, Action<bool> interactionEnd)
         {
-            if (interactable == null || !(interactable is IFeedable feedable))
+            if (target == null || !(target.GetComponent<IFeedable>() is IFeedable feedable))
                 interactionEnd(false);
             else
             {

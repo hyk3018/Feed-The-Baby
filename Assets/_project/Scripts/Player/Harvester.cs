@@ -54,12 +54,11 @@ namespace FeedTheBaby.Player
             _onHarvestEnd(false);
         }
 
-        public void Interact(IInteractable interactable, Action<bool> interactionEnd)
+        public void Interact(Transform target, Action<bool> interactionEnd)
         {
-            if (interactable == null)
-                return;
-
-            if (interactable is IHarvestable harvestable)
+            if (target == null || !(target.GetComponent<IHarvestable>() is IHarvestable harvestable)) 
+                interactionEnd(false);
+            else
             {
                 _onHarvestEnd += interactionEnd;
                 StartHarvest(harvestable);

@@ -14049,8 +14049,6 @@ MonoBehaviour:
     gridBounds:
       m_Position: {x: 0, y: 0, z: 0}
       m_Size: {x: 0, y: 0, z: 0}
-    terrainTileMap: {fileID: 0}
-  terrainTileMap: {fileID: 247252750}
   pathNodePrefab: {fileID: 6512543185229405595, guid: 13f40579a27ca9f41b9dbfae09845bab,
     type: 3}
   drawPath: 0
@@ -19491,6 +19489,11 @@ MonoBehaviour:
   hints: {fileID: 1545827661}
   currentLevel: 0
   currentLevelData: {fileID: 0}
+  navigationGrid:
+    grid: []
+    gridBounds:
+      m_Position: {x: 0, y: 0, z: 0}
+      m_Size: {x: 0, y: 0, z: 0}
 --- !u!4 &1335765507
 Transform:
   m_ObjectHideFlags: 0
@@ -48825,7 +48828,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6733312, y: 0.49751425}
+  m_Size: {x: 0.48531955, y: 0.33723354}
   m_EdgeRadius: 0
 --- !u!4 &8398071496377634761
 Transform:
@@ -48835,7 +48838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8398071496377634767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.18, y: -1.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -48927,6 +48930,7 @@ GameObject:
   - component: {fileID: 8398071496377634776}
   - component: {fileID: 8398071496377634778}
   - component: {fileID: 8398071496377634777}
+  - component: {fileID: 8398071496377634779}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -49024,9 +49028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4739785b4334dde866073cc4d31968c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
   recalculatePathRate: 1
-  CurrentMovement: {x: 0, y: 0}
+  currentDirection: {x: 0, y: 0}
   lockMovement: 0
 --- !u!114 &8398071496377634774
 MonoBehaviour:
@@ -49066,8 +49070,6 @@ MonoBehaviour:
     gridBounds:
       m_Position: {x: 0, y: 0, z: 0}
       m_Size: {x: 0, y: 0, z: 0}
-    terrainTileMap: {fileID: 0}
-  terrainTileMap: {fileID: 247252750}
   pathNodePrefab: {fileID: 6512543185229405595, guid: 13f40579a27ca9f41b9dbfae09845bab,
     type: 3}
   drawPath: 0
@@ -49099,6 +49101,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxCommands: 10
+--- !u!114 &8398071496377634779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398071496377634767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5bf435627c48758dfda34cf09436bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8576590722555926595
 MonoBehaviour:
   m_ObjectHideFlags: 0

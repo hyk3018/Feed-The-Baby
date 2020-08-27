@@ -42,7 +42,7 @@ namespace FeedTheBaby.Player
 
         void OnPathFound(List<Vector3> newPath, bool pathSuccessful)
         {
-            if (_alreadyFailed)
+            if (_alreadyFailed || _reachedTarget)
                 return;
 
             if (pathSuccessful)
@@ -96,7 +96,8 @@ namespace FeedTheBaby.Player
                 yield return null;
             }
 
-            FinishMove(true);
+            if (!_reachedTarget)
+                FinishMove(true);
         }
         
         void Move(Vector2 normalizedDirection)

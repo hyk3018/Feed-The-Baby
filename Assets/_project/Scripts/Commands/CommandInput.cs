@@ -19,20 +19,15 @@ namespace FeedTheBaby.Commands
         {
             if (Input.GetMouseButtonDown(1))
             {
-                RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition), Single.PositiveInfinity, collisionMask);
+                RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
+                    Single.PositiveInfinity, collisionMask);
                 if (hit.transform == null)
                 {
                     Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     _commandManager.AddCommand(new MovePositionCommand(groundPosition));
-                } else
-                {
-                    IInteractable interactable = hit.transform.GetComponent<IInteractable>();
-                    if (interactable != null)
-                    {
-                        _commandManager.AddCommand(new MoveAndInteractCommand(interactable, hit.transform));
-                    }
                 }
-
+                else
+                    _commandManager.AddCommand(new MoveAndInteractCommand(hit.transform));
             }
         }
     }

@@ -85,6 +85,7 @@ namespace FeedTheBaby
             // Set level object tiles
             // Then instantiate gameobjects after destroying all children
 
+            levelObjectsTileMap.ClearAllTiles();
             levelObjectsTileMap.SetTiles(currentLevelData.levelObjectPositions, currentLevelData.levelObjectTiles);
             
             navigationGrid = new NavGrid(terrainTileMap, levelObjectsTileMap, obstructionsTileMap);
@@ -136,7 +137,7 @@ namespace FeedTheBaby
                     levelObject = instance.AddComponent<LevelObject>();
                 }
                 
-                levelObject.destroyTile = clearTile;
+                levelObject.DestroyTile = clearTile;
                 
                 instance.transform.SetParent(brushTarget.transform);
                 instance.transform.position =

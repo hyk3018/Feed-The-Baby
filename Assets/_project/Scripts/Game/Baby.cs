@@ -10,7 +10,7 @@ namespace FeedTheBaby.Game
     // Player interacts with this to feed baby and
     // beat the level
 
-    public interface IFeedable : IInteractable
+    public interface IFeedable
     {
         void Feed(List<ItemAmount> foods);
         List<ItemAmount> GetHunger();

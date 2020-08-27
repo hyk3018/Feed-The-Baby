@@ -1,9 +1,10 @@
 ﻿using System;
+using UnityEngine;
 
 namespace FeedTheBaby.Commands
 {
     public interface IInteracter
     {
-        void Interact(IInteractable interactable, Action<bool> interactionEnd);
+        void Interact(Transform target, Action<bool> interactionEnd);
     }
 }

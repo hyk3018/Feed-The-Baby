@@ -22,5 +22,5 @@ MonoBehaviour:
   skillTreeData: {fileID: 11400000, guid: 5f563687374f6e641bd0c7d017db4e11, type: 2}
   itemUIData: {fileID: 11400000, guid: 89e3d32d0f321b44cbd303f21db8715e, type: 2}
   levelObjectMap: {fileID: 11400000, guid: 06d1065fa2afca24f96729c5ff938bd0, type: 2}
-  currentLevel: 4
-  levelsUnlocked: 5
+  currentLevel: 1
+  levelsUnlocked: 1

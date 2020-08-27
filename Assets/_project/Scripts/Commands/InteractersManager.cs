@@ -21,11 +21,11 @@ namespace FeedTheBaby.Commands
             }
         }
         
-        public void Interact(IInteractable interactable, Action<bool> interactionEnd)
+        public void Interact(Transform target, Action<bool> interactionEnd)
         {
             foreach (IInteracter interacter in _interacters)
             {
-                interacter.Interact(interactable, interactionEnd);
+                interacter.Interact(target, interactionEnd);
             }
         }
     }

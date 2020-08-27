@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FeedTheBaby.LevelObjects
 {
-    public interface IHarvestable : IInteractable
+    public interface IHarvestable
     {
         void Harvest(Action<ItemAmount> onFinishHarvest);
         bool StayToHarvest();
@@ -39,6 +39,8 @@ namespace FeedTheBaby.LevelObjects
 
         public void Harvest(Action<ItemAmount> onFinishHarvest)
         {
+            if (destroyOnHarvest)
+                DestroyTile();
             OnFinishHarvest += onFinishHarvest;
             _timer.StartCount(harvestTime);
             _timer.TimerEnd += FinishHarvest;
@@ -48,10 +50,7 @@ namespace FeedTheBaby.LevelObjects
         {
             OnFinishHarvest(itemAmount);
             if (destroyOnHarvest)
-            {
-                destroyTile();
                 Destroy(gameObject);
-            }
         }
     }
 }
