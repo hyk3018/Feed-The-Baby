@@ -53,6 +53,7 @@ namespace FeedTheBaby
             _goals.FinalTierFilled += OnGameEnd;
             _goals.FinalTierFilled += GameEnd;
             _timer.TimerEnd += CheckGameEnd;
+            player.GetComponent<Timer>().TimerEnd += CheckGameEnd;
             GameEnd += OnGameEnd;
         }
 

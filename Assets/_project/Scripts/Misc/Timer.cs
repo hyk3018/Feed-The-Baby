@@ -42,6 +42,11 @@ namespace FeedTheBaby
             TimerStart?.Invoke(this);
         }
 
+        public void AddTime(float timeToAdd)
+        {
+            RemainingTime = Mathf.Min(RemainingTime + timeToAdd, TimeToCount);
+        }
+
         void PauseTimer()
         {
             Counting = false;

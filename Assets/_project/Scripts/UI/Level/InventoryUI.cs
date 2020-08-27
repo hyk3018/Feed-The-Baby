@@ -11,7 +11,7 @@ namespace FeedTheBaby.UI
         [SerializeField] Inventory inventory = null;
         [SerializeField] GameObject itemSlotTemplate = null;
 
-        [SerializeField] Transform uiContainer = null;
+        [SerializeField] Transform inventoryUIContainer = null;
         [SerializeField] Transform fuelUIContainer = null;
 
         readonly List<GameObject> _itemSlots = new List<GameObject>();
@@ -22,7 +22,7 @@ namespace FeedTheBaby.UI
             // Set up empty item slots for all slots
             for (var i = 0; i < 6; i++)
             {
-                var itemSlot = Instantiate(itemSlotTemplate, uiContainer);
+                var itemSlot = Instantiate(itemSlotTemplate, inventoryUIContainer);
 
                 InitialiseEmptySlot(itemSlot);
 
