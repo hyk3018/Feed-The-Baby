@@ -4577,7 +4577,7 @@ MonoBehaviour:
     triggerSize: {x: 3, y: 1.77}
   playerStartPosition: {x: -4.5, y: -1.5}
   babyStartPosition: {x: 3.5, y: 0.5}
-  fuelAmount: 1
+  fuelAmount: 0
   levelName: level2
-  levelTime: 1000
-  playerStartTime: 10
+  levelTime: 10
+  playerStartTime: 0

@@ -7,7 +7,7 @@ namespace FeedTheBaby.LevelObjects
 {
     public interface IHarvestable
     {
-        void Harvest(Action<ItemAmount> onFinishHarvest);
+        void Harvest(Action<HarvestResult> onFinishHarvest);
         bool StayToHarvest();
     }
 
@@ -23,10 +23,13 @@ namespace FeedTheBaby.LevelObjects
 
         Timer _timer;
         Harvester _currentHarvester;
-        public Action<ItemAmount> OnFinishHarvest;
+        Grow _grow;
+        
+        public Action<HarvestResult> OnFinishHarvest;
 
         void Awake()
         {
+            _grow = GetComponent<Grow>();
             _timer = GetComponent<Timer>();
         }
 
@@ -37,20 +40,40 @@ namespace FeedTheBaby.LevelObjects
             return stayToHarvest;
         }
 
-        public void Harvest(Action<ItemAmount> onFinishHarvest)
+        public void Harvest(Action<HarvestResult> onFinishHarvest)
         {
-            if (destroyOnHarvest)
-                DestroyTile();
             OnFinishHarvest += onFinishHarvest;
+            
+            if (!_grow.FullyGrown)
+            {
+                OnFinishHarvest(new HarvestResult(default, false));
+                return;
+            }
+
+            if (destroyOnHarvest)
+                DestroyTile?.Invoke();
+            
             _timer.StartCount(harvestTime);
             _timer.TimerEnd += FinishHarvest;
         }
 
         void FinishHarvest(Timer t)
         {
-            OnFinishHarvest(itemAmount);
+            OnFinishHarvest(new HarvestResult(itemAmount,true));
             if (destroyOnHarvest)
                 Destroy(gameObject);
+        }
+    }
+    
+    public struct HarvestResult
+    {
+        public bool success;
+        public ItemAmount harvest;
+
+        public HarvestResult(ItemAmount harvest, bool success)
+        {
+            this.harvest = harvest;
+            this.success = success;
         }
     }
 }

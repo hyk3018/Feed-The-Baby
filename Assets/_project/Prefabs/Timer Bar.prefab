@@ -90,8 +90,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerBar: {fileID: 2071081920044333265}
   timer: {fileID: 0}
-  renderMode: 0
+  renderMode: 2
   activeOnStart: 0
+  destroyOnEnd: 1
 --- !u!1 &1519551226670970664
 GameObject:
   m_ObjectHideFlags: 0

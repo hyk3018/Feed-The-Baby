@@ -6285,4 +6285,4 @@ MonoBehaviour:
   fuelAmount: 0
   levelName: level4
   levelTime: 20
-  playerStartTime: 10
+  playerStartTime: 0

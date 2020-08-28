@@ -30,8 +30,20 @@ namespace FeedTheBaby
             FuelChange(_fuel);
         }
 
+        void AddFuel(int amountToAdd)
+        {
+            _fuel.amount = _fuel.amount + amountToAdd;
+            FuelChange(_fuel);
+        }
+
         public void AddItem(ItemAmount itemAmount)
         {
+            if (itemAmount.type == ItemType.Fuel)
+            {
+                AddFuel(itemAmount.amount);
+                return;
+            }
+
             var added = false;
 
             for (var i = 0; i < itemList.Count; i++)

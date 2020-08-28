@@ -65,7 +65,6 @@ namespace FeedTheBaby.Commands
                         {
                             if (moveSuccess && moveAndInteractCommand.target != null)
                             {
-                                Debug.Log("Yes interact");
                                 _interactersManager.Interact(moveAndInteractCommand.target, OnCommandFinish);
                             }
                             else

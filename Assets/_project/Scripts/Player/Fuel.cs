@@ -10,12 +10,12 @@ namespace FeedTheBaby.Player
         void Awake()
         {
             _fuelTimer = GetComponent<Timer>();
-            float fuelAmount = LevelManager.Instance.currentLevelData.fuelAmount;
-            if (fuelAmount > 0)
+            float playerStartTime = LevelManager.Instance.currentLevelData.playerStartTime;
+            if (playerStartTime > 0)
             {
                 LevelManager.Instance.LevelStart += (i) =>
                 {
-                    _fuelTimer.StartCount(fuelAmount);
+                    _fuelTimer.StartCount(playerStartTime);
                 };
             }
             else

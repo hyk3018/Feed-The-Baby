@@ -36,8 +36,19 @@ namespace FeedTheBaby.Player
             }
         }
 
-        void CollectHarvest(ItemAmount itemAmount)
+        void CollectHarvest(HarvestResult harvestResult)
         {
+            if (!harvestResult.success)
+            {
+                if (_harvesting)
+                {
+                    _harvesting = false;
+                    _behaviour.canMove = true;
+                }
+                _onHarvestEnd(false);
+                return;
+            }
+
             if (_inventory)
             {
                 if (_harvesting)
@@ -47,11 +58,11 @@ namespace FeedTheBaby.Player
                 }
 
                 AudioSource.PlayClipAtPoint(harvestSound, transform.position);
-                _inventory.AddItem(itemAmount);
+                _inventory.AddItem(harvestResult.harvest);
                 _onHarvestEnd(true);
             }
-
-            _onHarvestEnd(false);
+            else
+                _onHarvestEnd(false);
         }
 
         public void Interact(Transform target, Action<bool> interactionEnd)
