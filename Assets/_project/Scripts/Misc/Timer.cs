@@ -15,12 +15,12 @@ namespace FeedTheBaby
 
         void Awake()
         {
-            LevelManager.Instance.GameEnd += () => PauseTimer();
+            // LevelManager.Instance.GameEnd += () => PauseTimer();
         }
 
         void Update()
         {
-            if (Counting)
+            if (Counting && LevelManager.Instance.playing)
             {
                 RemainingTime -= Time.deltaTime;
                 TimerUpdate?.Invoke(this);

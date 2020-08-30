@@ -36,6 +36,18 @@ namespace FeedTheBaby
             FuelChange(_fuel);
         }
 
+        public bool SubtractFuel(int amountToSubtract)
+        {
+            if (_fuel.amount >= amountToSubtract)
+            {
+                _fuel.amount = _fuel.amount - amountToSubtract;
+                FuelChange(_fuel);
+                return true;
+            }
+
+            return false;
+        }
+
         public void AddItem(ItemAmount itemAmount)
         {
             if (itemAmount.type == ItemType.Fuel)

@@ -12,14 +12,14 @@ namespace FeedTheBaby.UI
 
         ItemType _type;
 
-        public void SetItemType(ItemType type)
+        void SetItemType(ItemType type)
         {
             image.enabled = true;
             var itemUiData = DataService.Instance.GetItemUIData();
             image.sprite = itemUiData.GetSprite(type);
         }
 
-        public void SetAmount(int amount)
+        void SetAmount(int amount)
         {
             amountText.text = amount.ToString();
         }

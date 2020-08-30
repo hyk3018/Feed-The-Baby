@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FeedTheBaby.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,9 @@ namespace FeedTheBaby.UI
     {
         [SerializeField] ItemUIData itemUIData = null;
         [SerializeField] Inventory inventory = null;
+        [SerializeField] Fuel fuel = null;
         [SerializeField] GameObject itemSlotTemplate = null;
+        [SerializeField] GameObject fuelSlotTemplate = null;
 
         [SerializeField] Transform inventoryUIContainer = null;
         [SerializeField] Transform fuelUIContainer = null;
@@ -18,6 +21,18 @@ namespace FeedTheBaby.UI
         GameObject _fuelSlot;
 
         void Awake()
+        {
+            InitialiseInventorySlots();
+
+            InitialiseFuelSlot();
+
+            // Subscribe to InventoryChange, which gets called at Start() to fill
+            // initial inventory values
+            inventory.InventoryChange += UpdateInventoryUI;
+            inventory.FuelChange += UpdateFuelUI;
+        }
+
+        void InitialiseInventorySlots()
         {
             // Set up empty item slots for all slots
             for (var i = 0; i < 6; i++)
@@ -28,15 +43,16 @@ namespace FeedTheBaby.UI
 
                 _itemSlots.Add(itemSlot);
             }
+        }
 
-            _fuelSlot = Instantiate(itemSlotTemplate, fuelUIContainer);
+        void InitialiseFuelSlot()
+        {
+            _fuelSlot = Instantiate(fuelSlotTemplate, fuelUIContainer);
             _fuelSlot.transform.localPosition = new Vector3(-26, 0, 0);
             InitialiseEmptySlot(_fuelSlot);
 
-            // Subscribe to InventoryChange, which gets called at Start() to fill
-            // initial inventory values
-            inventory.InventoryChange += UpdateInventoryUI;
-            inventory.FuelChange += UpdateFuelUI;
+            FuelSlotUI fuelSlotUI = _fuelSlot.GetComponent<FuelSlotUI>();
+            fuelSlotUI.fuel = fuel;
         }
 
         static void InitialiseEmptySlot(GameObject itemSlot)

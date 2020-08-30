@@ -33,7 +33,7 @@ namespace FeedTheBaby.LevelObjects
                 StartGrow();
         }
 
-        public void StartGrow()
+        void StartGrow()
         {
             _currentStage = 0;
             _currentGrowthTime = 0;
@@ -42,7 +42,7 @@ namespace FeedTheBaby.LevelObjects
         
         IEnumerator GrowUntilFull()
         {
-            while (_currentStage < growthStages.Length - 1)
+            while (_currentStage < growthStages.Length - 1 && LevelManager.Instance.playing)
             {
                 AddGrowth();
                 yield return null;

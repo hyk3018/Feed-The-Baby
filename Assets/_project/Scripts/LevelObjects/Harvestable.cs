@@ -44,7 +44,7 @@ namespace FeedTheBaby.LevelObjects
         {
             OnFinishHarvest += onFinishHarvest;
             
-            if (!_grow.FullyGrown)
+            if (_grow && !_grow.FullyGrown)
             {
                 OnFinishHarvest(new HarvestResult(default, false));
                 return;

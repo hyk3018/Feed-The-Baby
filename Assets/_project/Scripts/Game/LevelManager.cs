@@ -26,6 +26,7 @@ namespace FeedTheBaby
         public int currentLevel;
         public LevelData currentLevelData;
         public NavGrid navigationGrid;
+        public bool playing;
 
         Goals _goals;
         Timer _timer;
@@ -55,6 +56,7 @@ namespace FeedTheBaby
             _timer.TimerEnd += CheckGameEnd;
             player.GetComponent<Timer>().TimerEnd += CheckGameEnd;
             GameEnd += OnGameEnd;
+            playing = true;
         }
 
         void CheckGameEnd(Timer timer)
@@ -62,6 +64,7 @@ namespace FeedTheBaby
             AudioSource.PlayClipAtPoint(baby.GetComponent<Baby>().cryingSound, player.transform.position);
             EndWithStarsUncollected();
             OnGameEnd();
+            playing = false;
             GameEnd();
         }
 

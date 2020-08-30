@@ -26,7 +26,7 @@ namespace FeedTheBaby.Commands
                     Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     _commandManager.AddCommand(new MovePositionCommand(groundPosition));
                 }
-                else
+                else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
                     _commandManager.AddCommand(new MoveAndInteractCommand(hit.transform));
             }
         }
