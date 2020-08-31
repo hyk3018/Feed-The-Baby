@@ -11,7 +11,8 @@ namespace FeedTheBaby.UI
 
         void Start()
         {
-            commandInput.OnTileHeld += ShowPanel;
+            commandInput.OnCommandPanelOpen += ShowPanel;
+            commandInput.OnCommandPanelClose += HidePanel;
             commandPanel.SetActive(false);
         }
 
