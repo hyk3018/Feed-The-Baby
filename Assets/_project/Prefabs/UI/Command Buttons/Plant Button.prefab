@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8229040370611644248}
   - component: {fileID: 8229040370611644249}
   - component: {fileID: 8229040370611644254}
+  - component: {fileID: 7016077856369003072}
   m_Layer: 2
   m_Name: Plant Button
   m_TagString: Untagged
@@ -91,3 +92,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 20
+--- !u!95 &7016077856369003072
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8229040370611644252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02e086b9e707b2e4788e301c8b952faf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

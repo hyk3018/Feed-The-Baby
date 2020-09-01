@@ -29,6 +29,9 @@ namespace FeedTheBaby.Commands
 
         void Update()
         {
+            if (!LevelManager.Instance.playing)
+                return;
+            
             // When we click down and the panel is open, the next button up has
             // potential to close the current open panel
             if (Input.GetMouseButtonDown(1))
