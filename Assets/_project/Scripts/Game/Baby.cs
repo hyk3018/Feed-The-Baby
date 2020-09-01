@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FeedTheBaby.Commands;
+using FeedTheBaby.LevelObjects;
 using FeedTheBaby.Player;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace FeedTheBaby.Game
     // Player interacts with this to feed baby and
     // beat the level
 
-    public interface IFeedable
+    public interface IFeedable : IInteractable
     {
         void Feed(List<ItemAmount> foods);
         List<ItemAmount> GetHunger();
@@ -83,5 +84,7 @@ namespace FeedTheBaby.Game
                 emotionAnimator.SetTrigger(IsHappy);
             };
         }
+
+        public CommandType PossibleCommands() => CommandType.FEED;
     }
 }

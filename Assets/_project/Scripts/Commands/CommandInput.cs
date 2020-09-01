@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using FeedTheBaby.Game;
+using FeedTheBaby.LevelObjects;
+using FeedTheBaby.Tilemaps.Tiles;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace FeedTheBaby.Commands
 {
@@ -8,15 +11,16 @@ namespace FeedTheBaby.Commands
     public class CommandInput : MonoBehaviour
     {
         [SerializeField] LayerMask collisionMask = default;
+        [SerializeField] LayerMask ignoreMask = default;
         [SerializeField] float minimumHoldDuration = 1f;
         CommandManager _commandManager;
 
-        public Action<Vector3, Transform, HoldType> OnCommandPanelOpen;
+        public Action<Vector3, Transform, CommandType> OnCommandPanelOpen;
         public Action OnCommandPanelClose;
 
         float _currentHoldDuration;
         bool _panelOpen;
-        bool _buttonUpDuringPanelOpen;
+        bool _closeOnNextButtonUp;
 
         void Awake()
         {
@@ -25,39 +29,65 @@ namespace FeedTheBaby.Commands
 
         void Update()
         {
+            // When we click down and the panel is open, the next button up has
+            // potential to close the current open panel
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (_panelOpen)
+                {
+                    _closeOnNextButtonUp = true;
+                }
+            }
+            
+            // If we reach time to open a new panel, then the next button up
+            // should not close the panel
             if (Input.GetMouseButton(1))
             {
                 _currentHoldDuration += Time.deltaTime;
-                if (_currentHoldDuration > minimumHoldDuration)
+                
+                if (_currentHoldDuration >= minimumHoldDuration && !_panelOpen)
                 {
-                    _panelOpen = true;
+                    _closeOnNextButtonUp = false;
+                    
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
                         Single.PositiveInfinity, collisionMask);
-                    if (hit.transform == null)
+                    
+                    // Find out what we are using commands on
+                    RaycastObjectData raycastObjectData =
+                        RaycastObjectIdentifier.IdentifyRaycastObject(hit, ignoreMask);
+
+                    if (raycastObjectData.type == RaycastObjectType.NONE)
+                        return;
+
+                    // Determine what commands are possible for the object / tile
+                    CommandType possibleCommands = GetPossibleCommands(raycastObjectData);
+                    
+                    Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    if (raycastObjectData.type == RaycastObjectType.TERRAIN)
                     {
-                        Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        OnCommandPanelOpen?.Invoke(groundPosition, null, HoldType.GROUND);
+                        Debug.Log("yes");
+                        OnCommandPanelOpen?.Invoke(groundPosition, null, possibleCommands);
                     }
-                    else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
+                    else if (raycastObjectData.type == RaycastObjectType.COLLIDER_OBJECT)
                     {
-                        OnCommandPanelOpen(default, hit.transform, HoldType.LEVEL_OBJECT);
+                        OnCommandPanelOpen?.Invoke(groundPosition, hit.transform, possibleCommands);
                     }
-                    _currentHoldDuration = 0;
+                    
+                    _panelOpen = true;
                 }
             }
-
+            
             if (Input.GetMouseButtonUp(1))
             {
-                if (_panelOpen && _buttonUpDuringPanelOpen)
+                _currentHoldDuration = 0;
+                if (_closeOnNextButtonUp)
                 {
-                    _buttonUpDuringPanelOpen = false;
+                    _closeOnNextButtonUp = false;
                     OnCommandPanelClose?.Invoke();
                     ClosePanel();
                 }
-                else
+                else if (!_panelOpen)
                 {
-                    _buttonUpDuringPanelOpen = true;
-                    _currentHoldDuration = 0;
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
                         Single.PositiveInfinity, collisionMask);
                     if (hit.transform == null)
@@ -67,10 +97,43 @@ namespace FeedTheBaby.Commands
                     }
                     else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
                     {
-                        _commandManager.AddCommand(new MoveAndInteractCommand(hit.transform));
+                        _commandManager.AddCommand(new MoveAndInteractCommand(hit.transform, typeof(IFeedable)));
                     }
                 }
             }
+        }
+
+        static CommandType GetPossibleCommands(RaycastObjectData raycastObjectData)
+        {
+            CommandType possibleCommands = CommandType.NONE;
+
+            if (raycastObjectData.type == RaycastObjectType.TERRAIN)
+            {
+                if (raycastObjectData.tile is TerrainTile terrainTile)
+                {
+                    possibleCommands |= CommandType.MOVE;
+
+                    if (terrainTile.terrainType == TerrainType.Grassland)
+                    {
+                        possibleCommands |= CommandType.PLANT_FUEL;
+                    }
+                }
+            }
+            else if (raycastObjectData.type == RaycastObjectType.COLLIDER_OBJECT)
+            {
+                possibleCommands |= CommandType.MOVE;
+                
+                IInteractable[] interactables = raycastObjectData.colliderObject.GetComponents<IInteractable>();
+                foreach (IInteractable interactable in interactables)
+                    possibleCommands |= interactable.PossibleCommands();
+            }
+
+            if (possibleCommands != CommandType.NONE)
+            {
+                possibleCommands ^= CommandType.NONE;
+            }
+            
+            return possibleCommands;
         }
 
         public void ClosePanel()
@@ -79,8 +142,13 @@ namespace FeedTheBaby.Commands
         }
     }
 
-    public enum HoldType
+    [Flags]
+    public enum CommandType
     {
-        GROUND, LEVEL_OBJECT
+        NONE = 1,
+        MOVE = 2,
+        FEED = 4,
+        PLANT_FUEL = 8,
+        HARVEST = 16
     }
 }

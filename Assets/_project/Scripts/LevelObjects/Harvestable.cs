@@ -5,10 +5,15 @@ using UnityEngine;
 
 namespace FeedTheBaby.LevelObjects
 {
-    public interface IHarvestable
+    public interface IHarvestable : IInteractable
     {
         void Harvest(Action<HarvestResult> onFinishHarvest);
         bool StayToHarvest();
+    }
+
+    public interface IInteractable
+    {
+        CommandType PossibleCommands();
     }
 
     [RequireComponent(typeof(Timer))]
@@ -63,6 +68,8 @@ namespace FeedTheBaby.LevelObjects
             if (destroyOnHarvest)
                 Destroy(gameObject);
         }
+
+        public CommandType PossibleCommands() => CommandType.HARVEST;
     }
     
     public struct HarvestResult

@@ -10,7 +10,7 @@ namespace FeedTheBaby.Player
         void Awake()
         {
             canMove = true;
-            LevelManager.Instance.GameEnd += DisableComponents;
+            LevelManager.Instance.LevelEnd += DisableComponents;
         }
 
         void DisableComponents()

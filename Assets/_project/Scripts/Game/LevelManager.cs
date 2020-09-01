@@ -18,20 +18,20 @@ namespace FeedTheBaby
 
         [SerializeField] GameObject player = null;
         [SerializeField] GameObject baby = null;
-        [SerializeField] Tilemap terrainTileMap = null;
-        [SerializeField] Tilemap levelObjectsTileMap = null;
-        [SerializeField] Tilemap obstructionsTileMap = null;
         [SerializeField] GameObject hints = null;
 
-        public int currentLevel;
+        public Tilemap terrainTileMap = null;
+        public Tilemap levelObjectsTileMap = null;
+        public Tilemap obstructionsTileMap = null;
         public LevelData currentLevelData;
         public NavGrid navigationGrid;
+        public int currentLevel;
         public bool playing;
 
         Goals _goals;
         Timer _timer;
         public Action<Goals> LevelStart;
-        public Action GameEnd;
+        public Action LevelEnd;
         public Action EndWithStarsUncollected;
 
         public static LevelManager Instance => _instance;
@@ -52,10 +52,10 @@ namespace FeedTheBaby
             LevelStart(_goals);
             _timer.StartCount(currentLevelData.levelTime);
             _goals.FinalTierFilled += OnGameEnd;
-            _goals.FinalTierFilled += GameEnd;
+            _goals.FinalTierFilled += LevelEnd;
             _timer.TimerEnd += CheckGameEnd;
             player.GetComponent<Timer>().TimerEnd += CheckGameEnd;
-            GameEnd += OnGameEnd;
+            LevelEnd += OnGameEnd;
             playing = true;
         }
 
@@ -65,7 +65,7 @@ namespace FeedTheBaby
             EndWithStarsUncollected();
             OnGameEnd();
             playing = false;
-            GameEnd();
+            LevelEnd();
         }
 
         void OnGameEnd()

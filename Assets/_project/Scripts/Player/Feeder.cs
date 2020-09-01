@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FeedTheBaby.Player
 {
-    public class Feeder : MonoBehaviour, IInteracter
+    public class Feeder : MonoBehaviour, IInteractor
     {
         BehaviourController _behaviour;
         Inventory _inventory;
@@ -49,6 +49,11 @@ namespace FeedTheBaby.Player
                 FeedFromInventory(feedable);
                 interactionEnd(true);
             }
+        }
+
+        public bool InteractsWith(Type type)
+        {
+            return type == typeof(IFeedable);
         }
     }
 }

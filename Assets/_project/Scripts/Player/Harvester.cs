@@ -7,7 +7,7 @@ namespace FeedTheBaby.Player
 {
     [RequireComponent(typeof(Inventory))]
     [RequireComponent(typeof(BehaviourController))]
-    public class Harvester : MonoBehaviour, IInteracter
+    public class Harvester : MonoBehaviour, IInteractor
     {
         [SerializeField] AudioClip harvestSound = null;
         
@@ -74,6 +74,11 @@ namespace FeedTheBaby.Player
                 _onHarvestEnd += interactionEnd;
                 StartHarvest(harvestable);
             }
+        }
+
+        public bool InteractsWith(Type type)
+        {
+            return type == typeof(IHarvestable);
         }
     }
 }

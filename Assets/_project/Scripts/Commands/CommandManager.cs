@@ -63,9 +63,10 @@ namespace FeedTheBaby.Commands
                     _moveCommandExecutor.ExecuteMoveTransform(new MoveTransformCommand(moveAndInteractCommand.target),
                         (moveSuccess) =>
                         {
-                            if (moveSuccess && moveAndInteractCommand.target != null)
+                            if (moveSuccess && moveAndInteractCommand.interactableType != null)
                             {
-                                _interactersManager.Interact(moveAndInteractCommand.target, OnCommandFinish);
+                                _interactersManager.Interact(moveAndInteractCommand.target, 
+                                    moveAndInteractCommand.interactableType, OnCommandFinish);
                             }
                             else
                                 OnCommandFinish(false);

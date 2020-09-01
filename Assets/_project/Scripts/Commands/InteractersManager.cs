@@ -6,13 +6,13 @@ namespace FeedTheBaby.Commands
 {
     class InteractersManager : MonoBehaviour
     {
-        [SerializeField] List<IInteracter> _interacters = new List<IInteracter>();
+        [SerializeField] List<IInteractor> _interacters = new List<IInteractor>();
 
         // Get all components in gameobject that interacts
         void Awake()
         {
-            var interacters = GetComponentsInChildren<IInteracter>();
-            foreach (IInteracter interacter in interacters)
+            var interacters = GetComponentsInChildren<IInteractor>();
+            foreach (IInteractor interacter in interacters)
             {
                 if (!_interacters.Contains(interacter))
                 {
@@ -21,11 +21,12 @@ namespace FeedTheBaby.Commands
             }
         }
         
-        public void Interact(Transform target, Action<bool> interactionEnd)
+        public void Interact(Transform target, Type interactableType, Action<bool> interactionEnd)
         {
-            foreach (IInteracter interacter in _interacters)
+            foreach (IInteractor interacter in _interacters)
             {
-                interacter.Interact(target, interactionEnd);
+                if (interacter.InteractsWith(interactableType))
+                    interacter.Interact(target, interactionEnd);
             }
         }
     }

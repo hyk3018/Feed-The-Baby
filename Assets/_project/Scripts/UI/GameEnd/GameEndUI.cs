@@ -26,7 +26,7 @@ namespace FeedTheBaby.UI
         {
             base.Awake();
             _animator = GetComponent<Animator>();
-            LevelManager.Instance.GameEnd += () => StartCoroutine(ShowPanel());
+            LevelManager.Instance.LevelEnd += () => StartCoroutine(ShowPanel());
         }
 
         IEnumerator ShowPanel()
