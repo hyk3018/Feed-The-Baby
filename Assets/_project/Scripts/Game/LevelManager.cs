@@ -51,24 +51,31 @@ namespace FeedTheBaby
         {
             LevelStart(_goals);
             _timer.StartCount(currentLevelData.levelTime);
-            _goals.FinalTierFilled += OnGameEnd;
+            
+            // When final tier is filled we handle the level end and broadcast to others
+            _goals.FinalTierFilled += OnLevelEnd;
             _goals.FinalTierFilled += LevelEnd;
-            _timer.TimerEnd += CheckGameEnd;
-            player.GetComponent<Timer>().TimerEnd += CheckGameEnd;
-            LevelEnd += OnGameEnd;
+            
+            // When timer ends, we handle the failure
+            _timer.TimerEnd += OnLevelFail;
+            
+            // When the player's fuel ends, we handle the failure
+            player.GetComponent<Timer>().TimerEnd += OnLevelFail;
+            
+            LevelEnd += OnLevelEnd;
             playing = true;
         }
 
-        void CheckGameEnd(Timer timer)
+        void OnLevelFail(Timer timer)
         {
             AudioSource.PlayClipAtPoint(baby.GetComponent<Baby>().cryingSound, player.transform.position);
             EndWithStarsUncollected();
-            OnGameEnd();
+            OnLevelEnd();
             playing = false;
             LevelEnd();
         }
 
-        void OnGameEnd()
+        void OnLevelEnd()
         {
             if (_goals.CollectedStars > 0) DataService.Instance.UnlockNextLevel(currentLevel);
         }

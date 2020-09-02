@@ -53,7 +53,7 @@ namespace FeedTheBaby.UI
             var children = transform.Cast<Transform>().ToList();
             foreach (var child in children)
             {
-                Destroy(child.gameObject);
+                DestroyImmediate(child.gameObject);
             }
         }
     }

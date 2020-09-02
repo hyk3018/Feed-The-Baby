@@ -4,6 +4,7 @@ using FeedTheBaby.Game;
 using FeedTheBaby.LevelObjects;
 using FeedTheBaby.Tilemaps.Tiles;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace FeedTheBaby.Commands
 {
@@ -21,6 +22,7 @@ namespace FeedTheBaby.Commands
         float _currentHoldDuration;
         bool _panelOpen;
         bool _closeOnNextButtonUp;
+        bool _currentlyHolding;
 
         void Awake()
         {
@@ -31,7 +33,7 @@ namespace FeedTheBaby.Commands
         {
             if (!LevelManager.Instance.playing)
                 return;
-            
+
             // When we click down and the panel is open, the next button up has
             // potential to close the current open panel
             if (Input.GetMouseButtonDown(1))
@@ -46,10 +48,22 @@ namespace FeedTheBaby.Commands
             // should not close the panel
             if (Input.GetMouseButton(1))
             {
+                if (EventSystem.current.IsPointerOverGameObject() &&
+                    EventSystem.current.currentSelectedGameObject != null) 
+                    return;
+
                 _currentHoldDuration += Time.deltaTime;
                 
-                if (_currentHoldDuration >= minimumHoldDuration && !_panelOpen)
+                if (_currentHoldDuration >= minimumHoldDuration && !_currentlyHolding)
                 {
+                    Debug.Log("Open");
+                    if (_panelOpen)
+                    {
+                        OnCommandPanelClose?.Invoke();
+                        _panelOpen = false;
+                    }
+
+                    _currentlyHolding = true;
                     _closeOnNextButtonUp = false;
                     
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
@@ -68,7 +82,6 @@ namespace FeedTheBaby.Commands
                     Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     if (raycastObjectData.type == RaycastObjectType.TERRAIN)
                     {
-                        Debug.Log("yes");
                         OnCommandPanelOpen?.Invoke(groundPosition, null, possibleCommands);
                     }
                     else if (raycastObjectData.type == RaycastObjectType.COLLIDER_OBJECT)
@@ -82,6 +95,7 @@ namespace FeedTheBaby.Commands
             
             if (Input.GetMouseButtonUp(1))
             {
+                _currentlyHolding = false;
                 _currentHoldDuration = 0;
                 if (_closeOnNextButtonUp)
                 {
@@ -115,6 +129,7 @@ namespace FeedTheBaby.Commands
                 if (raycastObjectData.tile is TerrainTile terrainTile)
                 {
                     possibleCommands |= CommandType.MOVE;
+                    possibleCommands |= CommandType.CRAFT;
 
                     if (terrainTile.terrainType == TerrainType.Grassland)
                     {
@@ -144,7 +159,7 @@ namespace FeedTheBaby.Commands
             _panelOpen = false;
         }
     }
-
+    
     [Flags]
     public enum CommandType
     {
@@ -152,6 +167,7 @@ namespace FeedTheBaby.Commands
         MOVE = 2,
         FEED = 4,
         PLANT_FUEL = 8,
-        HARVEST = 16
+        HARVEST = 16,
+        CRAFT = 32
     }
 }
