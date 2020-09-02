@@ -18,9 +18,9 @@ namespace FeedTheBaby.Commands
 
         public Action<Vector3, Transform, CommandType> OnCommandPanelOpen;
         public Action OnCommandPanelClose;
+        public bool panelOpen;
 
         float _currentHoldDuration;
-        bool _panelOpen;
         bool _closeOnNextButtonUp;
         bool _currentlyHolding;
 
@@ -38,7 +38,7 @@ namespace FeedTheBaby.Commands
             // potential to close the current open panel
             if (Input.GetMouseButtonDown(1))
             {
-                if (_panelOpen)
+                if (panelOpen)
                 {
                     _closeOnNextButtonUp = true;
                 }
@@ -56,11 +56,9 @@ namespace FeedTheBaby.Commands
                 
                 if (_currentHoldDuration >= minimumHoldDuration && !_currentlyHolding)
                 {
-                    Debug.Log("Open");
-                    if (_panelOpen)
+                    if (panelOpen)
                     {
                         OnCommandPanelClose?.Invoke();
-                        _panelOpen = false;
                     }
 
                     _currentlyHolding = true;
@@ -88,8 +86,6 @@ namespace FeedTheBaby.Commands
                     {
                         OnCommandPanelOpen?.Invoke(groundPosition, hit.transform, possibleCommands);
                     }
-                    
-                    _panelOpen = true;
                 }
             }
             
@@ -101,9 +97,8 @@ namespace FeedTheBaby.Commands
                 {
                     _closeOnNextButtonUp = false;
                     OnCommandPanelClose?.Invoke();
-                    ClosePanel();
                 }
-                else if (!_panelOpen)
+                else if (!panelOpen)
                 {
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
                         Single.PositiveInfinity, collisionMask);
@@ -114,7 +109,7 @@ namespace FeedTheBaby.Commands
                     }
                     else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
                     {
-                        _commandManager.AddCommand(new MoveAndInteractCommand(hit.transform, typeof(IFeedable)));
+                        _commandManager.AddCommand(new MoveAndInteractCommand(hit.transform, null));
                     }
                 }
             }
@@ -152,11 +147,6 @@ namespace FeedTheBaby.Commands
             }
             
             return possibleCommands;
-        }
-
-        public void ClosePanel()
-        {
-            _panelOpen = false;
         }
     }
     

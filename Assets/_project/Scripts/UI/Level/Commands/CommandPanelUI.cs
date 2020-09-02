@@ -47,6 +47,7 @@ namespace FeedTheBaby.UI
             }
 
             commandPanel.SetActive(true);
+            commandInput.panelOpen = true;
              StartCoroutine(commandButtons.ShowButtons());
         }
 
@@ -71,6 +72,11 @@ namespace FeedTheBaby.UI
                     });
                     break;
                 case CommandType.PLANT_FUEL:
+                    button.SetCommand(() =>
+                    {
+                        commandManager.AddCommand(new PlantCommand(position));
+                        HidePanel();
+                    });
                     break;
                 case CommandType.HARVEST:
                     button.SetCommand(() =>
@@ -80,6 +86,10 @@ namespace FeedTheBaby.UI
                     });
                     break;
                 case CommandType.CRAFT:
+                    button.SetCommand(() =>
+                    {
+                        HidePanel();
+                    });
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(commandType), commandType, null);
@@ -88,6 +98,7 @@ namespace FeedTheBaby.UI
 
         public void HidePanel()
         {
+            commandInput.panelOpen = false;
             commandButtons.Clear();
             commandPanel.SetActive(false);
         }

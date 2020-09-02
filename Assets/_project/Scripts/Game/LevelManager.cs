@@ -70,8 +70,8 @@ namespace FeedTheBaby
         {
             AudioSource.PlayClipAtPoint(baby.GetComponent<Baby>().cryingSound, player.transform.position);
             EndWithStarsUncollected();
-            OnLevelEnd();
             playing = false;
+            OnLevelEnd();
             LevelEnd();
         }
 

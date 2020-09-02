@@ -1110,7 +1110,7 @@ MonoBehaviour:
   hints: []
   playerStartPosition: {x: -10.5, y: 4.5}
   babyStartPosition: {x: 9.5, y: -0.5}
-  fuelAmount: 5
+  fuelAmount: 0
   levelName: maze1
   levelTime: 30
   playerStartTime: 0

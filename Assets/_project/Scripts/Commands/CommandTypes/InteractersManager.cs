@@ -25,7 +25,7 @@ namespace FeedTheBaby.Commands
         {
             foreach (IInteractor interacter in _interacters)
             {
-                if (interacter.InteractsWith(interactableType))
+                if (interactableType == null || interacter.InteractsWith(interactableType))
                     interacter.Interact(target, interactionEnd);
             }
         }

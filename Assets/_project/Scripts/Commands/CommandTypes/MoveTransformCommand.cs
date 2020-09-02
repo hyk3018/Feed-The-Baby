@@ -11,14 +11,4 @@ namespace FeedTheBaby.Commands
             this.target = target;
         }
     }
-
-    public class MovePositionCommand : Command
-    {
-        public Vector2 target;
-
-        public MovePositionCommand(Vector2 target)
-        {
-            this.target = target;
-        }
-    }
 }

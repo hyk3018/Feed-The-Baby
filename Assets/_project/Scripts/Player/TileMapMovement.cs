@@ -86,7 +86,8 @@ namespace FeedTheBaby.Player
                     _targetIndex++;
                     if (_targetIndex >= _currentPath.Count)
                     {
-                        break;
+                        FinishMove(true);
+                        yield break;
                     }
                     _currentWaypoint = _currentPath[_targetIndex] + new Vector3(0.5f, 0.5f);
                 }
@@ -96,8 +97,7 @@ namespace FeedTheBaby.Player
                 yield return null;
             }
 
-            if (!_reachedTarget)
-                FinishMove(true);
+            FinishMove(false);
         }
         
         void Move(Vector2 normalizedDirection)

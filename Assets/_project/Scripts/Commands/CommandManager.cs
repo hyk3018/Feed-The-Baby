@@ -10,6 +10,7 @@ namespace FeedTheBaby.Commands
 
         IMoveCommandExecutor _moveCommandExecutor;
         InteractersManager _interactersManager;
+        IPlantCommandExecutor _plantCommandExecutor;
         
         bool _processingCommand;
 
@@ -18,6 +19,7 @@ namespace FeedTheBaby.Commands
             _commands = new List<Command>(maxCommands);
             _moveCommandExecutor = GetComponent<IMoveCommandExecutor>();
             _interactersManager = GetComponent<InteractersManager>();
+            _plantCommandExecutor = GetComponent<IPlantCommandExecutor>();
         }
 
         void Update()
@@ -56,6 +58,18 @@ namespace FeedTheBaby.Commands
                 case MoveTransformCommand moveCommand:
                     _moveCommandExecutor?.ExecuteMoveTransform(moveCommand, OnCommandFinish);
                     break;
+                case PlantCommand plantCommand:
+                    _moveCommandExecutor?.ExecuteMovePosition(new MovePositionCommand(plantCommand.target),
+                        (moveSuccess) =>
+                        {
+                            if (moveSuccess)
+                            {
+                                _plantCommandExecutor.ExecutePlant(plantCommand, OnCommandFinish);
+                            }
+                            else
+                                OnCommandFinish(false);
+                        });
+                    break;
                 case MovePositionCommand movePositionCommand:
                     _moveCommandExecutor?.ExecuteMovePosition(movePositionCommand, OnCommandFinish);
                     break;
@@ -63,7 +77,7 @@ namespace FeedTheBaby.Commands
                     _moveCommandExecutor.ExecuteMoveTransform(new MoveTransformCommand(moveAndInteractCommand.target),
                         (moveSuccess) =>
                         {
-                            if (moveSuccess && moveAndInteractCommand.interactableType != null)
+                            if (moveSuccess)
                             {
                                 _interactersManager.Interact(moveAndInteractCommand.target, 
                                     moveAndInteractCommand.interactableType, OnCommandFinish);
