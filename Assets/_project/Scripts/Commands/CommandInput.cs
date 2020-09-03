@@ -36,7 +36,7 @@ namespace FeedTheBaby.Commands
 
             // When we click down and the panel is open, the next button up has
             // potential to close the current open panel
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
             {
                 if (panelOpen)
                 {
@@ -46,7 +46,7 @@ namespace FeedTheBaby.Commands
             
             // If we reach time to open a new panel, then the next button up
             // should not close the panel
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
                 if (EventSystem.current.IsPointerOverGameObject() &&
                     EventSystem.current.currentSelectedGameObject != null) 
@@ -89,7 +89,7 @@ namespace FeedTheBaby.Commands
                 }
             }
             
-            if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
             {
                 _currentlyHolding = false;
                 _currentHoldDuration = 0;

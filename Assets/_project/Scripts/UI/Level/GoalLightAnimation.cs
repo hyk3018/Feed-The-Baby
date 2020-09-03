@@ -12,7 +12,7 @@ public class GoalLightAnimation : MonoBehaviour
     [SerializeField] ParticleSystem[] glowParticles = null;
 
     Animator _animator;
-    static readonly int StartGlow = Animator.StringToHash("StartGlow");
+    static readonly int Show = Animator.StringToHash("Show");
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class GoalLightAnimation : MonoBehaviour
     {
         if (tier == tierToGlow)
         {
-            _animator.SetTrigger(StartGlow);
+            _animator.SetTrigger(Show);
             foreach (var glowParticle in glowParticles)
                 glowParticle.Play();
         }

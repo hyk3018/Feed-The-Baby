@@ -25,12 +25,7 @@ namespace FeedTheBaby.LevelObjects
         {
             foreach (GrowthStage growthStage in growthStages)
                 _totalGrowthProportions += growthStage.stageDurationProportion;
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.G))
-                StartGrow();
+            StartGrow();
         }
 
         void StartGrow()

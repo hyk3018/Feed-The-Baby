@@ -1,6 +1,9 @@
 ﻿using FeedTheBaby.Commands;
-using FeedTheBaby.Editor.Dictionary;
 using UnityEngine;
+
+#if UNITY_EDITOR
+
+using FeedTheBaby.Editor.Dictionary;
 
 namespace FeedTheBaby.UI
 {
@@ -19,3 +22,5 @@ namespace FeedTheBaby.UI
         }
     }
 }
+
+#endif

@@ -1,8 +1,11 @@
 ﻿using System;
-using UnityEditor;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+#if UNITY_EDITOR
+
+using UnityEditor;
+using UnityEditor.Tilemaps;
 
 namespace FeedTheBaby.Tilemaps.Brushes
 {
@@ -179,3 +182,5 @@ namespace FeedTheBaby.Tilemaps.Brushes
         }
     }
 }
+
+#endif

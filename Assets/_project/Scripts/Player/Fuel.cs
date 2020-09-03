@@ -23,7 +23,10 @@ namespace FeedTheBaby.Player
                 };
             }
             else
+            {
+                _fuelTimer.enabled = false;
                 enabled = false;
+            }
         }
 
         public void ConsumeFuel(int amount)

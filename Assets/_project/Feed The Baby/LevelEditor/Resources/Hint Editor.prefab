@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.13}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1856636218247943168
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4155dbcc909e54648b1e23f8a5949cae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c439a1ef190764499014a3c4ff8eea2, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -172,7 +172,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 56.50412}
+  m_SizeDelta: {x: 350, y: 56.50412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1856636218495571588
 CanvasRenderer:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hint !
+  m_text: Click on the ground to move around
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d77b57ad25156e64ea8994a27dbadbd3, type: 2}
   m_sharedMaterial: {fileID: 8150498372645684774, guid: d77b57ad25156e64ea8994a27dbadbd3,
@@ -211,8 +211,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281341191
-  m_fontColor: {r: 0.027589884, g: 0.08375429, b: 0.18867922, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -271,10 +271,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0.19637495}
   m_textInfo:
     textComponent: {fileID: 1856636218495571589}
-    characterCount: 6
+    characterCount: 34
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 1
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1056317bad11ec449ade994a4150e971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minWidth: 350
 --- !u!1 &1856636218541071127
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ namespace FeedTheBaby.UI
     {
         void Awake()
         {
-            if (LevelManager.Instance.currentLevelData.fuelAmount <= 0)
+            if (LevelManager.Instance.currentLevelData.playerStartTime <= 0)
                 gameObject.SetActive(false);
         }
     }

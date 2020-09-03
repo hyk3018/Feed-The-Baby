@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+#if UNITY_EDITOR
+using UnityEditor.Tilemaps;
 namespace FeedTheBaby.Tilemaps.Brushes
 {
     /// <summary>
@@ -216,3 +217,5 @@ namespace FeedTheBaby.Tilemaps.Brushes
         }
     }
 }
+
+#endif

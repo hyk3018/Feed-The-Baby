@@ -1,7 +1,10 @@
-﻿using FeedTheBaby.Editor.Dictionary;
-using FeedTheBaby.Tilemaps.Tiles;
-using UnityEditor;
+﻿using FeedTheBaby.Tilemaps.Tiles;
 using UnityEngine;
+
+#if UNITY_EDITOR
+
+using FeedTheBaby.Editor.Dictionary;
+using UnityEditor;
 
 namespace FeedTheBaby.Tilemaps.Brushes
 {
@@ -18,3 +21,5 @@ namespace FeedTheBaby.Tilemaps.Brushes
         }
     }
 }
+
+#endif

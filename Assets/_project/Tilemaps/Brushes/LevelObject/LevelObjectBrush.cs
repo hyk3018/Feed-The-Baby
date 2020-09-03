@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using FeedTheBaby.Tilemaps.Tiles;
-using UnityEditor;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
+
+using UnityEditor;
+using UnityEditor.Tilemaps;
 
 namespace FeedTheBaby.Tilemaps.Brushes
 {
