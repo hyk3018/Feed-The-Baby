@@ -1,4 +1,5 @@
 ﻿using FeedTheBaby.Tilemaps.Tiles;
+using FeedTheBaby.Tilemaps.Tiles.Terrain;
 using UnityEngine;
 
 #if UNITY_EDITOR

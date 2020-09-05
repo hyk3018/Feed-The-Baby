@@ -6,12 +6,12 @@ namespace FeedTheBaby.Commands
 {
     public class RaycastObjectIdentifier
     {
-        public static RaycastObjectData IdentifyRaycastObject(RaycastHit2D hit, LayerMask ignoreMask)
+        public static RaycastObjectData IdentifyRaycastObject(RaycastHit2D hit, LayerMask ignoreMask, Vector3 inputPosition)
         {
             if (hit.transform == null)
             {
                 // Did not hit any colliders so we're clicking at tile map
-                Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 groundPosition = Camera.main.ScreenToWorldPoint(inputPosition);
 
                 Tilemap obstructionsTileMap = LevelManager.Instance.obstructionsTileMap;
                 Vector3Int worldToCell = obstructionsTileMap.WorldToCell(groundPosition);

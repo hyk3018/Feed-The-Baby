@@ -51,8 +51,8 @@ namespace FeedTheBaby.UI
             _fuelSlot.transform.localPosition = new Vector3(-26, 0, 0);
             InitialiseEmptySlot(_fuelSlot);
 
-            FuelSlotUI fuelSlotUI = _fuelSlot.GetComponent<FuelSlotUI>();
-            fuelSlotUI.fuel = fuel;
+            PotatoSlotUI potatoSlotUI = _fuelSlot.GetComponent<PotatoSlotUI>();
+            potatoSlotUI.fuel = fuel;
         }
 
         static void InitialiseEmptySlot(GameObject itemSlot)

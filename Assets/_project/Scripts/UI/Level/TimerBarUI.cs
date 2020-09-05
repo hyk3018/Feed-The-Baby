@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace FeedTheBaby.UI
 {
     internal class TimerBarUI : MonoBehaviour
     {
-        [SerializeField] Image timerBar = null;
+        [SerializeField] GameObject barObject = null;
+        [SerializeField] Image barFill = null;
         [SerializeField] Timer timer = null;
+        [SerializeField] TextMeshProUGUI timerCount = null;
         [SerializeField] RenderMode renderMode = RenderMode.ScreenSpaceOverlay;
         [SerializeField] bool activeOnStart = false;
         [SerializeField] bool destroyOnEnd = true;
@@ -24,15 +27,15 @@ namespace FeedTheBaby.UI
 
             if (!activeOnStart)
             {
-                GetComponent<Image>().enabled = false;
-                timerBar.enabled = false;
+                barObject.SetActive(false);
+                barFill.enabled = false;
             }
         }
 
         void Start()
         {
-            if (timerBar)
-                timerBar.fillAmount = 1;
+            if (barFill)
+                barFill.fillAmount = 1;
         }
 
         void ShowUI(Timer t)
@@ -42,15 +45,20 @@ namespace FeedTheBaby.UI
                 if (renderMode == RenderMode.WorldSpace)
                     transform.SetParent(GameObject.FindWithTag("WorldCanvas").transform);
 
-                GetComponent<Image>().enabled = true;
-                timerBar.enabled = true;
+                barObject.SetActive(true);
+                barFill.enabled = true;
             }
         }
 
         void UpdateUI(Timer t)
         {
-            if (timer.Counting && timerBar)
-                timerBar.fillAmount = timer.RemainingTime / timer.TimeToCount;
+            if (timer.Counting)
+            {
+                if (barFill)
+                    barFill.fillAmount = Mathf.Round(timer.RemainingTime / timer.TimeToCount * 50) / 50;
+                if (timerCount)
+                    timerCount.text = Mathf.Ceil(timer.RemainingTime).ToString();
+            }
         }
 
         void DestroyTimer(Timer t)

@@ -152,9 +152,10 @@ namespace FeedTheBaby
 
     public enum ItemType
     {
-        Berry,
-        Apple,
-        Wood,
-        Fuel
+        BERRY,
+        APPLE,
+        WOOD,
+        POTATO,
+        SPUDLING
     }
 }

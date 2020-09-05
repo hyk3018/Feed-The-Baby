@@ -1,16 +1,18 @@
 ﻿using UnityEngine.Tilemaps;
 
-namespace FeedTheBaby.Tilemaps.Tiles
+namespace FeedTheBaby.Tilemaps.Tiles.Terrain
 {
     public enum TerrainType
     {
-        Grassland,
-        Desert,
-        PineTree
+        GRASS,
+        SAND,
+        SAND_BONE,
+        PINE,
+        BOULDER
     }
 
     [UnityEngine.CreateAssetMenu(fileName = "Terrain Tile", menuName = "Tiles/Terrain Tile", order = 0)]
-    public class TerrainTile : Tile
+    public class TerrainTile : RandomTile
     {
         public TerrainType terrainType;
     }

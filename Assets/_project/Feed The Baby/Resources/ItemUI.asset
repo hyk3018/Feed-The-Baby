@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ItemUI
   m_EditorClassIdentifier: 
   itemSpriteDictionary:
-    keys: 000000000200000003000000
+    keys: 00000000020000000300000004000000
     values:
     - {fileID: 21300000, guid: deebc5807f0bdaf488690948f0fc7867, type: 3}
     - {fileID: 21300000, guid: e267f3364f70a10499225e88378c1771, type: 3}
     - {fileID: 21300000, guid: 49e8e1cd653421a45aa4021c04ec89aa, type: 3}
+    - {fileID: 21300000, guid: 333c522ccccc4bd4797bcc381375ff0b, type: 3}

@@ -22,8 +22,8 @@ namespace FeedTheBaby
         [SerializeField] GameObject player = null;
         [SerializeField] GameObject baby = null;
         [SerializeField] GameObject hints = null;
-        
-        [SerializeField] bool staticHint;
+
+        [SerializeField] bool staticHint = true;
 
         public Tilemap terrainTileMap = null;
         public Tilemap levelObjectsTileMap = null;
@@ -55,7 +55,9 @@ namespace FeedTheBaby
         void Start()
         {
             LevelStart(_goals);
-            _timer.StartCount(currentLevelData.levelTime);
+            
+            if (currentLevelData.levelTime > 0)
+                _timer.StartCount(currentLevelData.levelTime);
             
             // When final tier is filled we handle the level end and broadcast to others
             _goals.FinalTierFilled += OnLevelEnd;

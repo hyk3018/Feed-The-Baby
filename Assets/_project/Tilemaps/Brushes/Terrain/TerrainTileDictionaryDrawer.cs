@@ -2,6 +2,7 @@
 
 using FeedTheBaby.Editor.Dictionary;
 using FeedTheBaby.Tilemaps.Tiles;
+using FeedTheBaby.Tilemaps.Tiles.Terrain;
 
 namespace FeedTheBaby.Tilemaps.Brushes
 {

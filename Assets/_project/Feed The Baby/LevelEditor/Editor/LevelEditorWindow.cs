@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 using TerrainMap = FeedTheBaby.Tilemaps.Brushes.TerrainMap;
-using TerrainTile = FeedTheBaby.Tilemaps.Tiles.TerrainTile;
+using TerrainTile = FeedTheBaby.Tilemaps.Tiles.Terrain.TerrainTile;
 
 namespace FeedTheBaby.LevelEditor
 {
@@ -212,7 +212,7 @@ namespace FeedTheBaby.LevelEditor
             _inventoryOnLoad = levelData.initialInventory.ToList();
             _levelTime = levelData.levelTime;
             _playerStartTime = levelData.playerStartTime;
-            _fuelAmount = levelData.fuelAmount;
+            _fuelAmount = levelData.potatoAmount;
             
             Array.Resize(ref _goalTiers, levelData.goals.Length);
             for (var i = 0; i < levelData.goals.Length; i++) _goalTiers[i] = ItemTier.Copy(levelData.goals[i]);
@@ -359,7 +359,7 @@ namespace FeedTheBaby.LevelEditor
             levelAsset.playerStartTime = _playerStartTime;
 
             levelAsset.initialInventory = _inventoryOnLoad.ToArray();
-            levelAsset.fuelAmount = _fuelAmount;
+            levelAsset.potatoAmount = _fuelAmount;
 
             SaveTerrain(levelAsset);
             SaveObstructions(levelAsset);

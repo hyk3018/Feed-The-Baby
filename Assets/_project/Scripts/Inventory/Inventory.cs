@@ -20,7 +20,7 @@ namespace FeedTheBaby
 
         void Awake()
         {
-            _fuel = new ItemAmount(ItemType.Fuel, LevelManager.Instance.currentLevelData.fuelAmount);
+            _fuel = new ItemAmount(ItemType.POTATO, LevelManager.Instance.currentLevelData.potatoAmount);
             itemList = LevelManager.Instance.currentLevelData.initialInventory.ToList();
         }
 
@@ -50,7 +50,7 @@ namespace FeedTheBaby
 
         public void AddItem(ItemAmount itemAmount)
         {
-            if (itemAmount.type == ItemType.Fuel)
+            if (itemAmount.type == ItemType.POTATO)
             {
                 AddFuel(itemAmount.amount);
                 return;
@@ -115,6 +115,40 @@ namespace FeedTheBaby
         public List<ItemAmount> TakeItemsExact(List<ItemAmount> amountToTake)
         {
             return null;
+        }
+
+        public bool HasItem(ItemAmount itemAmount)
+        {
+            foreach (ItemAmount itemInInventory in itemList)
+            {
+                if (itemInInventory.type == itemAmount.type)
+                {
+                    return itemAmount.amount >= itemInInventory.amount;
+                }
+            }
+
+            return false;
+        }
+
+        // Takes even if not exact
+        public ItemAmount TakeItem(ItemAmount itemAmount)
+        {
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                ItemAmount itemInInventory = itemList[i];
+                if (itemInInventory.type == itemAmount.type)
+                {
+                    int amountTaken = Mathf.Min(itemInInventory.amount, itemAmount.amount);
+                    itemInInventory.amount = Mathf.Max(0, itemInInventory.amount - itemAmount.amount);
+                    if (itemInInventory.amount == 0)
+                        itemList.RemoveAt(i);
+
+                    InventoryChange(itemList);
+                    return new ItemAmount(itemAmount.type, amountTaken);
+                }
+            }
+            
+            return new ItemAmount(itemAmount.type, 0);
         }
     }
 }

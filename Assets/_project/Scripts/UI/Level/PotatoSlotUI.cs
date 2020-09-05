@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace FeedTheBaby.UI
 {
-    public class FuelSlotUI : ItemSlotUI, IPointerClickHandler
+    public class PotatoSlotUI : ItemSlotUI, IPointerClickHandler
     {
         public Fuel fuel = null;
 

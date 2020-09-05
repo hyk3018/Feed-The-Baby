@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FeedTheBaby.Game;
 using FeedTheBaby.LevelObjects;
 using FeedTheBaby.Tilemaps.Tiles;
+using FeedTheBaby.Tilemaps.Tiles.Terrain;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -23,6 +24,7 @@ namespace FeedTheBaby.Commands
         float _currentHoldDuration;
         bool _closeOnNextButtonUp;
         bool _currentlyHolding;
+        Vector3 _inputPositionOnClickDown;
 
         void Awake()
         {
@@ -48,6 +50,7 @@ namespace FeedTheBaby.Commands
             // should not close the panel
             if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
+                _inputPositionOnClickDown = Input.mousePosition;
                 if (EventSystem.current.IsPointerOverGameObject() &&
                     EventSystem.current.currentSelectedGameObject != null) 
                     return;
@@ -64,12 +67,12 @@ namespace FeedTheBaby.Commands
                     _currentlyHolding = true;
                     _closeOnNextButtonUp = false;
                     
-                    RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
+                    RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(_inputPositionOnClickDown),
                         Single.PositiveInfinity, collisionMask);
                     
                     // Find out what we are using commands on
                     RaycastObjectData raycastObjectData =
-                        RaycastObjectIdentifier.IdentifyRaycastObject(hit, ignoreMask);
+                        RaycastObjectIdentifier.IdentifyRaycastObject(hit, ignoreMask, _inputPositionOnClickDown);
 
                     if (raycastObjectData.type == RaycastObjectType.NONE)
                         return;
@@ -77,7 +80,7 @@ namespace FeedTheBaby.Commands
                     // Determine what commands are possible for the object / tile
                     CommandType possibleCommands = GetPossibleCommands(raycastObjectData);
                     
-                    Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3 groundPosition = Camera.main.ScreenToWorldPoint(_inputPositionOnClickDown);
                     if (raycastObjectData.type == RaycastObjectType.TERRAIN)
                     {
                         OnCommandPanelOpen?.Invoke(groundPosition, null, possibleCommands);
@@ -100,11 +103,11 @@ namespace FeedTheBaby.Commands
                 }
                 else if (!panelOpen)
                 {
-                    RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition),
+                    RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(_inputPositionOnClickDown),
                         Single.PositiveInfinity, collisionMask);
                     if (hit.transform == null)
                     {
-                        Vector3 groundPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        Vector3 groundPosition = Camera.main.ScreenToWorldPoint(_inputPositionOnClickDown);
                         _commandManager.AddCommand(new MovePositionCommand(groundPosition));
                     }
                     else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("UI"))
@@ -126,7 +129,7 @@ namespace FeedTheBaby.Commands
                     possibleCommands |= CommandType.MOVE;
                     possibleCommands |= CommandType.CRAFT;
 
-                    if (terrainTile.terrainType == TerrainType.Grassland)
+                    if (terrainTile.terrainType == TerrainType.GRASS)
                     {
                         possibleCommands |= CommandType.PLANT_FUEL;
                     }

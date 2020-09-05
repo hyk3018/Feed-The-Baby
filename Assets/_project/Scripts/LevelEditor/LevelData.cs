@@ -2,7 +2,7 @@
 using FeedTheBaby.Tilemaps.Tiles;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using TerrainTile = FeedTheBaby.Tilemaps.Tiles.TerrainTile;
+using TerrainTile = FeedTheBaby.Tilemaps.Tiles.Terrain.TerrainTile;
 
 namespace FeedTheBaby.LevelEditor
 {
@@ -22,7 +22,7 @@ namespace FeedTheBaby.LevelEditor
         public HintData[] hints = null;
         public Vector2 playerStartPosition;
         public Vector2 babyStartPosition;
-        public int fuelAmount = 0;
+        public int potatoAmount = 0;
         public string levelName = "";
         public float levelTime;
         public float playerStartTime;

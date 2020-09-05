@@ -49,6 +49,7 @@ namespace FeedTheBaby.Game
         {
             if (foods == null || foods.Count == 0)
             {
+                AudioSource.PlayClipAtPoint(cryingSound, transform.position);
                 emotionAnimator.SetTrigger(IsSad);
                 return;
             }

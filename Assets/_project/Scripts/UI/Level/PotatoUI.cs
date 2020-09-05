@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FeedTheBaby.UI
 {
-    public class FuelUI : MonoBehaviour
+    public class PotatoUI : MonoBehaviour
     {
         void Awake()
         {

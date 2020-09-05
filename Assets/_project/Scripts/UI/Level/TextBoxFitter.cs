@@ -10,12 +10,10 @@ namespace FeedTheBaby.UI
         [SerializeField] float maxWidth = 150;
         [SerializeField] float maxHeight = 250;
         TextMeshProUGUI _text;
-        bool _sizeConfigured;
 
         void Awake()
         {
             _text = GetComponent<TextMeshProUGUI>();
-            _sizeConfigured = false;
         }
 
         void Update()
@@ -25,7 +23,6 @@ namespace FeedTheBaby.UI
         public void SetText(string text)
         {
             _text.text = text;
-            _sizeConfigured = false;
         }
 
         public void Refit()

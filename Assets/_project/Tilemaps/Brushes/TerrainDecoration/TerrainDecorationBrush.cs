@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using FeedTheBaby.Tilemaps.Tiles;
+using FeedTheBaby.Tilemaps.Tiles.Terrain;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using TerrainTile = FeedTheBaby.Tilemaps.Tiles.TerrainTile;
+using TerrainTile = FeedTheBaby.Tilemaps.Tiles.Terrain.TerrainTile;
 
 #if UNITY_EDITOR
 

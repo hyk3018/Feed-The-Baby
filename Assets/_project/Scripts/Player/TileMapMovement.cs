@@ -12,6 +12,7 @@ namespace FeedTheBaby.Player
     {
         [SerializeField] float moveSpeed = 0f;
         [SerializeField] float recalculatePathRate = 0f;
+        [SerializeField] int pathLimit = 10;
 
         public Vector2 currentDirection;
         public bool lockMovement;
@@ -47,16 +48,23 @@ namespace FeedTheBaby.Player
 
             if (pathSuccessful)
             {
-                _currentPath = newPath;
-                _targetIndex = 0;
-                
-                if (newPath.Count > 0)
+                if (newPath.Count < pathLimit)
                 {
-                    _pathFollow = StartCoroutine(FollowPath());
+                    _currentPath = newPath;
+                    _targetIndex = 0;
+                    
+                    if (newPath.Count > 0)
+                    {
+                        _pathFollow = StartCoroutine(FollowPath());
+                    }
+                    else
+                    {
+                        FinishMove(true);
+                    }
                 }
                 else
                 {
-                    FinishMove(true);
+                    FinishMove(false);
                 }
             }
             else
