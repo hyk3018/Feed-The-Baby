@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FeedTheBaby.Game;
 using FeedTheBaby.GameData;
 using FeedTheBaby.LevelEditor;
 using FeedTheBaby.LevelObjects;
 using FeedTheBaby.Pathfinding;
+using FeedTheBaby.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace FeedTheBaby
 {
@@ -18,6 +22,8 @@ namespace FeedTheBaby
         [SerializeField] GameObject player = null;
         [SerializeField] GameObject baby = null;
         [SerializeField] GameObject hints = null;
+        
+        [SerializeField] bool staticHint;
 
         public Tilemap terrainTileMap = null;
         public Tilemap levelObjectsTileMap = null;
@@ -26,7 +32,7 @@ namespace FeedTheBaby
         public NavGrid navigationGrid;
         public int currentLevel;
         public bool playing;
-
+        
         Goals _goals;
         Timer _timer;
         public Action<Goals> LevelStart;
@@ -69,13 +75,13 @@ namespace FeedTheBaby
         {
             AudioSource.PlayClipAtPoint(baby.GetComponent<Baby>().cryingSound, player.transform.position);
             EndWithStarsUncollected();
-            playing = false;
             OnLevelEnd();
             LevelEnd();
         }
 
         void OnLevelEnd()
         {
+            playing = false;
             if (_goals.CollectedStars > 0) DataService.Instance.UnlockNextLevel(currentLevel);
         }
 
@@ -120,17 +126,39 @@ namespace FeedTheBaby
                     });
             }
 
-            children = hints.transform.Cast<Transform>().ToList();
-            foreach (var child in children)
-                DestroyImmediate(child.gameObject);
+            LoadHints();
+        }
 
-            if (currentLevelData.hints != null)
+        void LoadHints()
+        {
+            if (staticHint)
             {
-                foreach (var hint in currentLevelData.hints)
+                TimedShowHide timedShowHide = hints.GetComponent<TimedShowHide>();
+                TextMeshProUGUI hintText = hints.GetComponentInChildren<TextMeshProUGUI>();
+
+                int numberOfHints = currentLevelData.hints.Length;
+                if (numberOfHints == 0)
+                    return;
+                
+                int hintNumber = Random.Range(0, numberOfHints);
+                hintText.text = currentLevelData.hints[hintNumber].text;
+                timedShowHide.ShowForDuration(currentLevelData.hints[hintNumber].duration);
+            }
+            else
+            {
+                List<Transform> children;
+                children = hints.transform.Cast<Transform>().ToList();
+                foreach (var child in children)
+                    DestroyImmediate(child.gameObject);
+
+                if (currentLevelData.hints != null)
                 {
-                    GameObject hintPrefab = Resources.Load<GameObject>("Hint Editor");
-                    GameObject hintObject = Instantiate(hintPrefab, hints.transform);
-                    hintObject.GetComponent<Hint>().LoadHint(hint);
+                    foreach (var hint in currentLevelData.hints)
+                    {
+                        GameObject hintPrefab = Resources.Load<GameObject>("Hint Editor");
+                        GameObject hintObject = Instantiate(hintPrefab, hints.transform);
+                        hintObject.GetComponent<Hint>().LoadHint(hint);
+                    }
                 }
             }
         }

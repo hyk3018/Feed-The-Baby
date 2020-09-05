@@ -23,4 +23,4 @@ MonoBehaviour:
   itemUIData: {fileID: 11400000, guid: 89e3d32d0f321b44cbd303f21db8715e, type: 2}
   levelObjectMap: {fileID: 11400000, guid: 06d1065fa2afca24f96729c5ff938bd0, type: 2}
   currentLevel: 0
-  levelsUnlocked: 2
+  levelsUnlocked: 6

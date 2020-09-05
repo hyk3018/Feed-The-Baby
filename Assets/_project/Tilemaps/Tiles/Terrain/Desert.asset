@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4baa5a0a39c0ad47acb8a8f78e6e357, type: 3}
   m_Name: Desert
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1353551497164233637, guid: 15601078add2a65448d6e198b8ab223d,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 382bb89de14afa24097b612caeed9e02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -16,9 +16,7 @@ MonoBehaviour:
   - items:
     - type: 0
       amount: 1
-  - items:
-    - type: 2
-      amount: 1
+  - items: []
   - items: []
   terrainPositions:
   - {x: -14, y: -6, z: 0}
@@ -1103,11 +1101,15 @@ MonoBehaviour:
   levelObjectPositions: []
   levelObjectTiles: []
   initialInventory:
-  - type: 2
-    amount: 1
   - type: 0
     amount: 1
-  hints: []
+  hints:
+  - position: {x: -0.9500122, y: 0.6500015}
+    text: No player hunger. You've got what you need. Find the baby.
+    duration: 4
+    showOnce: 0
+    triggerOffset: {x: 0, y: 0}
+    triggerSize: {x: 1, y: 1}
   playerStartPosition: {x: -10.5, y: 4.5}
   babyStartPosition: {x: 9.5, y: -0.5}
   fuelAmount: 0

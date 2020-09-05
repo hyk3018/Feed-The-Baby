@@ -390,13 +390,13 @@ namespace FeedTheBaby.LevelEditor
         void SaveObstructions(LevelData levelAsset)
         {
             var obstructionPositions = new List<Vector3Int>();
-            var obstructionTypes = new List<TerrainTile>();
+            var obstructionTypes = new List<TileBase>();
             _obstructionsTileMap.CompressBounds();
             var bounds = _obstructionsTileMap.cellBounds;
 
             foreach (var pos in bounds.allPositionsWithin)
             {
-                if (_obstructionsTileMap.GetTile(pos) is TerrainTile obstructionTile)
+                if (_obstructionsTileMap.GetTile(pos) is TileBase obstructionTile)
                 {
                     obstructionPositions.Add(pos);
                     obstructionTypes.Add(obstructionTile);
@@ -507,7 +507,7 @@ namespace FeedTheBaby.LevelEditor
             }
             else
             {
-                GUILayout.Label("No GameObnject with tag \"Obstructions\" found.", _errorStyle);
+                GUILayout.Label("No GameObject with tag \"Obstructions\" found.", _errorStyle);
             }
             
             EditorGUILayout.EndHorizontal();
