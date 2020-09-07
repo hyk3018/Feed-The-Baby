@@ -5,6 +5,7 @@ namespace FeedTheBaby.Tilemaps.Tiles.Terrain
     public enum TerrainType
     {
         GRASS,
+        DIRT,
         SAND,
         SAND_BONE,
         PINE,

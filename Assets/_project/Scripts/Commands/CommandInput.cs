@@ -129,7 +129,7 @@ namespace FeedTheBaby.Commands
                     possibleCommands |= CommandType.MOVE;
                     possibleCommands |= CommandType.CRAFT;
 
-                    if (terrainTile.terrainType == TerrainType.GRASS)
+                    if (terrainTile.terrainType == TerrainType.GRASS || terrainTile.terrainType == TerrainType.DIRT)
                     {
                         possibleCommands |= CommandType.PLANT_FUEL;
                     }

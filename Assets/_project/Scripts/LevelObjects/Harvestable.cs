@@ -47,14 +47,13 @@ namespace FeedTheBaby.LevelObjects
 
         public void Harvest(Action<HarvestResult> onFinishHarvest)
         {
-            OnFinishHarvest += onFinishHarvest;
-            
             if (_grow && !_grow.FullyGrown)
             {
-                OnFinishHarvest(new HarvestResult(default, false));
+                onFinishHarvest(new HarvestResult(default, false));
                 return;
             }
 
+            OnFinishHarvest += onFinishHarvest;
             if (destroyOnHarvest)
                 DestroyTile?.Invoke();
             

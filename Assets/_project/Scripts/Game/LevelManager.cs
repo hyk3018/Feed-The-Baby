@@ -55,6 +55,11 @@ namespace FeedTheBaby
         void Start()
         {
             LevelStart(_goals);
+
+            Vector3 cameraToPlayer = player.transform.position - Camera.main.transform.position;
+            cameraToPlayer.z = 0;
+            Camera.main.transform.position += cameraToPlayer;
+            
             
             if (currentLevelData.levelTime > 0)
                 _timer.StartCount(currentLevelData.levelTime);

@@ -135,4 +135,4 @@ MonoBehaviour:
   - {fileID: 8363470912824194618, guid: 382bb89de14afa24097b612caeed9e02, type: 3}
   - {fileID: 8363470912824194618, guid: 382bb89de14afa24097b612caeed9e02, type: 3}
   - {fileID: 5804625333536067221, guid: 382bb89de14afa24097b612caeed9e02, type: 3}
-  terrainType: 1
+  terrainType: 2
