@@ -1517,4 +1517,4 @@ MonoBehaviour:
   potatoAmount: 0
   levelName: level11a bush decision
   levelTime: 10
-  playerStartTime: 10
+  playerStartTime: 0

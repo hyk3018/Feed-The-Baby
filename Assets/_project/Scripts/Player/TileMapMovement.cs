@@ -129,13 +129,23 @@ namespace FeedTheBaby.Player
             Vector3 firstWaypoint = _currentPath[0] + new Vector3(0.5f, 0.5f);
             Vector3 secondWaypoint = _currentPath[1] + new Vector3(0.5f, 0.5f);
             var currentPosition = transform.position;
+
+            // Check if any of x or y is between the two waypoints - only not in between if point is completely
+            // on other side of a waypoint
+            Vector3 v1 = currentPosition - firstWaypoint;
+            Vector3 v2 = currentPosition - secondWaypoint;
+            return Mathf.Sign(v1.x) != Mathf.Sign(v2.x) ||
+                   Mathf.Sign(v1.y) != Mathf.Sign(v2.y);
             
+            #pragma warning disable 0162
+            // This version checks using dot and cross product - gives false positives for what we intend
             float a = Vector3.Dot(Vector3.Cross(firstWaypoint, currentPosition),
                 Vector3.Cross(firstWaypoint, secondWaypoint));
             float b = Vector3.Dot(Vector3.Cross(secondWaypoint, currentPosition),
                 Vector3.Cross(secondWaypoint, firstWaypoint));
-
             return (a >= 0 && b >= 0);
+            #pragma warning restore 0162
+            
         }
         
         #endregion

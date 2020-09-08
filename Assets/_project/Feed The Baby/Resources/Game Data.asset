@@ -28,15 +28,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d206c192dec429541a4d8dc31aad9993, type: 2}
   - {fileID: 11400000, guid: 43df1c5d652a4e74180d3f0a89ba18ac, type: 2}
   - {fileID: 11400000, guid: 49c3b5c81d03bb44cb5a6c2d9341ee54, type: 2}
+  - {fileID: 11400000, guid: 6b2062dc385a1584bb5ec16aa8e040ba, type: 2}
+  - {fileID: 11400000, guid: 471035942dbd89249bc40126f1d8a608, type: 2}
   - {fileID: 11400000, guid: 5c78c28bba9953243ba53727f92be708, type: 2}
   - {fileID: 11400000, guid: 3cb817d1006e8424fbc23008768a0aab, type: 2}
   - {fileID: 11400000, guid: d4aeee60aff7ddf409a95f8276c274a5, type: 2}
   - {fileID: 11400000, guid: c1ff480ca03676c45b3a30bf010c827d, type: 2}
   - {fileID: 11400000, guid: 3f2023076f8ac1e4e9e29d1d0e3bf704, type: 2}
+  starsCollectedPerLevel: 00000000000000000000000000000000000000000000000000000000000000000000000000000000030000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   skillTreeData: {fileID: 11400000, guid: 5f563687374f6e641bd0c7d017db4e11, type: 2}
   itemUIData: {fileID: 11400000, guid: 89e3d32d0f321b44cbd303f21db8715e, type: 2}
   levelObjectMap: {fileID: 11400000, guid: 06d1065fa2afca24f96729c5ff938bd0, type: 2}
-  currentLevel: 0
-  levelsUnlocked: 18
-  starsCollected: 20
+  currentLevel: 11
+  levelsUnlocked: 13
   starsSpent: 0

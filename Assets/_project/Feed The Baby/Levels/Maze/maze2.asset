@@ -5631,7 +5631,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c97d36f731f7d4488f6039e6b56a6c3, type: 2}
   - {fileID: 11400000, guid: 0c97d36f731f7d4488f6039e6b56a6c3, type: 2}
   initialInventory: []
-  hints: []
+  hints:
+  - position: {x: 0, y: 0}
+    text: Damn that is a hungry baby. Can you feed them all they want?
+    duration: 0
+    showOnce: 0
+    triggerOffset: {x: 0, y: 0}
+    triggerSize: {x: 0, y: 0}
   playerStartPosition: {x: -1.5, y: -2.5}
   babyStartPosition: {x: 12.5, y: -5.5}
   potatoAmount: 0

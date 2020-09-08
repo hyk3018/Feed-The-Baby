@@ -36,6 +36,9 @@ namespace FeedTheBaby.Commands
             if (!LevelManager.Instance.playing)
                 return;
 
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             // When we click down and the panel is open, the next button up has
             // potential to close the current open panel
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -51,10 +54,6 @@ namespace FeedTheBaby.Commands
             if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
                 _inputPositionOnClickDown = Input.mousePosition;
-                if (EventSystem.current.IsPointerOverGameObject() &&
-                    EventSystem.current.currentSelectedGameObject != null) 
-                    return;
-
                 _currentHoldDuration += Time.deltaTime;
                 
                 if (_currentHoldDuration >= minimumHoldDuration && !_currentlyHolding)
@@ -94,10 +93,6 @@ namespace FeedTheBaby.Commands
             
             if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
             {
-                if (EventSystem.current.IsPointerOverGameObject() &&
-                    EventSystem.current.currentSelectedGameObject != null) 
-                    return;
-                
                 _currentlyHolding = false;
                 _currentHoldDuration = 0;
                 if (_closeOnNextButtonUp)

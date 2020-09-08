@@ -1896,7 +1896,8 @@ MonoBehaviour:
   hints:
   - position: {x: -0.9500122, y: 0.6500015}
     text: Click on the potato icon at the bottom to eat it and replenish player energy.
-      Some areas are only accessible once you learn new skills.
+      Some areas are only accessible once you learn new skills, so come back later
+      to earn the second star.
     duration: 0
     showOnce: 0
     triggerOffset: {x: 0, y: 0}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af5f17ad1cd4c679d0c1680c0259e16, type: 3}
-  m_Name: level14 potato 2
+  m_Name: level13a potato 2
   m_EditorClassIdentifier: 
   goals:
   - items:
@@ -1959,6 +1959,6 @@ MonoBehaviour:
   playerStartPosition: {x: -8.5, y: 6.5}
   babyStartPosition: {x: -7.5, y: -2.5}
   potatoAmount: 1
-  levelName: level14 potato 2
+  levelName: level13a potato 2
   levelTime: 17
   playerStartTime: 7

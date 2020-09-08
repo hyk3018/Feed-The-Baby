@@ -15,7 +15,7 @@ namespace FeedTheBaby.Player
         Animator _animator;
         TileMapMovement _tileMapMovement;
 
-        Vector2 _lastMovement = Vector2.down;
+        Vector2 _lastMovementBeforeStop = Vector2.down;
 
         void Awake()
         {
@@ -41,21 +41,23 @@ namespace FeedTheBaby.Player
         {
             // Only need to update last directions if not moving or interacting since
             // the animator won't need to use it
+            Vector2 currentDirectionNormalized = _tileMapMovement.currentDirection.normalized;
+            
             if (_tileMapMovement.currentDirection.x == 0 && _tileMapMovement.currentDirection.y == 0
                 || !_behaviour.canMove)
             {
                 _animator.SetBool(Movement, false);
-                _animator.SetFloat(LastDirX, _lastMovement.x);
-                _animator.SetFloat(LastDirY, _lastMovement.y);
+                _animator.SetFloat(LastDirX, _lastMovementBeforeStop.x);
+                _animator.SetFloat(LastDirY, _lastMovementBeforeStop.y);
             }
             else
             {
                 _animator.SetBool(Movement, true);
-                _lastMovement = _tileMapMovement.currentDirection.normalized;
+                _lastMovementBeforeStop = currentDirectionNormalized;
             }
-
-            _animator.SetFloat(DirX, _tileMapMovement.currentDirection.normalized.x);
-            _animator.SetFloat(DirY, _tileMapMovement.currentDirection.normalized.y);
+            
+            _animator.SetFloat(DirX, currentDirectionNormalized.x);
+            _animator.SetFloat(DirY, currentDirectionNormalized.y);
         }
     }
 }

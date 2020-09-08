@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FeedTheBaby.Commands;
@@ -22,6 +23,7 @@ namespace FeedTheBaby.Game
         [SerializeField] Animator emotionAnimator = null;
         [SerializeField] AudioClip happySound = null;
         [SerializeField] public AudioClip cryingSound = null;
+        [SerializeField] AnimationClip[] emotionAnimations = null;
 
         public Action<List<ItemAmount>> HungerChanged;
 
@@ -32,6 +34,8 @@ namespace FeedTheBaby.Game
 
         List<ItemAmount> _currentHungerFilled;
         List<ItemAmount> _remainingHunger;
+        bool _showingEmotion;
+        float _emotionDuration = 5f;
 
         void Awake()
         {
@@ -43,6 +47,10 @@ namespace FeedTheBaby.Game
                 else
                     ShowSad();
             };
+            
+            if (emotionAnimations != null && emotionAnimations.Length > 0)
+                _emotionDuration = emotionAnimations.Max(t => t.length);
+            
         }
 
         // For each item we are eating, subtract the amount 
@@ -85,14 +93,31 @@ namespace FeedTheBaby.Game
 
         void ShowHappy()
         {
-            CameraSound.PlaySoundAtCameraDepth(happySound, transform.position, 0.5f);
-            emotionAnimator.SetTrigger(IsHappy);
+            if (!_showingEmotion)
+            {
+                Debug.Log("Yes happy");
+                _showingEmotion = true;
+                CameraSound.PlaySoundAtCameraDepth(happySound, transform.position, 0.5f);
+                emotionAnimator.SetTrigger(IsHappy);
+                StartCoroutine(FinishShowingEmotion());
+            }
         }
 
         void ShowSad()
         {
-            CameraSound.PlaySoundAtCameraDepth(cryingSound, transform.position, 0.5f);
-            emotionAnimator.SetTrigger(IsSad);
+            if (!_showingEmotion)
+            {
+                _showingEmotion = true;
+                CameraSound.PlaySoundAtCameraDepth(cryingSound, transform.position, 0.5f);
+                emotionAnimator.SetTrigger(IsSad);
+                StartCoroutine(FinishShowingEmotion());
+            }
+        }
+
+        IEnumerator FinishShowingEmotion()
+        {
+            yield return new WaitForSeconds(_emotionDuration);
+            _showingEmotion = false;
         }
 
         public CommandType PossibleCommands() => CommandType.FEED;

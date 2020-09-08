@@ -19017,6 +19017,8 @@ GameObject:
   - component: {fileID: 639099628}
   - component: {fileID: 639099630}
   - component: {fileID: 639099627}
+  - component: {fileID: 639099631}
+  - component: {fileID: 639099632}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -19041,9 +19043,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5, y: -5}
+  m_AnchoredPosition: {x: -35, y: -35}
   m_SizeDelta: {x: 60, y: 60}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &639099627
 Animator:
   serializedVersion: 3
@@ -19143,9 +19145,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1619716100}
-        m_MethodName: SetTrigger
-        m_Mode: 5
+      - m_Target: {fileID: 639099631}
+        m_MethodName: PauseGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19154,17 +19156,31 @@ MonoBehaviour:
           m_StringArgument: Show
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1335765506}
-        m_MethodName: Pause
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &639099631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639099625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419b1755a67a41d1b24e5a01bb216f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanelAnimator: {fileID: 1619716100}
+--- !u!114 &639099632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639099625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40abfe47c91c4a8cb26cc944a0ef1812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &645551341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19630,6 +19646,9 @@ MonoBehaviour:
   emotionAnimator: {fileID: 289884883}
   happySound: {fileID: 8300000, guid: 40828ee2424a5024a92e17255a555984, type: 3}
   cryingSound: {fileID: 8300000, guid: 70dc3fc5b86629f4fb99eb986d1ee337, type: 3}
+  emotionAnimations:
+  - {fileID: 7400000, guid: a0d7a4168504efa45be5de627400cd0e, type: 2}
+  - {fileID: 7400000, guid: c48d508806a47474aa8bb0530e759cce, type: 2}
 --- !u!1 &826569023
 GameObject:
   m_ObjectHideFlags: 0
@@ -20390,7 +20409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36502aaa61c461c882dbf23f7c71a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panEdgeWidthPixels: 5
+  panEdgeWidthPixels: 40
   panSpeed: 8
   cameraBounds: {fileID: 934278552}
 --- !u!114 &934278556
@@ -33981,7 +34000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab92516b949c43e1bfe8ff9108a842d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disables: []
+  disables:
+  - {fileID: 639099625}
 --- !u!1 &1664263511
 GameObject:
   m_ObjectHideFlags: 0
@@ -53751,7 +53771,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8398071496377634767}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 namespace FeedTheBaby.UI
@@ -19,9 +20,12 @@ namespace FeedTheBaby.UI
         {
             if (LevelManager.Instance.playing)
             {
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 _tileMap.ClearAllTiles();
-                _tileMap.SetTile(_tileMap.WorldToCell(mousePos), highlightTile);
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    _tileMap.SetTile(_tileMap.WorldToCell(mousePos), highlightTile);
+                }
             }
         }
     }

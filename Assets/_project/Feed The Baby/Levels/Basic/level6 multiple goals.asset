@@ -2351,7 +2351,8 @@ MonoBehaviour:
     amount: 2
   hints:
   - position: {x: 3.57, y: 10.45}
-    text: Giving the baby more food can gain you more stars!
+    text: Giving the baby more food can gain you more stars! Look at the panel at
+      the top left before the game starts to see all the food the baby would like!
     duration: 0
     showOnce: 0
     triggerOffset: {x: -0.03, y: -2.4}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -23,18 +24,21 @@ namespace FeedTheBaby
         {
             if (LevelManager.Instance.playing)
             {
-                if (!_nonPanPixelBounds.Contains(Input.mousePosition))
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    cameraBounds.canReturnToBounds = false;
-                    Vector3 velocity = Input.mousePosition - _nonPanPixelBounds.center;
-                    Vector3 movement = velocity.normalized * (panSpeed * Time.deltaTime);
-                    movement.z = 0;
+                    if (!_nonPanPixelBounds.Contains(Input.mousePosition))
+                    {
+                        cameraBounds.canReturnToBounds = false;
+                        Vector3 velocity = Input.mousePosition - _nonPanPixelBounds.center;
+                        Vector3 movement = velocity.normalized * (panSpeed * Time.deltaTime);
+                        movement.z = 0;
 
-                    cameraBounds.MoveTowardsMoveBounds(movement);
-                }
-                else
-                {
-                    cameraBounds.canReturnToBounds = true;
+                        cameraBounds.MoveTowardsMoveBounds(movement);
+                    }
+                    else
+                    {
+                        cameraBounds.canReturnToBounds = true;
+                    }
                 }
             }
         }
