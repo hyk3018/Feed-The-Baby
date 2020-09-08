@@ -44,7 +44,7 @@ namespace FeedTheBaby
 
         public void AddTime(float timeToAdd)
         {
-            RemainingTime = Mathf.Min(RemainingTime + timeToAdd, TimeToCount);
+            RemainingTime += timeToAdd;
         }
 
         void PauseTimer()

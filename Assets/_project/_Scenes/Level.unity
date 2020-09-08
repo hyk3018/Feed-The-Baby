@@ -54106,6 +54106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95d45651363454292aa7873023959f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eatSound: {fileID: 8300000, guid: a8123576f8438374bbd24c46b66f3de1, type: 3}
   timerPerFuel: 8
 --- !u!114 &8398071496377634782
 MonoBehaviour:

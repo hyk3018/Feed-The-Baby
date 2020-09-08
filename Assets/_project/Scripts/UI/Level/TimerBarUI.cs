@@ -14,6 +14,8 @@ namespace FeedTheBaby.UI
         [SerializeField] bool activeOnStart = false;
         [SerializeField] bool destroyOnEnd = true;
 
+        float _originalStartTime;
+
         void Awake()
         {
             if (timer != null)
@@ -51,6 +53,8 @@ namespace FeedTheBaby.UI
             
             if (timerCount)
                 timerCount.text = Mathf.Ceil(timer.RemainingTime).ToString();
+
+            _originalStartTime = timer.TimeToCount;
         }
 
         void UpdateUI(Timer t)
@@ -58,7 +62,7 @@ namespace FeedTheBaby.UI
             if (timer.Counting)
             {
                 if (barFill)
-                    barFill.fillAmount = Mathf.Round(timer.RemainingTime / timer.TimeToCount * 50) / 50;
+                    barFill.fillAmount = Mathf.Round(Mathf.Min(1, timer.RemainingTime / _originalStartTime) * 50) / 50;
                 if (timerCount)
                     timerCount.text = Mathf.Ceil(timer.RemainingTime).ToString();
             }

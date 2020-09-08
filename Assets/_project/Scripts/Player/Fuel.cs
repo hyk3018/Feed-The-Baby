@@ -5,6 +5,7 @@ namespace FeedTheBaby.Player
 {
     public class Fuel : MonoBehaviour
     {
+        [SerializeField] AudioClip eatSound = null;
         [SerializeField] float timerPerFuel = 3f;
         
         Timer _fuelTimer;
@@ -32,7 +33,10 @@ namespace FeedTheBaby.Player
         public void ConsumeFuel(int amount)
         {
             if (_inventory.SubtractFuel(amount))
+            {
+                CameraSound.PlaySoundAtCameraPosition(eatSound, 0.3f);
                 _fuelTimer.AddTime(amount * timerPerFuel);
+            }
         }
     }
 }

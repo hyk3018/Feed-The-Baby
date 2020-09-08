@@ -95,9 +95,8 @@ namespace FeedTheBaby.Game
         {
             if (!_showingEmotion)
             {
-                Debug.Log("Yes happy");
                 _showingEmotion = true;
-                CameraSound.PlaySoundAtCameraDepth(happySound, transform.position, 0.5f);
+                CameraSound.PlaySoundAtCameraPosition(happySound, 0.5f);
                 emotionAnimator.SetTrigger(IsHappy);
                 StartCoroutine(FinishShowingEmotion());
             }
@@ -108,7 +107,7 @@ namespace FeedTheBaby.Game
             if (!_showingEmotion)
             {
                 _showingEmotion = true;
-                CameraSound.PlaySoundAtCameraDepth(cryingSound, transform.position, 0.5f);
+                CameraSound.PlaySoundAtCameraPosition(cryingSound, 0.5f);
                 emotionAnimator.SetTrigger(IsSad);
                 StartCoroutine(FinishShowingEmotion());
             }
