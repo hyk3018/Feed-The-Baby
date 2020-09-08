@@ -36,9 +36,6 @@ namespace FeedTheBaby.Commands
             if (!LevelManager.Instance.playing)
                 return;
 
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
-
             // When we click down and the panel is open, the next button up has
             // potential to close the current open panel
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -48,6 +45,9 @@ namespace FeedTheBaby.Commands
                     _closeOnNextButtonUp = true;
                 }
             }
+            
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
             
             // If we reach time to open a new panel, then the next button up
             // should not close the panel
