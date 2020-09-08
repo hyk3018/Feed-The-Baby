@@ -39,6 +39,9 @@ namespace FeedTheBaby.Pathfinding
             }
         }
 
+        // Traversable only if there is a terrain tile and no obstruction
+        // Passable if there is no level object tile, is traversable, or
+        // is a level object tile that is passable
         public void CalculateCellNavigation(Vector3Int cellPosition)
         {
             Vector3 worldPosition = _terrainTileMap.CellToWorld(cellPosition);
@@ -86,11 +89,16 @@ namespace FeedTheBaby.Pathfinding
                     if (x == 0 && y == 0)
                         continue;
 
+                    // Diagonal is neighbour if adjacent tiles are passable (which implies traversable)
                     if (Mathf.Abs(x) + Mathf.Abs(y) == 2)
-                        continue;
-                    
-                    neighbours.Add(grid[(y + node.gridPosition.y) * gridBounds.size.x +
-                                        (x + node.gridPosition.x) ]);
+                    {
+                        Node adjacentX = grid[GridCoordToIndex(node.gridPosition.y, node.gridPosition.x + x)];
+                        Node adjacentY = grid[GridCoordToIndex(node.gridPosition.y + y, node.gridPosition.x)];
+                        if (!adjacentX.passable || !adjacentY.passable)
+                            continue;
+                    }
+
+                    neighbours.Add(grid[GridCoordToIndex(node.gridPosition.y + y, node.gridPosition.x + x)]);
                 }
             }
 

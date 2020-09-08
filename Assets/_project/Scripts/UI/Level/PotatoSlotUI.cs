@@ -10,7 +10,8 @@ namespace FeedTheBaby.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            fuel.ConsumeFuel(1);
+            if (LevelManager.Instance.playing)
+                fuel.ConsumeFuel(1);
         }
     }
 }

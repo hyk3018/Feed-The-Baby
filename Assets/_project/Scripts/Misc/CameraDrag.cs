@@ -24,7 +24,7 @@ namespace FeedTheBaby
                 if (Input.GetMouseButton(2))
                 {
                     Vector3 currentMouse = cameraBounds.mainCamera.ScreenToViewportPoint(Input.mousePosition);
-                    cameraBounds.MoveToBounds(_cameraRoot + (_dragRoot - currentMouse) * 10);
+                    cameraBounds.MoveToMoveBounds(_cameraRoot + (_dragRoot - currentMouse) * 10);
                 }
 
                 if (Input.GetMouseButtonUp(2))

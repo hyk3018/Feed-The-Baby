@@ -10,7 +10,10 @@ namespace FeedTheBaby.Player
         void Awake()
         {
             canMove = true;
-            LevelManager.Instance.LevelEnd += DisableComponents;
+            LevelManager.Instance.LevelEnd += (success) =>
+            {
+                DisableComponents();
+            };
         }
 
         void DisableComponents()

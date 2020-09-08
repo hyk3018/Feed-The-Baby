@@ -36,7 +36,7 @@ namespace FeedTheBaby
         Goals _goals;
         Timer _timer;
         public Action<Goals> LevelStart;
-        public Action LevelEnd;
+        public Action<bool> LevelEnd;
         public Action EndWithStarsUncollected;
 
         public static LevelManager Instance => _instance;
@@ -56,40 +56,36 @@ namespace FeedTheBaby
         {
             LevelStart(_goals);
 
-            Vector3 cameraToPlayer = player.transform.position - Camera.main.transform.position;
-            cameraToPlayer.z = 0;
-            Camera.main.transform.position += cameraToPlayer;
-            
-            
+            Camera.main.GetComponent<CameraBounds>().MoveToBounds(player.transform.position);
+
             if (currentLevelData.levelTime > 0)
                 _timer.StartCount(currentLevelData.levelTime);
             
             // When final tier is filled we handle the level end and broadcast to others
-            _goals.FinalTierFilled += OnLevelEnd;
-            _goals.FinalTierFilled += LevelEnd;
+            _goals.FinalTierFilled += () => OnLevelEnd(true);
             
             // When timer ends, we handle the failure
-            _timer.TimerEnd += OnLevelFail;
+            _timer.TimerEnd += (t) => OnLevelEnd(_goals.AnyTiersFilled);
             
             // When the player's fuel ends, we handle the failure
-            player.GetComponent<Timer>().TimerEnd += OnLevelFail;
+            player.GetComponent<Timer>().TimerEnd += (t) => OnLevelEnd(_goals.AnyTiersFilled);
             
-            LevelEnd += OnLevelEnd;
-            playing = true;
+            playing = currentLevelData.hints.Length <= 0;
         }
 
-        void OnLevelFail(Timer timer)
-        {
-            AudioSource.PlayClipAtPoint(baby.GetComponent<Baby>().cryingSound, player.transform.position);
-            EndWithStarsUncollected();
-            OnLevelEnd();
-            LevelEnd();
-        }
-
-        void OnLevelEnd()
+        void OnLevelEnd(bool success)
         {
             playing = false;
-            if (_goals.CollectedStars > 0) DataService.Instance.UnlockNextLevel(currentLevel);
+            if (success)
+            {
+                if (_goals.CollectedStars > 0) DataService.Instance.UnlockNextLevel(currentLevel);
+                LevelEnd?.Invoke(true);
+            }
+            else
+            {
+                EndWithStarsUncollected?.Invoke();
+                LevelEnd?.Invoke(false);
+            }
         }
 
         void LoadLevel()
@@ -168,6 +164,16 @@ namespace FeedTheBaby
                     }
                 }
             }
+        }
+
+        public void Pause()
+        {
+            playing = false;
+        }
+
+        public void Unpause()
+        {
+            playing = true;
         }
 
         static void InstantiateLevelObjectPrefabInCell(GridLayout grid, GameObject brushTarget, Vector3Int position,

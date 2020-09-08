@@ -36,10 +36,12 @@ namespace FeedTheBaby.Game
         void Awake()
         {
             LevelManager.Instance.LevelStart += Setup;
-            LevelManager.Instance.EndWithStarsUncollected += () =>
+            LevelManager.Instance.LevelEnd += (success) =>
             {
-                AudioSource.PlayClipAtPoint(cryingSound, Camera.main.transform.position, 0.1f);
-                emotionAnimator.SetTrigger(IsSad);
+                if (success)
+                    ShowHappy();
+                else
+                    ShowSad();
             };
         }
 
@@ -49,8 +51,7 @@ namespace FeedTheBaby.Game
         {
             if (foods == null || foods.Count == 0)
             {
-                AudioSource.PlayClipAtPoint(cryingSound, transform.position);
-                emotionAnimator.SetTrigger(IsSad);
+                ShowSad();
                 return;
             }
 
@@ -79,11 +80,19 @@ namespace FeedTheBaby.Game
         {
             SetHunger(goals);
 
-            goals.TierFilled += i =>
-            {
-                AudioSource.PlayClipAtPoint(happySound, Camera.main.transform.position, 0.1f);
-                emotionAnimator.SetTrigger(IsHappy);
-            };
+            goals.TierFilled += i => ShowHappy();
+        }
+
+        void ShowHappy()
+        {
+            CameraSound.PlaySoundAtCameraDepth(happySound, transform.position, 0.5f);
+            emotionAnimator.SetTrigger(IsHappy);
+        }
+
+        void ShowSad()
+        {
+            CameraSound.PlaySoundAtCameraDepth(cryingSound, transform.position, 0.5f);
+            emotionAnimator.SetTrigger(IsSad);
         }
 
         public CommandType PossibleCommands() => CommandType.FEED;

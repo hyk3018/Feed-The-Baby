@@ -15,6 +15,7 @@ namespace FeedTheBaby.UI
         [SerializeField] Goals goals = null;
 
         [SerializeField] GameObject restartLevelButton = null;
+        [SerializeField] GameObject pauseRestartLevelButton = null;
         [SerializeField] GameObject nextLevelButton = null;
 
         static readonly int Show = Animator.StringToHash("Show");
@@ -26,7 +27,13 @@ namespace FeedTheBaby.UI
         {
             base.Awake();
             _animator = GetComponent<Animator>();
-            LevelManager.Instance.LevelEnd += () => StartCoroutine(ShowPanel());
+            
+            LevelManager.Instance.LevelEnd += (success) =>
+            {
+                StartCoroutine(ShowPanel());
+            };
+            
+            StartCoroutine(UpdatePanelData());
         }
 
         IEnumerator ShowPanel()
@@ -41,6 +48,7 @@ namespace FeedTheBaby.UI
             var currentLevel = DataService.Instance.GetCurrentLevel();
             
             restartLevelButton.GetComponent<LevelSelector>().SetLevelToSelect(currentLevel);
+            pauseRestartLevelButton.GetComponent<LevelSelector>().SetLevelToSelect(currentLevel);
             
             if (DataService.Instance.GetLevelsUnlocked() > currentLevel + 1)
             {

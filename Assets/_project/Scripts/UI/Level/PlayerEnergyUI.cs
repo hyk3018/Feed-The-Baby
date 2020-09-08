@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FeedTheBaby.UI
 {
-    public class PotatoUI : MonoBehaviour
+    public class PlayerEnergyUI : MonoBehaviour
     {
         void Awake()
         {

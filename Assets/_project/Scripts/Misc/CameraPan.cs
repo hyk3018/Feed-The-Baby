@@ -30,7 +30,7 @@ namespace FeedTheBaby
                     Vector3 movement = velocity.normalized * (panSpeed * Time.deltaTime);
                     movement.z = 0;
 
-                    cameraBounds.MoveWithinBounds(movement);
+                    cameraBounds.MoveTowardsMoveBounds(movement);
                 }
                 else
                 {

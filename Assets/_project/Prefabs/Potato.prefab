@@ -114,7 +114,7 @@ MonoBehaviour:
     stageDurationProportion: 2
   - sprite: {fileID: 479611073585374572, guid: 8056fc0ac8b8f6a48b86649545acf383, type: 3}
     stageDurationProportion: 0
-  totalGrowthTime: 5
+  totalGrowthTime: 4
 --- !u!114 &6155816326982801604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   itemAmount:
     type: 3
     amount: 1
-  harvestTime: 1
+  harvestTime: 0
   stayToHarvest: 1
   destroyOnHarvest: 1
   needsFight: 0

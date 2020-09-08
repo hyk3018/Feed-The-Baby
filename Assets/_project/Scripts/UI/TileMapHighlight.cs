@@ -17,9 +17,12 @@ namespace FeedTheBaby.UI
         // Update is called once per frame
         void Update()
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _tileMap.ClearAllTiles();
-            _tileMap.SetTile(_tileMap.WorldToCell(mousePos), highlightTile);
+            if (LevelManager.Instance.playing)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                _tileMap.ClearAllTiles();
+                _tileMap.SetTile(_tileMap.WorldToCell(mousePos), highlightTile);
+            }
         }
     }
 }

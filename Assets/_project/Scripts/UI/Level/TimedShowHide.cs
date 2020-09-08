@@ -6,6 +6,8 @@ namespace FeedTheBaby.UI
 {
     public class TimedShowHide : MonoBehaviour
     {
+        public event Action OnHidden;
+        
         Animator _animator;
         static readonly int Show = Animator.StringToHash("Show");
         static readonly int Hide = Animator.StringToHash("Hide");
@@ -29,7 +31,12 @@ namespace FeedTheBaby.UI
             
             _show = true;
             _animator.SetTrigger(Show);
-            StartCoroutine(HideAfterDuration(duration));
+
+            if (duration > 0)
+            {
+                StartCoroutine(HideAfterDuration(duration));
+            }
+            
             StartCoroutine(ShowUntilTrigger());
         }
 
@@ -38,6 +45,9 @@ namespace FeedTheBaby.UI
             while (_show)
                 yield return null;
             _animator.SetTrigger(Hide);
+
+            yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+            OnHidden?.Invoke();
         }
 
         IEnumerator HideAfterDuration(float duration)

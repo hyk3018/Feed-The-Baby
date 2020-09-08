@@ -30,10 +30,12 @@ namespace FeedTheBaby.Pathfinding
             StartCoroutine(FindPath(startPos, targetPos));
         }
 
+        // A* Pathfinding with reduced turns heuristic - prevent unnatural movement
         IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
         {
             bool pathSuccess = false;
 
+            // Only run if start and target are within navigation grid
             if (!navGrid.WithinGrid(startPos) || !navGrid.WithinGrid(targetPos))
             {
                 _pathRequestManager.FinishProcessingPath(new List<Vector3>(), false);
@@ -43,41 +45,58 @@ namespace FeedTheBaby.Pathfinding
             Node startNode = navGrid.NodeFromWorldPoint(startPos);
             Node targetNode = navGrid.NodeFromWorldPoint(targetPos);
 
+            // Target equals start case
             if (startNode == targetNode)
             {
                 _pathRequestManager.FinishProcessingPath(new List<Vector3>(), true);
                 yield break;
             }
 
+            // If we are not on a tile that we should be "stuck" at
             if (startNode.traversable && targetNode.traversable)
             {
-
+                // First add start node
                 Heap<Node> openSet = new Heap<Node>(navGrid.MaxSize);
                 HashSet<Node> closedSet = new HashSet<Node>();
                 openSet.Add(startNode);
 
+                // Whilst there are traversable neighbours (open set is not empty)
                 while (openSet.Count > 0)
                 {
+                    // Select lowest cost node from heap
                     Node currentNode = openSet.RemoveFirst();
+                    
+                    // Add node to closed - it has been fully considered
                     closedSet.Add(currentNode);
 
+                    // If we reach target we are done
                     if (currentNode == targetNode)
                     {
                         pathSuccess = true;
                         break;
                     }
 
+                    // Obtain neighbours and calculate their new costs
                     List<Node> neighbours = navGrid.GetNeighbours(currentNode);
                     foreach (Node neighbour in neighbours)
                     {
+                        // Only consider non closed set neighbours that are not target and are passable
                         if (!navGrid.NodePassable(neighbour) && neighbour != targetNode
                             || closedSet.Contains(neighbour))
                             continue;
 
+                        // Consider moving to neighbour from current
                         int newMoveCostToNeighbour = currentNode.gCost +
                                                      GetDistance(currentNode, neighbour);
+                        
+                        // If it is closer
                         if (newMoveCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                         {
+                            // // If we 
+                            // if (currentNode.parent != null)
+                            // {
+                            //     
+                            // }
                             neighbour.gCost = newMoveCostToNeighbour;
                             neighbour.hCost = GetDistance(neighbour, targetNode);
                             neighbour.parent = currentNode;

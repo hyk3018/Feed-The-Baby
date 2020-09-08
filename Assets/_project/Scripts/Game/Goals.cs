@@ -19,6 +19,8 @@ namespace FeedTheBaby
         int _finalTier;
         public int AvailableStars { get; private set; }
         public int CollectedStars { get; private set; }
+        
+        public bool AnyTiersFilled;
 
         void Awake()
         {
@@ -35,6 +37,7 @@ namespace FeedTheBaby
 
         void Start()
         {
+            AnyTiersFilled = false;
             baby.HungerChanged += UpdateGoals;
         }
 
@@ -55,6 +58,7 @@ namespace FeedTheBaby
                     _tiersFilled[i] = i == 0 || _tiersFilled[i - 1];
                     if (_tiersFilled[i])
                     {
+                        AnyTiersFilled = true;
                         CollectedStars += 1;
                         TierFilled?.Invoke(i);
                     }

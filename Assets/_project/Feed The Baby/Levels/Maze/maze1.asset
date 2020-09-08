@@ -3598,7 +3598,7 @@ MonoBehaviour:
     triggerSize: {x: 1, y: 1}
   playerStartPosition: {x: -12.5, y: 5.5}
   babyStartPosition: {x: 4.5, y: 5.5}
-  fuelAmount: 0
+  potatoAmount: 0
   levelName: maze1
   levelTime: 30
-  playerStartTime: 0
+  playerStartTime: 30

@@ -13,6 +13,7 @@ namespace FeedTheBaby.Pathfinding
 
         public int gCost;
         public int hCost;
+        public int turns;
         public Node parent;
 
         public Node(bool traversable, bool passable, Vector2 worldPosition, Vector2Int gridPosition)

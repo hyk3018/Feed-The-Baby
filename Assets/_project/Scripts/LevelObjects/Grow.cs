@@ -37,9 +37,13 @@ namespace FeedTheBaby.LevelObjects
         
         IEnumerator GrowUntilFull()
         {
-            while (_currentStage < growthStages.Length - 1 && LevelManager.Instance.playing)
+            while (_currentStage < growthStages.Length - 1)
             {
-                AddGrowth();
+                if (LevelManager.Instance.playing)
+                {
+                    AddGrowth();
+                }
+
                 yield return null;
             }
         }

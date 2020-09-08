@@ -48,6 +48,9 @@ namespace FeedTheBaby.UI
                 barObject.SetActive(true);
                 barFill.enabled = true;
             }
+            
+            if (timerCount)
+                timerCount.text = Mathf.Ceil(timer.RemainingTime).ToString();
         }
 
         void UpdateUI(Timer t)

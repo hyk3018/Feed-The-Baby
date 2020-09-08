@@ -56,9 +56,14 @@ namespace FeedTheBaby.LevelObjects
             OnFinishHarvest += onFinishHarvest;
             if (destroyOnHarvest)
                 DestroyTile?.Invoke();
-            
-            _timer.StartCount(harvestTime);
-            _timer.TimerEnd += FinishHarvest;
+
+            if (harvestTime <= 0)
+                FinishHarvest(null);   
+            else
+            {
+                _timer.StartCount(harvestTime);
+                _timer.TimerEnd += FinishHarvest;
+            }
         }
 
         void FinishHarvest(Timer t)

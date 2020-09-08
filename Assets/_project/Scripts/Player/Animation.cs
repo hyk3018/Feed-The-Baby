@@ -26,7 +26,15 @@ namespace FeedTheBaby.Player
 
         void Update()
         {
-            Animate();
+            if (LevelManager.Instance.playing)
+            {
+                _animator.speed = 1;
+                Animate();
+            }
+            else
+            {
+                _animator.speed = 0;
+            }
         }
 
         void Animate()

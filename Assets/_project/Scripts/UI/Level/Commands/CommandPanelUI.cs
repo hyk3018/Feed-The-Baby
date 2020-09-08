@@ -16,7 +16,10 @@ namespace FeedTheBaby.UI
 
         void Start()
         {
-            LevelManager.Instance.LevelEnd += HidePanel;
+            LevelManager.Instance.LevelEnd += (success) =>
+            {
+                HidePanel();
+            };
             commandInput.OnCommandPanelOpen += ShowPanel;
             commandInput.OnCommandPanelClose += HidePanel;
             commandPanel.SetActive(false);

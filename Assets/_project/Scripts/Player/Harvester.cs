@@ -57,7 +57,7 @@ namespace FeedTheBaby.Player
                     _behaviour.canMove = true;
                 }
 
-                AudioSource.PlayClipAtPoint(harvestSound, transform.position);
+                CameraSound.PlaySoundAtCameraDepth(harvestSound, transform.position, 0.5f);
                 _inventory.AddItem(harvestResult.harvest);
                 _onHarvestEnd(true);
             }

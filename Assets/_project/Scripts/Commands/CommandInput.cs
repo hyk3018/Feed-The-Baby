@@ -94,6 +94,10 @@ namespace FeedTheBaby.Commands
             
             if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
             {
+                if (EventSystem.current.IsPointerOverGameObject() &&
+                    EventSystem.current.currentSelectedGameObject != null) 
+                    return;
+                
                 _currentlyHolding = false;
                 _currentHoldDuration = 0;
                 if (_closeOnNextButtonUp)

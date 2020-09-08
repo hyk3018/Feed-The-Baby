@@ -15,7 +15,7 @@ namespace FeedTheBaby
 
         void Awake()
         {
-            LevelManager.Instance.LevelEnd += () => PauseTimer();
+            LevelManager.Instance.LevelEnd += (success) => PauseTimer();
         }
 
         void Update()

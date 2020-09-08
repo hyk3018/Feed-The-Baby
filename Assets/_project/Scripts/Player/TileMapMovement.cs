@@ -55,6 +55,8 @@ namespace FeedTheBaby.Player
                     
                     if (newPath.Count > 0)
                     {
+                        if (_pathFollow != null)
+                            StopCoroutine(_pathFollow);
                         _pathFollow = StartCoroutine(FollowPath());
                     }
                     else
@@ -97,11 +99,12 @@ namespace FeedTheBaby.Player
                         FinishMove(true);
                         yield break;
                     }
+
                     _currentWaypoint = _currentPath[_targetIndex] + new Vector3(0.5f, 0.5f);
                 }
 
-                Vector2 moveDirection = _currentWaypoint - transform.position;
-                Move(moveDirection.normalized);
+                Move((_currentWaypoint - transform.position).normalized);
+
                 yield return null;
             }
 
@@ -113,7 +116,7 @@ namespace FeedTheBaby.Player
             Vector2 currentVelocity = normalizedDirection * moveSpeed;
             currentDirection = currentVelocity;
 
-            if (_behaviour.canMove)
+            if (_behaviour.canMove && LevelManager.Instance.playing)
                 _rb2d.velocity = currentVelocity;
             else
                 _rb2d.velocity = Vector2.zero;

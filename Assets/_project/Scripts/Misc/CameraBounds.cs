@@ -19,10 +19,6 @@ namespace FeedTheBaby
         {
             mainCamera = GetComponent<Camera>();
             canReturnToBounds = true;
-        }
-
-        void Start()
-        {
             CalculateBoundsRelativeToPosition();
         }
 
@@ -38,8 +34,12 @@ namespace FeedTheBaby
             mouseWorldMoveBounds.max = bounds.max + new Vector3(movementSlack, movementSlack, -cameraPosition.z);
             
             float cameraHalfHeight = mainCamera.orthographicSize;
-            bounds.min += new Vector3(cameraHalfHeight * mainCamera.aspect, cameraHalfHeight, cameraPosition.z);
-            bounds.max -= new Vector3(cameraHalfHeight * mainCamera.aspect, cameraHalfHeight, cameraPosition.z);
+            bounds.min = new Vector3(Mathf.Min(bounds.min.x + cameraHalfHeight * mainCamera.aspect, 0),
+                                     Mathf.Min(bounds.min.y + cameraHalfHeight, 0),
+                                     cameraPosition.z);
+            bounds.max = new Vector3(Mathf.Max(bounds.max.x - cameraHalfHeight * mainCamera.aspect, 0),
+                                     Mathf.Max(bounds.max.y - cameraHalfHeight, 0),
+                                     cameraPosition.z);
 
             moveBounds.min = bounds.min - new Vector3(movementSlack,movementSlack);
             moveBounds.max = bounds.max + new Vector3(movementSlack, movementSlack);
@@ -49,15 +49,22 @@ namespace FeedTheBaby
         {
             ReturnToBounds();
         }
-
+        
         public void MoveToBounds(Vector3 position)
+        {
+            float x = Mathf.Clamp(position.x, bounds.min.x, bounds.max.x);
+            float y = Mathf.Clamp(position.y, bounds.min.y, bounds.max.y);
+            transform.position = new Vector3(x, y, transform.position.z);
+        }
+        
+        public void MoveToMoveBounds(Vector3 position)
         {
             float x = Mathf.Clamp(position.x, moveBounds.min.x, moveBounds.max.x);
             float y = Mathf.Clamp(position.y, moveBounds.min.y, moveBounds.max.y);
             transform.position = new Vector3(x, y, transform.position.z);
         }
 
-        public void MoveWithinBounds(Vector3 movement)
+        public void MoveTowardsMoveBounds(Vector3 movement)
         {
             if (moveBounds.Contains(transform.position + new Vector3(movement.x, 0)))
             {
