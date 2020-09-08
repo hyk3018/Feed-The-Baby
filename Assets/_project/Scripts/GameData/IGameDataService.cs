@@ -14,10 +14,11 @@ namespace FeedTheBaby.GameData
         ItemUIData GetItemUIData();
         LevelObjectMap GetLevelObjectMap();
         int GetStarsCollected();
-        void AddStars(int amount);
+        int GetStarsCollected(int level);
         void SpendStars(int amount);
         void RestoreStars();
         int GetLevelsUnlocked();
         void UnlockNextLevel(int currentLevel);
+        void AddStarsForLevel(int collected, int level);
     }
 }

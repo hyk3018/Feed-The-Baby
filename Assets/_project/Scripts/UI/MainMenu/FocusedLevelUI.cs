@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FeedTheBaby.GameData;
 using FeedTheBaby.LevelEditor;
@@ -10,6 +11,7 @@ namespace FeedTheBaby.UI
     public class FocusedLevelUI : DisableablePanel
     {
         [SerializeField] TextMeshProUGUI title = null;
+        [SerializeField] TextMeshProUGUI starsCollected = null;
         [SerializeField] GameObject itemSlotPrefab = null;
         [SerializeField] Transform[] itemSlotGrids = null;
         [SerializeField] Transform inventoryGrid = null;
@@ -34,6 +36,8 @@ namespace FeedTheBaby.UI
             _levelToLoad = DataService.Instance.GetCurrentLevel();
             _levelData = DataService.Instance.GetLevels()[_levelToLoad];
             title.text = "Level : " + (_levelToLoad + 1);
+            starsCollected.text = String.Format("Stars Collected : {0}/{1}",
+                DataService.Instance.GetStarsCollected(_levelToLoad), _levelData.AvailableStars());
 
             FillGoals();
             FillInventory();

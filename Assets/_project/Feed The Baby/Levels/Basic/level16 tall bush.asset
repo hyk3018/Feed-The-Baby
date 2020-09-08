@@ -1889,4 +1889,4 @@ MonoBehaviour:
   potatoAmount: 0
   levelName: level16 tall bush
   levelTime: 20
-  playerStartTime: 20
+  playerStartTime: 0

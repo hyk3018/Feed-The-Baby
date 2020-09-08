@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FeedTheBaby.LevelEditor;
 using FeedTheBaby.SkillTree;
 using FeedTheBaby.Tilemaps.Brushes;
@@ -11,19 +12,19 @@ namespace FeedTheBaby.GameData
     [CreateAssetMenu(fileName = "Game Data", menuName = "Feed The Baby/Game Data", order = 0)]
     public class GameData : ScriptableObject, IGameDataService
     {
-        // [SerializeField] LevelData level = null;
         [SerializeField] LevelData[] levels = null;
+        [SerializeField] int[] starsCollectedPerLevel = null;
         [SerializeField] SkillTreeData skillTreeData = null;
         [SerializeField] ItemUIData itemUIData = null;
         [SerializeField] LevelObjectMap levelObjectMap = null;
         [SerializeField] int currentLevel;
         [SerializeField] int levelsUnlocked = 1;
-        int _starsCollected;
-        int _starsSpent;
+        [SerializeField] int starsSpent;
 
         void Awake()
         {
             skillTreeData.SetFirstTime();
+            starsCollectedPerLevel = new int[levels.Length];
         }
 
         public void SetCurrentLevel(int i)
@@ -56,14 +57,12 @@ namespace FeedTheBaby.GameData
             return levelObjectMap;
         }
 
-        public int GetStarsCollected()
-        {
-            return _starsCollected;
-        }
+        public int GetStarsCollected() => starsCollectedPerLevel.Sum();
+        public int GetStarsCollected(int level) => starsCollectedPerLevel[level];
 
-        public void AddStars(int amount)
+        public void AddStarsForLevel(int collected, int level)
         {
-            _starsCollected += amount;
+            starsCollectedPerLevel[level] = Mathf.Max(collected, starsCollectedPerLevel[level]);
         }
 
         public void SpendStars(int amount)
@@ -92,6 +91,11 @@ namespace FeedTheBaby.GameData
             currentLevel = 0;
             levelsUnlocked = 1;
         }
+
+        public void ResetStars()
+        {
+            starsCollectedPerLevel = new int[levels.Length];
+        }
     }
 
     #if UNITY_EDITOR
@@ -102,6 +106,7 @@ namespace FeedTheBaby.GameData
         {
             var data = Resources.Load<GameData>("Game Data");
             data.ResetLevel();
+            data.ResetStars();
         }
     }
     #endif

@@ -16,8 +16,6 @@ namespace FeedTheBaby.UI
 
         List<Button> _levelButtons;
 
-        static readonly int Show = Animator.StringToHash("Show");
-
         static readonly int ButtonDisabled = Animator.StringToHash("Disabled");
         static readonly int ButtonNormal = Animator.StringToHash("Normal");
 

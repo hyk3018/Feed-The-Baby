@@ -76,6 +76,8 @@ namespace FeedTheBaby.UI
                 endGameMessage.text =
                     $"You've collected {collectedStars} out of {availableStars} stars for this level!";
 
+            DataService.Instance.AddStarsForLevel(collectedStars, currentLevel);
+                
             yield break;
         }
     }

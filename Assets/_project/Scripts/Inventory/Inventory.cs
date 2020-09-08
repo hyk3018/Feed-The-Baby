@@ -123,7 +123,7 @@ namespace FeedTheBaby
             {
                 if (itemInInventory.type == itemAmount.type)
                 {
-                    return itemAmount.amount >= itemInInventory.amount;
+                    return itemAmount.amount <= itemInInventory.amount;
                 }
             }
 
@@ -139,9 +139,11 @@ namespace FeedTheBaby
                 if (itemInInventory.type == itemAmount.type)
                 {
                     int amountTaken = Mathf.Min(itemInInventory.amount, itemAmount.amount);
-                    itemInInventory.amount = Mathf.Max(0, itemInInventory.amount - itemAmount.amount);
+                    itemInInventory.amount = Mathf.Max(0, itemInInventory.amount - amountTaken);
                     if (itemInInventory.amount == 0)
                         itemList.RemoveAt(i);
+                    else
+                        itemList[i] = itemInInventory;
 
                     InventoryChange(itemList);
                     return new ItemAmount(itemAmount.type, amountTaken);

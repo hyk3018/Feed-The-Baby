@@ -5637,4 +5637,4 @@ MonoBehaviour:
   potatoAmount: 0
   levelName: maze2
   levelTime: 100
-  playerStartTime: 100
+  playerStartTime: 0

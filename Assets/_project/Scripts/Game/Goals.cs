@@ -25,11 +25,11 @@ namespace FeedTheBaby
         void Awake()
         {
             _goalTiers = LevelManager.Instance.currentLevelData.goals;
+            AvailableStars = LevelManager.Instance.currentLevelData.AvailableStars();
             for (var i = 0; i < _goalTiers.Length; i++)
                 if (_goalTiers[i].items.Count > 0)
                 {
                     _finalTier = i;
-                    AvailableStars = i + 1;
                 }
 
             _tiersFilled = new bool[_goalTiers.Length];

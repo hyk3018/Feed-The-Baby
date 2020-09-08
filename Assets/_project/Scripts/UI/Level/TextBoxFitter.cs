@@ -1,6 +1,9 @@
 ﻿using TMPro;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace FeedTheBaby.UI
 {
@@ -15,11 +18,7 @@ namespace FeedTheBaby.UI
         {
             _text = GetComponent<TextMeshProUGUI>();
         }
-
-        void Update()
-        {
-        }
-
+        
         public void SetText(string text)
         {
             _text.text = text;
@@ -39,6 +38,7 @@ namespace FeedTheBaby.UI
         }
     }
 
+    #if UNITY_EDITOR
     [CustomEditor(typeof(TextBoxFitter))]
     public class TextBoxFitterEditor : UnityEditor.Editor
     {
@@ -50,4 +50,5 @@ namespace FeedTheBaby.UI
                 ((TextBoxFitter) target).Refit();
         }
     }
+    #endif
 }

@@ -1896,5 +1896,5 @@ MonoBehaviour:
   babyStartPosition: {x: 15.5, y: -0.5}
   potatoAmount: 0
   levelName: level4 timer
-  levelTime: 15
+  levelTime: 10
   playerStartTime: 0
