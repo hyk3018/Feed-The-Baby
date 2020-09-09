@@ -35,5 +35,5 @@ MonoBehaviour:
   m_Size: {x: 1, y: 1, z: 1}
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
-  levelObjectType: 0
+  levelObjectType: 3
   levelObjectMap: {fileID: 11400000, guid: 06d1065fa2afca24f96729c5ff938bd0, type: 2}

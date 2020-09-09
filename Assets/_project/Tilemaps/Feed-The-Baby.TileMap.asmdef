@@ -2,7 +2,8 @@
     "name": "Feed-The-Baby.TileMap",
     "references": [
         "Unity.2D.Tilemap.Editor",
-        "Feed-The-Baby.Dictionary"
+        "Feed-The-Baby.Dictionary",
+        "Unity.2D.Tilemap.Extras"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

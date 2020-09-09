@@ -1,4 +1,4 @@
-﻿using UnityEngine.Tilemaps;
+﻿using UnityEngine;
 
 namespace FeedTheBaby.Tilemaps.Tiles.Terrain
 {
@@ -9,11 +9,12 @@ namespace FeedTheBaby.Tilemaps.Tiles.Terrain
         SAND,
         SAND_BONE,
         PINE,
-        BOULDER
+        BOULDER,
+        WATER
     }
 
-    [UnityEngine.CreateAssetMenu(fileName = "Terrain Tile", menuName = "Tiles/Terrain Tile", order = 0)]
-    public class TerrainTile : RandomTile
+    [CreateAssetMenu(fileName = "Terrain Tile", menuName = "Tiles/Terrain Tile", order = 0)]
+    public class TerrainTile : RuleTile
     {
         public TerrainType terrainType;
     }

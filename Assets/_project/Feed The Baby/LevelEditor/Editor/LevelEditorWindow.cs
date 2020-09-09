@@ -390,13 +390,13 @@ namespace FeedTheBaby.LevelEditor
         void SaveObstructions(LevelData levelAsset)
         {
             var obstructionPositions = new List<Vector3Int>();
-            var obstructionTypes = new List<TileBase>();
+            var obstructionTypes = new List<TerrainTile>();
             _obstructionsTileMap.CompressBounds();
             var bounds = _obstructionsTileMap.cellBounds;
 
             foreach (var pos in bounds.allPositionsWithin)
             {
-                if (_obstructionsTileMap.GetTile(pos) is TileBase obstructionTile)
+                if (_obstructionsTileMap.GetTile(pos) is TerrainTile obstructionTile)
                 {
                     obstructionPositions.Add(pos);
                     obstructionTypes.Add(obstructionTile);
